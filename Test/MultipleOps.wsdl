@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.alsb.com/MultipleOps/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="MultipleOps"
+	targetNamespace="http://www.alsb.com/MultipleOps/">
+	<wsdl:types>
+		<xsd:schema
+			targetNamespace="http://www.alsb.com/MultipleOps/">
+			<xsd:element name="getOrder">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="in" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getOrderResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="out" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getBillingHistory">
+				<xsd:complexType>
+					<xsd:sequence>						<xsd:element name="in" type="xsd:string"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getBillingHistoryResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="out" type="xsd:string"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getBasicCustomerInfo">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="in" type="xsd:string"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getBasicCustomerInfoResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="out" type="xsd:string"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="getOrderRequest">
+		<wsdl:part element="tns:getOrder" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="getOrderResponse">
+		<wsdl:part element="tns:getOrderResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="getBillingHistoryRequest">
+		<wsdl:part name="parameters" element="tns:getBillingHistory"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getBillingHistoryResponse">
+		<wsdl:part name="parameters"
+			element="tns:getBillingHistoryResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getBasicCustomerInfoRequest">
+		<wsdl:part name="parameters"
+			element="tns:getBasicCustomerInfo">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getBasicCustomerInfoResponse">
+		<wsdl:part name="parameters"
+			element="tns:getBasicCustomerInfoResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="MultipleOps">
+		<wsdl:operation name="getOrder">
+			<wsdl:input message="tns:getOrderRequest" />
+			<wsdl:output message="tns:getOrderResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="getBillingHistory">
+			<wsdl:input message="tns:getBillingHistoryRequest"></wsdl:input>
+			<wsdl:output message="tns:getBillingHistoryResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getBasicCustomerInfo">
+			<wsdl:input message="tns:getBasicCustomerInfoRequest"></wsdl:input>
+			<wsdl:output message="tns:getBasicCustomerInfoResponse"></wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="MultipleOpsSOAP" type="tns:MultipleOps">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="getOrder">
+			<soap:operation
+				soapAction="http://www.alsb.com/MultipleOps/getOrder" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getBillingHistory">
+			<soap:operation
+				soapAction="http://www.alsb.com/MultipleOps/getBillingHistory" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getBasicCustomerInfo">
+			<soap:operation
+				soapAction="http://www.alsb.com/MultipleOps/getBasicCustomerInfo" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="MultipleOps">
+		<wsdl:port binding="tns:MultipleOpsSOAP"
+			name="MultipleOpsSOAP">
+			<soap:address location="http://www.example.org/" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

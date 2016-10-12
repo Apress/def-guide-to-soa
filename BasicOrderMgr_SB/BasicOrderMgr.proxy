@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment>
+  <ser:coreEntry isProxy="true" isEnabled="true" xmlns:ser="http://www.bea.com/wli/sb/services">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:wsdl ref="BasicOrderMgr_SB/WSDL/BasicOrderMgrProxy"/>
+      <con:port>
+        <con:name>BasicOrderMgrProxySoapPort</con:name>
+        <con:namespace>http://www.alsb.com/</con:namespace>
+      </con:port>
+      <con:selector type="SOAP body"/>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig xmlns:ser="http://www.bea.com/wli/sb/services">
+    <tran:provider-id xmlns:tran="http://www.bea.com/wli/sb/transports">http</tran:provider-id>
+    <tran:inbound xmlns:tran="http://www.bea.com/wli/sb/transports">true</tran:inbound>
+    <tran:URI xmlns:tran="http://www.bea.com/wli/sb/transports">
+      <env:value xmlns:env="http://www.bea.com/wli/config/env">/BasicOrderMgr_SB/BasicOrderMgr</env:value>
+    </tran:URI>
+    <tran:inbound-properties xmlns:tran="http://www.bea.com/wli/sb/transports"/>
+    <tran:all-headers xmlns:tran="http://www.bea.com/wli/sb/transports">false</tran:all-headers>
+    <tran:provider-specific xmlns:tran="http://www.bea.com/wli/sb/transports">
+      <http:inbound-properties xmlns:http="http://www.bea.com/wli/sb/transports/http"/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router xmlns:ser="http://www.bea.com/wli/sb/services">
+    <con:pipeline type="request" name="PipelinePairNode1_request" xmlns:con="http://www.bea.com/wli/sb/pipeline/config">
+      <con:stage name="assign variables">
+        <con:comment>get the first name and last name values from the request
+document.</con:comment>
+        <con:context>
+          <con1:varNsDecl namespace="http://www.alsb.com/" prefix="alsb" xmlns:con1="http://www.bea.com/wli/sb/stages/config"/>
+        </con:context>
+        <con:actions>
+          <con1:assign varName="firstName" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:comment xmlns:con2="http://www.bea.com/wli/sb/stages/config">Get the first name of the customer</con2:comment>
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-5958768938522500873--29af58e5.1188a09cd27.-7ff8</con2:id>
+            <con1:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">$body/alsb:CustomerName/alsb:firstName/text()</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="lastName" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:comment xmlns:con2="http://www.bea.com/wli/sb/stages/config">Get the last name of the customer.</con2:comment>
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-5958768938522500873--29af58e5.1188a09cd27.-7ff7</con2:id>
+            <con1:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">$body/alsb:CustomerName/alsb:lastName/text()</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="get credit rating">
+        <con:context>
+          <con1:varNsDecl namespace="http://www.alsb.com/" prefix="alsb" xmlns:con1="http://www.bea.com/wli/sb/stages/config"/>
+        </con:context>
+        <con:actions>
+          <con1:assign varName="soapRequestBody" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-5958768938522500873--29af58e5.1188a09cd27.-7ff6</con2:id>
+            <con1:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config"><![CDATA[<soap:Body xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+<alsb:getCreditRating xmlns:alsb="http://www.alsb.com/">
+    <alsb:firstName>{$firstName}</alsb:firstName>
+    <alsb:lastName>{$lastName}</alsb:lastName>
+</alsb:getCreditRating>
+</soap:Body>]]></con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:wsCallout xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-5958768938522500873--29af58e5.1188a09cd27.-7ff5</con2:id>
+            <con1:service xsi:type="ref:BusinessServiceRef" ref="BasicOrderMgr_SB/BasicOrderMgr" xmlns:ref="http://www.bea.com/wli/sb/reference" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            <con1:operation>getCreditRating</con1:operation>
+            <con1:request>
+              <con1:body wrapped="true">$soapRequestBody</con1:body>
+            </con1:request>
+            <con1:response>
+              <con1:body wrapped="true">soapResponseBody</con1:body>
+            </con1:response>
+            <con1:requestTransform/>
+            <con1:responseTransform/>
+          </con1:wsCallout>
+          <con1:assign varName="creditRating" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-5958768938522500873--29af58e5.1188a09cd27.-7ff4</con2:id>
+            <con1:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">$soapResponseBody/alsb:getCreditRatingResponse/alsb:return/text()</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode1_response" xmlns:con="http://www.bea.com/wli/sb/pipeline/config"/>
+    <con:pipeline type="request" name="PipelinePairNode2_request" xmlns:con="http://www.bea.com/wli/sb/pipeline/config">
+      <con:stage name="assign variables">
+        <con:comment>get the first name and last name values from the request
+document.</con:comment>
+        <con:context>
+          <con1:varNsDecl namespace="http://www.alsb.com/" prefix="alsb" xmlns:con1="http://www.bea.com/wli/sb/stages/config"/>
+          <con1:varNsDecl namespace="http://www.alsb.com/order/" prefix="ord" xmlns:con1="http://www.bea.com/wli/sb/stages/config"/>
+        </con:context>
+        <con:actions>
+          <con1:assign varName="firstName" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:comment xmlns:con2="http://www.bea.com/wli/sb/stages/config">Get the first name of the customer</con2:comment>
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-1500272937352536385-33915447.1188a850cba.-7ffe</con2:id>
+            <con1:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">$body/alsb:Order/ord:FirstName/text()</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="lastName" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:comment xmlns:con2="http://www.bea.com/wli/sb/stages/config">Get the last name of the customer.</con2:comment>
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-1500272937352536385-33915447.1188a850cba.-7ffd</con2:id>
+            <con1:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">$body/alsb:Order/ord:LastName/text()</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="get credit rating">
+        <con:context>
+          <con1:varNsDecl namespace="http://www.alsb.com/" prefix="alsb" xmlns:con1="http://www.bea.com/wli/sb/stages/config"/>
+        </con:context>
+        <con:actions>
+          <con1:assign varName="soapRequestBody" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-1500272937352536385-33915447.1188a850cba.-7ff9</con2:id>
+            <con1:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config"><![CDATA[<soap:Body xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+<alsb:getCreditRating xmlns:alsb="http://www.alsb.com/">
+    <alsb:firstName>{$firstName}</alsb:firstName>
+    <alsb:lastName>{$lastName}</alsb:lastName>
+</alsb:getCreditRating>
+</soap:Body>]]></con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:wsCallout xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-1500272937352536385-33915447.1188a850cba.-7ff8</con2:id>
+            <con1:service xsi:type="ref:BusinessServiceRef" ref="BasicOrderMgr_SB/BasicOrderMgr" xmlns:ref="http://www.bea.com/wli/sb/reference" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            <con1:operation>getCreditRating</con1:operation>
+            <con1:request>
+              <con1:body wrapped="true">$soapRequestBody</con1:body>
+            </con1:request>
+            <con1:response>
+              <con1:body wrapped="true">soapResponseBody</con1:body>
+            </con1:response>
+            <con1:requestTransform/>
+            <con1:responseTransform/>
+          </con1:wsCallout>
+          <con1:assign varName="creditRating" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-1500272937352536385-33915447.1188a850cba.-7ff7</con2:id>
+            <con1:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">$soapResponseBody/alsb:getCreditRatingResponse/alsb:return</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode2_response" xmlns:con="http://www.bea.com/wli/sb/pipeline/config"/>
+    <con:pipeline type="request" name="PipelinePairNode3_request" xmlns:con="http://www.bea.com/wli/sb/pipeline/config">
+      <con:stage name="stage1">
+        <con:context/>
+        <con:actions>
+          <con1:log xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config">
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-2764595548165756336-5372d0a2.1188b75f9ba.-8000</con2:id>
+            <con1:logLevel>error</con1:logLevel>
+            <con1:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">concat('Default branch taken')</con2:xqueryText>
+            </con1:expr>
+            <con1:message>&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;</con1:message>
+          </con1:log>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode3_response" xmlns:con="http://www.bea.com/wli/sb/pipeline/config"/>
+    <con:flow xmlns:con="http://www.bea.com/wli/sb/pipeline/config">
+      <con:branch-node type="operation" name="BranchNode1">
+        <con:context/>
+        <con:branch-table>
+          <con:branch name="getProducts">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="PipelinePairNode1">
+                <con:request>PipelinePairNode1_request</con:request>
+                <con:response>PipelinePairNode1_response</con:response>
+              </con:pipeline-node>
+              <con:route-node name="get product catalog">
+                <con:context/>
+                <con:actions>
+                  <con1:route xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config">
+                    <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-5958768938522500873--29af58e5.1188a09cd27.-7ff3</con2:id>
+                    <con1:service ref="BasicOrderMgr_SB/BasicOrderMgr" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                    <con1:operation>getProductCatalog</con1:operation>
+                    <con1:outboundTransform>
+                      <con2:replace varName="body" contents-only="false" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+                        <con3:id xmlns:con3="http://www.bea.com/wli/sb/stages/config">_ActionId-8016308923544658977--9e57f7b.11886b22f24.-7ff9</con3:id>
+                        <con2:location>
+                          <con3:xpathText xmlns:con3="http://www.bea.com/wli/sb/stages/config">./*</con3:xpathText>
+                        </con2:location>
+                        <con2:expr>
+                          <con3:xqueryText xmlns:con3="http://www.bea.com/wli/sb/stages/config">&lt;alsb:getProductCatalog xmlns:alsb="http://www.alsb.com/">
+    &lt;alsb:creditRating>{$creditRating}&lt;/alsb:creditRating>
+&lt;/alsb:getProductCatalog></con3:xqueryText>
+                        </con2:expr>
+                      </con2:replace>
+                    </con1:outboundTransform>
+                    <con1:responseTransform/>
+                  </con1:route>
+                </con:actions>
+              </con:route-node>
+            </con:flow>
+          </con:branch>
+          <con:branch name="submitOrder">
+            <con:operator>equals</con:operator>
+            <con:value/>
+            <con:flow>
+              <con:pipeline-node name="PipelinePairNode2">
+                <con:request>PipelinePairNode2_request</con:request>
+                <con:response>PipelinePairNode2_response</con:response>
+              </con:pipeline-node>
+              <con:branch-node type="condition" name="decide order processing type">
+                <con:context>
+                  <con1:userNsDecl namespace="http://www.alsb.com/" prefix="alsb" xmlns:con1="http://www.bea.com/wli/sb/stages/config"/>
+                </con:context>
+                <con:branch-table variable="creditRating">
+                  <con:xpath>
+                    <con1:xpathText xmlns:con1="http://www.bea.com/wli/sb/stages/config">./text()</con1:xpathText>
+                  </con:xpath>
+                  <con:branch name="preferred customer">
+                    <con:operator>greater than equal to</con:operator>
+                    <con:value>xs:int(700)</con:value>
+                    <con:flow>
+                      <con:route-node name="route preferred order">
+                        <con:context>
+                          <con1:varNsDecl namespace="http://www.alsb.com/" prefix="alsb" xmlns:con1="http://www.bea.com/wli/sb/stages/config"/>
+                        </con:context>
+                        <con:actions>
+                          <con1:route xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config">
+                            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-1500272937352536385-33915447.1188a850cba.-7ff6</con2:id>
+                            <con1:service ref="BasicOrderMgr_SB/BasicOrderMgr" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                            <con1:operation>processPreferredOrder</con1:operation>
+                            <con1:outboundTransform>
+                              <con2:assign varName="bizRequest" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+                                <con3:id xmlns:con3="http://www.bea.com/wli/sb/stages/config">_ActionId-2764595548165756336-5372d0a2.1188b75f9ba.-7ffe</con3:id>
+                                <con2:expr>
+                                  <con3:xqueryText xmlns:con3="http://www.bea.com/wli/sb/stages/config">&lt;alsb:processPreferredOrder xmlns:alsb="http://www.alsb.com/">
+    &lt;alsb:order xmlns:ord="http://www.alsb.com/order/">
+        {$body/alsb:Order/*}
+    &lt;/alsb:order>
+&lt;/alsb:processPreferredOrder></con3:xqueryText>
+                                </con2:expr>
+                              </con2:assign>
+                              <con2:replace varName="body" contents-only="true" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+                                <con3:id xmlns:con3="http://www.bea.com/wli/sb/stages/config">_ActionId-2764595548165756336-5372d0a2.1188b75f9ba.-7ffd</con3:id>
+                                <con2:location>
+                                  <con3:xpathText xmlns:con3="http://www.bea.com/wli/sb/stages/config">.</con3:xpathText>
+                                </con2:location>
+                                <con2:expr>
+                                  <con3:xqueryText xmlns:con3="http://www.bea.com/wli/sb/stages/config">$bizRequest</con3:xqueryText>
+                                </con2:expr>
+                              </con2:replace>
+                            </con1:outboundTransform>
+                            <con1:responseTransform/>
+                          </con1:route>
+                        </con:actions>
+                      </con:route-node>
+                    </con:flow>
+                  </con:branch>
+                  <con:branch name="standard customer">
+                    <con:operator>less than</con:operator>
+                    <con:value>xs:int(700)</con:value>
+                    <con:flow>
+                      <con:route-node name="route standard order">
+                        <con:context/>
+                        <con:actions>
+                          <con1:route xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config">
+                            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-1500272937352536385-33915447.1188a850cba.-7ff5</con2:id>
+                            <con1:service ref="BasicOrderMgr_SB/BasicOrderMgr" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+                            <con1:operation>processOrder</con1:operation>
+                            <con1:outboundTransform>
+                              <con2:replace varName="body" contents-only="true" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+                                <con3:id xmlns:con3="http://www.bea.com/wli/sb/stages/config">_ActionId-1103991075033756647-73d026ec.11cfe36fba9.-7ffe</con3:id>
+                                <con2:location>
+                                  <con3:xpathText xmlns:con3="http://www.bea.com/wli/sb/stages/config">.</con3:xpathText>
+                                </con2:location>
+                                <con2:expr>
+                                  <con3:xqueryText xmlns:con3="http://www.bea.com/wli/sb/stages/config">&lt;alsb:processOrder xmlns:alsb="http://www.alsb.com/">
+    &lt;alsb:order xmlns:ord="http://www.alsb.com/order/">
+        {$body/alsb:Order/*}
+    &lt;/alsb:order>
+&lt;/alsb:processOrder></con3:xqueryText>
+                                </con2:expr>
+                              </con2:replace>
+                            </con1:outboundTransform>
+                            <con1:responseTransform/>
+                          </con1:route>
+                        </con:actions>
+                      </con:route-node>
+                    </con:flow>
+                  </con:branch>
+                  <con:default-branch>
+                    <con:flow>
+                      <con:pipeline-node name="PipelinePairNode3">
+                        <con:request>PipelinePairNode3_request</con:request>
+                        <con:response>PipelinePairNode3_response</con:response>
+                      </con:pipeline-node>
+                    </con:flow>
+                  </con:default-branch>
+                </con:branch-table>
+              </con:branch-node>
+            </con:flow>
+          </con:branch>
+          <con:default-branch>
+            <con:flow/>
+          </con:default-branch>
+        </con:branch-table>
+      </con:branch-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

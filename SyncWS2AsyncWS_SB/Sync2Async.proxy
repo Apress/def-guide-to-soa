@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment>
+  <ser:coreEntry isProxy="true" isEnabled="true" xmlns:ser="http://www.bea.com/wli/sb/services">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:wsdl ref="SyncWS2AsyncWS_SB/WSDL/Sync2AsyncProxy"/>
+      <con:port>
+        <con:name>SyncProxySOAP</con:name>
+        <con:namespace>http://www.alsb.com/SyncProxy/</con:namespace>
+      </con:port>
+      <con:selector type="SOAP body"/>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig xmlns:ser="http://www.bea.com/wli/sb/services">
+    <tran:provider-id xmlns:tran="http://www.bea.com/wli/sb/transports">http</tran:provider-id>
+    <tran:inbound xmlns:tran="http://www.bea.com/wli/sb/transports">true</tran:inbound>
+    <tran:URI xmlns:tran="http://www.bea.com/wli/sb/transports">
+      <env:value xmlns:env="http://www.bea.com/wli/config/env">/SyncWS2AsyncWS_SB/Sync2Async</env:value>
+    </tran:URI>
+    <tran:inbound-properties xmlns:tran="http://www.bea.com/wli/sb/transports"/>
+    <tran:all-headers xmlns:tran="http://www.bea.com/wli/sb/transports">false</tran:all-headers>
+    <tran:provider-specific xmlns:tran="http://www.bea.com/wli/sb/transports">
+      <http:inbound-properties xmlns:http="http://www.bea.com/wli/sb/transports/http"/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router xmlns:ser="http://www.bea.com/wli/sb/services">
+    <con:pipeline type="request" name="PipelinePairNode1_request" xmlns:con="http://www.bea.com/wli/sb/pipeline/config">
+      <con:stage name="stage1">
+        <con:context>
+          <con1:varNsDecl namespace="http://www.alsb.com/SyncProxy/" prefix="syn" xmlns:con1="http://www.bea.com/wli/sb/stages/config"/>
+        </con:context>
+        <con:actions>
+          <con1:route xmlns:con1="http://www.bea.com/wli/sb/stages/publish/config">
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-701376394352234298--6928373d.118aa53c2c4.-8000</con2:id>
+            <con1:service ref="SyncWS2AsyncWS_SB/AsyncOrder" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            <con1:operation>submitAsyncOrder</con1:operation>
+            <con1:outboundTransform>
+              <con2:rename varName="body" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+                <con3:id xmlns:con3="http://www.bea.com/wli/sb/stages/config">_ActionId-3404305480726221140--7b462cc8.118e1ea39af.-7ffe</con3:id>
+                <con2:location>
+                  <con3:xpathText xmlns:con3="http://www.bea.com/wli/sb/stages/config">./*</con3:xpathText>
+                </con2:location>
+                <con2:namespace>http://www.alsb.com/AsyncBusiness/</con2:namespace>
+              </con2:rename>
+              <con2:transport-headers copy-all="false" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+                <con3:id xmlns:con3="http://www.bea.com/wli/sb/stages/config">_ActionId-701376394352234298--6928373d.118aa53c2c4.-7fff</con3:id>
+                <con2:header-set>outbound-request</con2:header-set>
+                <con2:header value="expression" name="URI">
+                  <con3:xqueryText xmlns:con3="http://www.bea.com/wli/sb/stages/config">"/AsyncOrder_WS/AsyncBusiness"</con3:xqueryText>
+                </con2:header>
+                <con2:header name="_wls_mimehdrContent_Type" value="expression">
+                  <con3:xqueryText xmlns:con3="http://www.bea.com/wli/sb/stages/config">"text/xml; charset=UTF-8"</con3:xqueryText>
+                </con2:header>
+              </con2:transport-headers>
+            </con1:outboundTransform>
+          </con1:route>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode1_response" xmlns:con="http://www.bea.com/wli/sb/pipeline/config"/>
+    <con:flow xmlns:con="http://www.bea.com/wli/sb/pipeline/config">
+      <con:pipeline-node name="PipelinePairNode1">
+        <con:request>PipelinePairNode1_request</con:request>
+        <con:response>PipelinePairNode1_response</con:response>
+      </con:pipeline-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

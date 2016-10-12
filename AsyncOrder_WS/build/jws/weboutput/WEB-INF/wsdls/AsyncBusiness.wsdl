@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<s0:definitions name="AsyncBusiness" targetNamespace="http://www.alsb.com/AsyncBusiness/" xmlns="" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://www.alsb.com/AsyncBusiness/" xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/">
+  <s0:types>
+    <xsd:schema targetNamespace="http://www.alsb.com/AsyncBusiness/" xmlns:order="http://www.alsb.com/order/" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://www.alsb.com/AsyncBusiness/" xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.alsb.com/AsyncBusiness/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://www.alsb.com/order/" schemaLocation="order.xsd"/>
+      <xsd:element name="submitOrder" type="order:Order"/>
+    </xsd:schema>
+  </s0:types>
+  <s0:message name="submitOrder">
+    <s0:part element="s1:submitOrder" name="submitOrder"/>
+  </s0:message>
+  <s0:portType name="AsyncBusiness">
+    <s0:operation name="submitAsyncOrder">
+      <s0:input message="s1:submitOrder"/>
+    </s0:operation>
+  </s0:portType>
+  <s0:binding name="AsyncBusinessSOAP" type="s1:AsyncBusiness">
+    <s2:binding style="document" transport="http://www.openuri.org/2002/04/soap/jms"/>
+    <s0:operation name="submitAsyncOrder">
+      <s2:operation soapAction="http://www.alsb.com/AsyncBusiness/submitOrder"/>
+      <s0:input>
+        <s2:body parts="submitOrder" use="literal"/>
+      </s0:input>
+    </s0:operation>
+  </s0:binding>
+  <s0:service name="AsyncBusiness">
+    <s0:port binding="s1:AsyncBusinessSOAP" name="AsyncBusiness">
+      <s2:address location="jms://localhost:7001/AsyncOrder_WS/AsyncBusiness?URI=jms.WebServiceQueue"/>
+    </s0:port>
+  </s0:service>
+</s0:definitions>

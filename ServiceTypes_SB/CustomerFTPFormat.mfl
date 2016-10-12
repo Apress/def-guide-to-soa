@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE MessageFormat SYSTEM 'mfl.dtd'>
+<!--    Enter description of the message format here.    -->
+<MessageFormat name='CustomerFTPFormat' version='2.01'>
+    <FieldFormat name='ID' type='Numeric' delimRef='' delim='\t' delimOptional='n' codepage='UTF-8'/>
+    <FieldFormat name='Name' type='String' delimRef='' delim='\r' delimOptional='n' codepage='UTF-8'/>
+</MessageFormat>

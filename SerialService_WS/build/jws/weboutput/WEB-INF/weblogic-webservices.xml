@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<weblogic-webservices xmlns="http://www.bea.com/ns/weblogic/weblogic-webservices" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.bea.com/ns/weblogic/weblogic-webservices http://www.bea.com/ns/weblogic/weblogic-webservices/1.0/weblogic-webservices.xsd">
+  <webservice-description>
+    <webservice-description-name>com.alsb.serial.SerialPortTypeImpl</webservice-description-name>
+    <webservice-type>JAXRPC</webservice-type>
+    <port-component>
+      <port-component-name>SerialService</port-component-name>
+      <service-endpoint-address>
+        <webservice-contextpath>SerialService_WS</webservice-contextpath>
+        <webservice-serviceuri>/SerialService</webservice-serviceuri>
+      </service-endpoint-address>
+    </port-component>
+  </webservice-description>
+</weblogic-webservices>

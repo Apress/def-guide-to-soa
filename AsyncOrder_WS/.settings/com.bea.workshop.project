@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-project guid="AsyncOrder_WS_118a9b599d5_dce1a82bc7c2b8dd" version="5">
+	<web-app guid="AsyncOrder_WS_118a9b599d5_cee65858f989eb00">
+		<web-app-type>com.m7.webapp.java</web-app-type>
+		<folder-mapping project-name="AsyncOrder_WS" project-uri="WebContent" web-app-uri="/"/>
+	</web-app>
+	<properties>
+		<property name="validation.compile" value="true"/>
+		<property name="validation.missingFile" value="true"/>
+		<property name="validation.unresolvedVar" value="false"/>
+		<property name="validation" value="true"/>
+		<property name="taglib.downloadRemote" value="true"/>
+		<property name="validation.resources" value="true"/>
+		<property name="validation.unresolvedType" value="true"/>
+		<property name="validation.compile.jspQuotation" value="false"/>
+	</properties>
+</web-project>

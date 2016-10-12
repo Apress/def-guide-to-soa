@@ -1,0 +1,238 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<s0:definitions name="TemperamentalCreditServiceDefinitions" targetNamespace="http://www.alsb.com" xmlns="" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://www.alsb.com" xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/">
+  <s0:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.alsb.com" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://www.alsb.com" xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="variableOpC">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="arg0" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+
+      </xs:element>
+      <xs:element name="variableOpCResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="variableCreditCheck">
+
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="arg0" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="variableCreditCheckResponse">
+        <xs:complexType>
+          <xs:sequence>
+
+            <xs:element name="return" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="rapidCreditCheck">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="arg0" type="xs:string"/>
+          </xs:sequence>
+
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="rapidCreditCheckResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+
+      <xs:element name="setDelay">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="delayInSeconds" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setDelayResponse">
+        <xs:complexType>
+
+          <xs:sequence>
+            <xs:element name="return" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="variableOpB">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="arg0" type="xs:string"/>
+
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="variableOpBResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+
+      </xs:element>
+      <xs:element name="variableOpA">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="arg0" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="variableOpAResponse">
+
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </s0:types>
+  <s0:message name="variableOpC">
+
+    <s0:part element="s1:variableOpC" name="parameters"/>
+  </s0:message>
+  <s0:message name="variableOpCResponse">
+    <s0:part element="s1:variableOpCResponse" name="parameters"/>
+  </s0:message>
+  <s0:message name="variableCreditCheck">
+    <s0:part element="s1:variableCreditCheck" name="parameters"/>
+  </s0:message>
+  <s0:message name="variableCreditCheckResponse">
+
+    <s0:part element="s1:variableCreditCheckResponse" name="parameters"/>
+  </s0:message>
+  <s0:message name="rapidCreditCheck">
+    <s0:part element="s1:rapidCreditCheck" name="parameters"/>
+  </s0:message>
+  <s0:message name="rapidCreditCheckResponse">
+    <s0:part element="s1:rapidCreditCheckResponse" name="parameters"/>
+  </s0:message>
+  <s0:message name="setDelay">
+
+    <s0:part element="s1:setDelay" name="parameters"/>
+  </s0:message>
+  <s0:message name="setDelayResponse">
+    <s0:part element="s1:setDelayResponse" name="parameters"/>
+  </s0:message>
+  <s0:message name="variableOpB">
+    <s0:part element="s1:variableOpB" name="parameters"/>
+  </s0:message>
+  <s0:message name="variableOpBResponse">
+
+    <s0:part element="s1:variableOpBResponse" name="parameters"/>
+  </s0:message>
+  <s0:message name="variableOpA">
+    <s0:part element="s1:variableOpA" name="parameters"/>
+  </s0:message>
+  <s0:message name="variableOpAResponse">
+    <s0:part element="s1:variableOpAResponse" name="parameters"/>
+  </s0:message>
+  <s0:portType name="TemperamentalCreditService">
+
+    <s0:operation name="variableOpC" parameterOrder="parameters">
+      <s0:input message="s1:variableOpC"/>
+      <s0:output message="s1:variableOpCResponse"/>
+    </s0:operation>
+    <s0:operation name="variableCreditCheck" parameterOrder="parameters">
+      <s0:input message="s1:variableCreditCheck"/>
+      <s0:output message="s1:variableCreditCheckResponse"/>
+    </s0:operation>
+    <s0:operation name="rapidCreditCheck" parameterOrder="parameters">
+
+      <s0:input message="s1:rapidCreditCheck"/>
+      <s0:output message="s1:rapidCreditCheckResponse"/>
+    </s0:operation>
+    <s0:operation name="setDelay" parameterOrder="parameters">
+      <s0:input message="s1:setDelay"/>
+      <s0:output message="s1:setDelayResponse"/>
+    </s0:operation>
+    <s0:operation name="variableOpB" parameterOrder="parameters">
+      <s0:input message="s1:variableOpB"/>
+
+      <s0:output message="s1:variableOpBResponse"/>
+    </s0:operation>
+    <s0:operation name="variableOpA" parameterOrder="parameters">
+      <s0:input message="s1:variableOpA"/>
+      <s0:output message="s1:variableOpAResponse"/>
+    </s0:operation>
+  </s0:portType>
+  <s0:binding name="TemperamentalCreditServiceSoapBinding" type="s1:TemperamentalCreditService">
+    <s2:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+    <s0:operation name="variableOpC">
+      <s2:operation soapAction="" style="document"/>
+      <s0:input>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:input>
+      <s0:output>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:output>
+    </s0:operation>
+
+    <s0:operation name="variableCreditCheck">
+      <s2:operation soapAction="" style="document"/>
+      <s0:input>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:input>
+      <s0:output>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:output>
+    </s0:operation>
+
+    <s0:operation name="rapidCreditCheck">
+      <s2:operation soapAction="" style="document"/>
+      <s0:input>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:input>
+      <s0:output>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:output>
+    </s0:operation>
+
+    <s0:operation name="setDelay">
+      <s2:operation soapAction="" style="document"/>
+      <s0:input>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:input>
+      <s0:output>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:output>
+    </s0:operation>
+
+    <s0:operation name="variableOpB">
+      <s2:operation soapAction="" style="document"/>
+      <s0:input>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:input>
+      <s0:output>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:output>
+    </s0:operation>
+
+    <s0:operation name="variableOpA">
+      <s2:operation soapAction="" style="document"/>
+      <s0:input>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:input>
+      <s0:output>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:output>
+    </s0:operation>
+
+  </s0:binding>
+  <s0:service name="TemperamentalCreditService">
+    <s0:port binding="s1:TemperamentalCreditServiceSoapBinding" name="TemperamentalCreditSoapPort">
+      <s2:address location="http://localhost:7001/TemperamentalService_WS/credit"/>
+    </s0:port>
+  </s0:service>
+</s0:definitions>

@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<webservices xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <webservice-description>
+    <webservice-description-name>com.alsb.soap.SOAPwithAttachmentPortImpl</webservice-description-name>
+    <wsdl-file>/wsdls/SOAPwithAttachment.wsdl</wsdl-file>
+    <jaxrpc-mapping-file>WEB-INF/SOAPwithAttachment.xml</jaxrpc-mapping-file>
+    <port-component>
+      <port-component-name>SOAPwithAttachmentSOAP</port-component-name>
+      <wsdl-port xmlns:soap="http://www.alsb.com/SOAPwithAttachment/">soap:SOAPwithAttachmentSOAP</wsdl-port>
+      <service-endpoint-interface>com.alsb.soap.SOAPwithAttachmentPortImplPortType</service-endpoint-interface>
+      <service-impl-bean>
+        <servlet-link>SOAPwithAttachmentServlethttp</servlet-link>
+      </service-impl-bean>
+    </port-component>
+  </webservice-description>
+</webservices>

@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<weblogic-wsee-standaloneclient xmlns="http://www.bea.com/ns/weblogic/90" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <service-ref>
+    <j2ee:service-ref-name xmlns:j2ee="http://java.sun.com/xml/ns/j2ee">unused information</j2ee:service-ref-name>
+    <j2ee:service-interface xmlns:j2ee="http://java.sun.com/xml/ns/j2ee">com.alsb.security.lib.SecureMessageService_Service</j2ee:service-interface>
+    <j2ee:wsdl-file xmlns:j2ee="http://java.sun.com/xml/ns/j2ee">com/alsb/security/lib/SecureMessageService_Service_saved_wsdl.wsdl</j2ee:wsdl-file>
+    <j2ee:jaxrpc-mapping-file xmlns:j2ee="http://java.sun.com/xml/ns/j2ee">com/alsb/security/lib/SecureMessageService_Service_java_wsdl_mapping.xml</j2ee:jaxrpc-mapping-file>
+    <j2ee:service-qname xmlns:j2ee="http://java.sun.com/xml/ns/j2ee" xmlns:sec="http://www.alsb.com/SecureMessageService/">sec:SecureMessageService</j2ee:service-qname>
+  </service-ref>
+</weblogic-wsee-standaloneclient>

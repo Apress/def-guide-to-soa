@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s1:definitions name="SecureMessageService" targetNamespace="http://www.alsb.com/SecureMessageService/" xmlns:s0="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:s1="http://schemas.xmlsoap.org/wsdl/" xmlns:s2="http://www.alsb.com/SecureMessageService/" xmlns:s3="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+  <wsp:UsingPolicy s1:Required="true"/>
+  <wsp:Policy s0:Id="Sign.xml">
+    <wssp:Integrity xmlns:wls="http://www.bea.com/wls90/security/policy/wsee#part" xmlns:wssp="http://www.bea.com/wls90/security/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+      <wssp:SignatureAlgorithm URI="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+      <wssp:CanonicalizationAlgorithm URI="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+      <wssp:Target>
+        <wssp:DigestAlgorithm URI="http://www.w3.org/2000/09/xmldsig#sha1"/>
+        <wssp:MessageParts Dialect="http://www.bea.com/wls90/security/policy/wsee#part"> 
+        wls:SystemHeaders()
+      </wssp:MessageParts>
+
+      </wssp:Target>
+      <wssp:Target>
+        <wssp:DigestAlgorithm URI="http://www.w3.org/2000/09/xmldsig#sha1"/>
+        <wssp:MessageParts Dialect="http://www.bea.com/wls90/security/policy/wsee#part"> 
+        wls:SecurityHeader(wsu:Timestamp)
+      </wssp:MessageParts>
+      </wssp:Target>
+      <wssp:Target>
+        <wssp:DigestAlgorithm URI="http://www.w3.org/2000/09/xmldsig#sha1"/>
+        <wssp:MessageParts Dialect="http://schemas.xmlsoap.org/2002/12/wsse#part">
+
+      wsp:Body()
+      </wssp:MessageParts>
+      </wssp:Target>
+      <wssp:SupportedTokens>
+        <wssp:SecurityToken IncludeInMessage="true" TokenType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3">
+          <wssp:TokenIssuer>CN=jeff,OU=IT,O=BEA,L=San Jose ST\=California,C=US,CN=server,OU=IT,O=BEA,L=San Jose ST\=California,C=US,</wssp:TokenIssuer>
+        </wssp:SecurityToken>
+      </wssp:SupportedTokens>
+    </wssp:Integrity>
+
+    <wssp:MessageAge Age="60" xmlns:wssp="http://www.bea.com/wls90/security/policy"/>
+  </wsp:Policy>
+  <s1:types>
+    <xsd:schema targetNamespace="http://www.alsb.com/SecureMessageService/" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://www.alsb.com/SecureMessageService/" xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.alsb.com/SecureMessageService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:element name="getGreeting">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+          </xsd:sequence>
+
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getGreetingResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="greeting" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+    </xsd:schema>
+  </s1:types>
+  <s1:message name="getGreetingRequest">
+    <s1:part element="s2:getGreeting" name="parameters"/>
+  </s1:message>
+  <s1:message name="getGreetingResponse">
+    <s1:part element="s2:getGreetingResponse" name="parameters"/>
+  </s1:message>
+  <s1:portType name="SecureMessageService">
+
+    <s1:operation name="getGreeting">
+      <s1:input message="s2:getGreetingRequest"/>
+      <s1:output message="s2:getGreetingResponse"/>
+    </s1:operation>
+  </s1:portType>
+  <s1:binding name="SecureMessageServiceSOAP" type="s2:SecureMessageService">
+    <s3:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <s1:operation name="getGreeting">
+      <wsp:Policy>
+
+        <wsp:PolicyReference URI="#Sign.xml"/>
+      </wsp:Policy>
+      <s3:operation soapAction="getGreeting"/>
+      <s1:input>
+        <s3:body use="literal"/>
+      </s1:input>
+      <s1:output>
+        <s3:body use="literal"/>
+      </s1:output>
+
+    </s1:operation>
+  </s1:binding>
+  <s1:service name="SecureMessageService">
+    <s1:port binding="s2:SecureMessageServiceSOAP" name="SecureMessageServiceSOAP">
+      <s3:address location="http://JEDAVIES01.amer.bea.com:7001/Security_SB/SecureMessage"/>
+    </s1:port>
+  </s1:service>
+</s1:definitions>

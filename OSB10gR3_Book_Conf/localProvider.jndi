@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment>
+  <con:description xmlns:con="http://www.bea.com/wli/sb/resources/config">Provides access to the same JNDI tree
+that the service bus runs on.</con:description>
+  <con:providerUrl xmlns:con="http://www.bea.com/wli/sb/resources/config">t3://localhost:7001</con:providerUrl>
+  <con:UserPassword xmlns:con="http://www.bea.com/wli/sb/resources/config">
+    <con:username>weblogic</con:username>
+    <con:password>weblogic</con:password>
+  </con:UserPassword>
+</xml-fragment>

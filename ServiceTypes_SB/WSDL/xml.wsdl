@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+   xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+   xmlns:alsb="http://www.alsb.com/"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="XMLWSDLDefinitions"
+   xmlns="http://www.alsb.com/"
+   targetNamespace="http://www.alsb.com/">
+   <wsdl:message name="getGreetingRequest">
+      <wsdl:part name="name" type="xsd:string" />
+   </wsdl:message>
+   
+   <wsdl:message name="getGreetingResponse">
+      <wsdl:part name="response" type="xsd:string" />
+   </wsdl:message>
+   
+   <wsdl:portType name="XMLWSDLPortType" xmlns="http://www.alsb.com/">
+      <wsdl:operation name="getGreeting">
+         <wsdl:input message="alsb:getGreetingRequest" />
+         <wsdl:output message="alsb:getGreetingResponse" />
+      </wsdl:operation>
+   </wsdl:portType>
+   
+   <wsdl:binding name="XMLWSDLHTTP" type="alsb:XMLWSDLPortType">
+      <http:binding verb="POST" />
+      <wsdl:operation name="getGreeting">
+         <http:operation location="/GetGreeting" />
+         <wsdl:input>
+            <mime:content type="application/x-www-form-urlencoded" />
+         </wsdl:input>
+         <wsdl:output>
+            <mime:content type="text/xml" />
+         </wsdl:output>
+      </wsdl:operation>
+   </wsdl:binding>
+
+   <wsdl:service name="XMLWSDLService">
+      <wsdl:port binding="alsb:XMLWSDLHTTP" name="XMLWSDLHTTP">
+         <http:address location="http://localhost:7001/xmlwsdl/XMLWSDLService" />
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>

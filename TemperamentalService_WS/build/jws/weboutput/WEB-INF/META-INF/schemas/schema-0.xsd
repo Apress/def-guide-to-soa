@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.alsb.com" elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="variableCreditCheck">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="arg0" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="variableCreditCheckResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="return" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="setDelay">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="delayInSeconds" type="xs:int"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="setDelayResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="return" type="xs:int"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="variableOpB">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="arg0" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="variableOpBResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="return" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="variableOpA">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="arg0" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="variableOpAResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="return" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="variableOpC">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="arg0" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="variableOpCResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="return" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="rapidCreditCheck">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="arg0" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="rapidCreditCheckResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="return" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

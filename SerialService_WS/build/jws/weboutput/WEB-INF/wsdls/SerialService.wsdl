@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<s0:definitions name="SerialServiceDefinitions" targetNamespace="http://www.alsb.com/" xmlns="" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://www.alsb.com/" xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/">
+  <s0:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.alsb.com/" xmlns:alsb="http://www.alsb.com/" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://www.alsb.com/" xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="CustomerRequestType">
+        <xs:sequence>
+          <xs:element name="customerID" type="xs:int"/>
+          <xs:element name="firstName" type="xs:string"/>
+          <xs:element name="lastName" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="CustomerRequest" type="alsb:CustomerRequestType"/>
+    </xs:schema>
+  </s0:types>
+  <s0:message name="request">
+    <s0:part element="s1:CustomerRequest" name="parameters"/>
+  </s0:message>
+  <s0:portType name="SerialPortType">
+    <s0:operation name="processCustomer" parameterOrder="parameters">
+      <s0:input message="s1:request"/>
+    </s0:operation>
+  </s0:portType>
+  <s0:binding name="SerialServiceSoapBinding" type="s1:SerialPortType">
+    <s2:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <s0:operation name="processCustomer">
+      <s2:operation style="document"/>
+      <s0:input>
+        <s2:body use="literal"/>
+      </s0:input>
+    </s0:operation>
+  </s0:binding>
+  <s0:service name="SerialService">
+    <s0:port binding="s1:SerialServiceSoapBinding" name="SerialService">
+      <s2:address location="http://localhost:7001/SerialService_WS/SerialService"/>
+      <s2:address location="http://localhost:7001/SerialService_WS/SerialService2"/>
+    </s0:port>
+  </s0:service>
+</s0:definitions>

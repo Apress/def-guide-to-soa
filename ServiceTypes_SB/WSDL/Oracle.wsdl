@@ -1,0 +1,76 @@
+<wsdl:definitions
+  name="PhotoCatalogService"
+  targetNamespace="http://examples.com/PhotoCatalog"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:types="http://examples.com/PhotoCatalog/types"
+  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+  xmlns:tns="http://examples.com/PhotoCatalog">
+  <wsdl:message name="addPhotoRequest">
+    <wsdl:part name="photo" type="xsd:hexBinary"/>
+  </wsdl:message>
+  <wsdl:message name="addPhotoResponse">
+    <wsdl:part name="status" type="xsd:string"/>
+  </wsdl:message>
+  <wsdl:message name="replacePhotoRequest">
+    <wsdl:part name="oldPhoto" type="xsd:string"/>
+    <wsdl:part name="newPhoto" type="xsd:hexBinary"/>
+  </wsdl:message>
+  <wsdl:message name="replacePhotoResponse">
+    <wsdl:part name="status" type="xsd:string"/>
+  </wsdl:message>
+  <wsdl:portType name="PhotoCatalog">
+    <wsdl:operation name="addPhoto">
+      <wsdl:input message="tns:addPhotoRequest"/>
+      <wsdl:output message="tns:addPhotoResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="replacePhoto">
+      <wsdl:input message="tns:replacePhotoRequest"/>
+      <wsdl:output message="tns:replacePhotoResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PhotoCatalogBinding" type="tns:PhotoCatalog">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="addPhoto">
+      <wsdl:input>
+        <mime:multipartRelated>
+          <mime:part>
+            <soap:body use="literal"/>
+          </mime:part>
+          <mime:part>
+            <mime:content part="photo" 
+                          type="image/jpeg"/>
+          </mime:part>
+        </mime:multipartRelated>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:multipartRelated>
+          <mime:part>
+            <soap:body use="literal"/>
+          </mime:part>
+          <mime:part>
+            <mime:content part="status" type="text/plain"/>
+            <mime:content part="status" type="text/xml"/>
+          </mime:part>
+        </mime:multipartRelated>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="replacePhoto">
+      <wsdl:input>
+        <mime:multipartRelated>
+          <mime:part>
+            <soap:body parts="oldPhoto" use="literal"/>
+          </mime:part>
+          <mime:part>
+            <mime:content part="newPhoto" 
+                          type="image/jpeg"/>
+          </mime:part>
+        </mime:multipartRelated>
+      </wsdl:input>
+      <wsdl:output>
+            <soap:body parts="status" use="literal"/>        
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+</wsdl:definitions>

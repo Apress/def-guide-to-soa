@@ -1,0 +1,17 @@
+<foo>
+	<bar>
+		<id>1</id>
+		<name>name1</name>
+	</bar>
+</foo>
+
+=================================
+
+<foo>
+	<bar>
+		<id>2</id>
+		<name>name2</name>
+		<id>3</id>
+		<name>name3</name>
+	</bar>
+</foo>

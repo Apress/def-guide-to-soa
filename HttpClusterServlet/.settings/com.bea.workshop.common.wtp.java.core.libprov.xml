@@ -1,0 +1,26 @@
+<install-record>
+  <entry>
+    <facet id="workshop.beehive.controls"/>
+    <provider id="j2ee-library-provider-workshop.beehive.controls-10.0"/>
+  </entry>
+  <entry>
+    <facet id="workshop.jstl"/>
+    <provider id="j2ee-library-provider-workshop.jstl"/>
+  </entry>
+  <entry>
+    <facet id="workshop.struts"/>
+    <provider id="j2ee-library-provider-workshop.struts-1.2"/>
+  </entry>
+  <entry>
+    <facet id="wls.controls"/>
+    <provider id="j2ee-library-provider-wls.controls-10.0"/>
+  </entry>
+  <entry>
+    <facet id="wls.logging"/>
+    <provider id="j2ee-library-provider-wls.logging-web"/>
+  </entry>
+  <entry>
+    <facet id="workshop.beehive.netui"/>
+    <provider id="j2ee-library-provider-workshop.beehive.netui-1.0.1"/>
+  </entry>
+</install-record>

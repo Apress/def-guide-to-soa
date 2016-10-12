@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faceted-project>
+  <runtime name="Oracle WebLogic Server v10.3"/>
+  <fixed facet="alsb.container"/>
+  <installed facet="alsb.container" version="1.0.100"/>
+</faceted-project>

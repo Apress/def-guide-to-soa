@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE rmi PUBLIC "-//BEA Systems, Inc.//RMI Runtime DTD 1.0//EN" "rmi.dtd">
+<rmi
+    name="com.alsb.ejb.TaxCalculator_yl4068_EOImpl"
+>
+<cluster
+    clusterable="true"
+    propagate-environment="true"
+>
+</cluster>
+
+<lifecycle
+    dgc-policy="managed"
+>
+</lifecycle>
+
+<method
+    name="calculateTax(double)"
+    requires-transaction="true"
+>
+</method>
+<method
+    name="getPrimaryKey()"
+    requires-transaction="true"
+>
+</method>
+<method
+    name="getEJBHome()"
+    requires-transaction="true"
+>
+</method>
+<method
+    name="getHandle()"
+    requires-transaction="true"
+>
+</method>
+<method
+    name="isIdentical(javax.ejb.EJBObject)"
+    requires-transaction="true"
+>
+</method>
+<method
+    name="remove()"
+    requires-transaction="true"
+>
+</method>
+
+<security
+    client-authentication="supported"
+    client-cert-authentication="supported"
+    identity-assertion="supported"
+    confidentiality="supported"
+    integrity="supported"
+>
+</security>
+
+</rmi>

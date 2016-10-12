@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<s0:definitions name="SOAPwithAttachment"
+	targetNamespace="http://www.alsb.com/SOAPwithAttachment/" xmlns=""
+	xmlns:s0="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:s1="http://www.alsb.com/SOAPwithAttachment/"
+	xmlns:s2="http://www.w3.org/2001/XMLSchema"
+	xmlns:s3="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:s4="http://schemas.xmlsoap.org/wsdl/mime/">
+	<s0:types>
+		<xsd:schema
+			targetNamespace="http://www.alsb.com/SOAPwithAttachment/"
+			xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+			xmlns:s0="http://schemas.xmlsoap.org/wsdl/"
+			xmlns:s1="http://www.alsb.com/SOAPwithAttachment/"
+			xmlns:s2="http://www.w3.org/2001/XMLSchema"
+			xmlns:s3="http://schemas.xmlsoap.org/wsdl/soap/"
+			xmlns:s4="http://schemas.xmlsoap.org/wsdl/mime/"
+			xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+			xmlns:tns="http://www.alsb.com/SOAPwithAttachment/"
+			xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:element name="submitAttachmentResponse"
+				type="xsd:string" />
+			<xsd:complexType name="SubmitAttachmentRequestType">
+				<xsd:sequence>
+					<xsd:element name="fileName" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="submitAttachmentRequest"
+				type="tns:SubmitAttachmentRequestType" />
+			<xsd:element name="zipFile" type="xsd:base64Binary" />
+		</xsd:schema>
+	</s0:types>
+	<s0:message name="submitAttachmentRequest">
+		<s0:part name="submitAttachment"
+			type="s1:SubmitAttachmentRequestType" />
+		<s0:part name="zipFile" type="s2:base64Binary" />
+	</s0:message>
+	<s0:message name="submitAttachmentResponse">
+		<s0:part element="s1:submitAttachmentResponse"
+			name="submitAttachmentResponse" />
+	</s0:message>
+	<s0:portType name="SOAPwithAttachmentPort">
+		<s0:operation name="submitAttachment">
+			<s0:input message="s1:submitAttachmentRequest" />
+			<s0:output message="s1:submitAttachmentResponse" />
+		</s0:operation>
+	</s0:portType>
+	<s0:binding name="SOAPwithAttachmentSOAP"
+		type="s1:SOAPwithAttachmentPort">
+		<s3:binding style="rpc"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<s0:operation name="submitAttachment">
+			<s3:operation
+				soapAction="http://www.alsb.com/SOAPwithAttachment/submitAttachment" />
+			<s0:input>
+				<s4:multipartRelated>
+					<s4:part>
+						<s3:body
+							namespace="http://www.alsb.com/SOAPwithAttachment/"
+							parts="submitAttachment" use="literal" />
+					</s4:part>
+					<s4:part>
+						<s4:content part="zipFile"
+							type="application/zip" />
+					</s4:part>
+				</s4:multipartRelated>
+			</s0:input>
+			<s0:output>
+				<s3:body parts="submitAttachmentResponse" use="literal" />
+			</s0:output>
+		</s0:operation>
+	</s0:binding>
+	<s0:service name="SOAPwithAttachment">
+		<s0:port binding="s1:SOAPwithAttachmentSOAP"
+			name="SOAPwithAttachmentSOAP">
+			<s3:address
+				location="http://localhost:7001/SOAPwithAttachment_WS/SOAPwithAttachment" />
+		</s0:port>
+	</s0:service>
+</s0:definitions>

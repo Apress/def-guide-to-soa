@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<j2ee:java-wsdl-mapping xmlns:j2ee="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <j2ee:package-mapping>
+    <j2ee:package-type>com.alsb</j2ee:package-type>
+    <j2ee:namespaceURI>http://www.alsb.com/</j2ee:namespaceURI>
+  </j2ee:package-mapping>
+  <j2ee:package-mapping>
+    <j2ee:package-type>com.alsb.syncbusiness</j2ee:package-type>
+    <j2ee:namespaceURI>http://www.alsb.com/</j2ee:namespaceURI>
+  </j2ee:package-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.Order</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:alsb="http://www.alsb.com/">alsb:Order</j2ee:root-type-qname>
+    <j2ee:qname-scope>complexType</j2ee:qname-scope>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>OrderID</j2ee:java-variable-name>
+      <j2ee:xml-element-name>orderID</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:service-interface-mapping>
+    <j2ee:service-interface>javax.xml.rpc.Service</j2ee:service-interface>
+    <j2ee:wsdl-service-name xmlns:alsb="http://www.alsb.com/">alsb:SyncBusinessService</j2ee:wsdl-service-name>
+    <j2ee:port-mapping>
+      <j2ee:port-name>SyncBusinessService</j2ee:port-name>
+      <j2ee:java-port-name>getSyncBusinessService</j2ee:java-port-name>
+    </j2ee:port-mapping>
+  </j2ee:service-interface-mapping>
+  <j2ee:service-endpoint-interface-mapping>
+    <j2ee:service-endpoint-interface>com.alsb.syncbusiness.SyncBusinessPortTypeImplPortType</j2ee:service-endpoint-interface>
+    <j2ee:wsdl-port-type xmlns:alsb="http://www.alsb.com/">alsb:SyncBusinessPortType</j2ee:wsdl-port-type>
+    <j2ee:wsdl-binding xmlns:alsb="http://www.alsb.com/">alsb:SyncBusinessServiceSoapBinding</j2ee:wsdl-binding>
+    <j2ee:service-endpoint-method-mapping>
+      <j2ee:java-method-name>submitOrder</j2ee:java-method-name>
+      <j2ee:wsdl-operation>submitOrder</j2ee:wsdl-operation>
+      <j2ee:wrapped-element></j2ee:wrapped-element>
+      <j2ee:method-param-parts-mapping>
+        <j2ee:param-position>0</j2ee:param-position>
+        <j2ee:param-type>com.alsb.Order</j2ee:param-type>
+        <j2ee:wsdl-message-mapping>
+          <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com/">alsb:submitOrder</j2ee:wsdl-message>
+          <j2ee:wsdl-message-part-name>order</j2ee:wsdl-message-part-name>
+          <j2ee:parameter-mode>IN</j2ee:parameter-mode>
+        </j2ee:wsdl-message-mapping>
+      </j2ee:method-param-parts-mapping>
+      <j2ee:wsdl-return-value-mapping>
+        <j2ee:method-return-value>com.alsb.Order</j2ee:method-return-value>
+        <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com/">alsb:submitOrderResponse</j2ee:wsdl-message>
+        <j2ee:wsdl-message-part-name>orderResultValue</j2ee:wsdl-message-part-name>
+      </j2ee:wsdl-return-value-mapping>
+    </j2ee:service-endpoint-method-mapping>
+  </j2ee:service-endpoint-interface-mapping>
+</j2ee:java-wsdl-mapping>

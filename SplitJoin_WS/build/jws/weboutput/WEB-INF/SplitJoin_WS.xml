@@ -1,0 +1,216 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<j2ee:java-wsdl-mapping xmlns:j2ee="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <j2ee:package-mapping>
+    <j2ee:package-type>com.alsb</j2ee:package-type>
+    <j2ee:namespaceURI>http://www.alsb.com/</j2ee:namespaceURI>
+  </j2ee:package-mapping>
+  <j2ee:package-mapping>
+    <j2ee:package-type>com.alsb.business</j2ee:package-type>
+    <j2ee:namespaceURI>http://www.alsb.com/</j2ee:namespaceURI>
+  </j2ee:package-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.GetCustomerInfo</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:alsb="http://www.alsb.com/">alsb:getCustomerInfo</j2ee:root-type-qname>
+    <j2ee:qname-scope>element</j2ee:qname-scope>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.GetCustomerInfoResponse</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:alsb="http://www.alsb.com/">alsb:getCustomerInfoResponse</j2ee:root-type-qname>
+    <j2ee:qname-scope>element</j2ee:qname-scope>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.GetBillingInfo</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:alsb="http://www.alsb.com/">alsb:getBillingInfo</j2ee:root-type-qname>
+    <j2ee:qname-scope>element</j2ee:qname-scope>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.GetBillingInfoResponse</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:alsb="http://www.alsb.com/">alsb:getBillingInfoResponse</j2ee:root-type-qname>
+    <j2ee:qname-scope>element</j2ee:qname-scope>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.GetOrderInfoResponse</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:alsb="http://www.alsb.com/">alsb:getOrderInfoResponse</j2ee:root-type-qname>
+    <j2ee:qname-scope>element</j2ee:qname-scope>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.GetOrderInfo</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:alsb="http://www.alsb.com/">alsb:getOrderInfo</j2ee:root-type-qname>
+    <j2ee:qname-scope>element</j2ee:qname-scope>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.GetCustomerInfo</j2ee:java-type>
+    <j2ee:anonymous-type-qname>http://www.alsb.com/:&gt;getCustomerInfo</j2ee:anonymous-type-qname>
+    <j2ee:qname-scope>complexType</j2ee:qname-scope>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>CustomerID</j2ee:java-variable-name>
+      <j2ee:xml-element-name>customerID</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.GetCustomerInfoResponse</j2ee:java-type>
+    <j2ee:anonymous-type-qname>http://www.alsb.com/:&gt;getCustomerInfoResponse</j2ee:anonymous-type-qname>
+    <j2ee:qname-scope>complexType</j2ee:qname-scope>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>CustomerID</j2ee:java-variable-name>
+      <j2ee:xml-element-name>customerID</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>FirstName</j2ee:java-variable-name>
+      <j2ee:xml-element-name>firstName</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>LastName</j2ee:java-variable-name>
+      <j2ee:xml-element-name>lastName</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.GetBillingInfo</j2ee:java-type>
+    <j2ee:anonymous-type-qname>http://www.alsb.com/:&gt;getBillingInfo</j2ee:anonymous-type-qname>
+    <j2ee:qname-scope>complexType</j2ee:qname-scope>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>CustomerID</j2ee:java-variable-name>
+      <j2ee:xml-element-name>customerID</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.GetBillingInfoResponse</j2ee:java-type>
+    <j2ee:anonymous-type-qname>http://www.alsb.com/:&gt;getBillingInfoResponse</j2ee:anonymous-type-qname>
+    <j2ee:qname-scope>complexType</j2ee:qname-scope>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>CustomerID</j2ee:java-variable-name>
+      <j2ee:xml-element-name>customerID</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>Bill</j2ee:java-variable-name>
+      <j2ee:xml-element-name>bill</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.GetOrderInfoResponse</j2ee:java-type>
+    <j2ee:anonymous-type-qname>http://www.alsb.com/:&gt;getOrderInfoResponse</j2ee:anonymous-type-qname>
+    <j2ee:qname-scope>complexType</j2ee:qname-scope>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>CustomerID</j2ee:java-variable-name>
+      <j2ee:xml-element-name>customerID</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>Order</j2ee:java-variable-name>
+      <j2ee:xml-element-name>order</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.GetOrderInfo</j2ee:java-type>
+    <j2ee:anonymous-type-qname>http://www.alsb.com/:&gt;getOrderInfo</j2ee:anonymous-type-qname>
+    <j2ee:qname-scope>complexType</j2ee:qname-scope>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>CustomerID</j2ee:java-variable-name>
+      <j2ee:xml-element-name>customerID</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.Bill</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:alsb="http://www.alsb.com/">alsb:Bill</j2ee:root-type-qname>
+    <j2ee:qname-scope>complexType</j2ee:qname-scope>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>CustomerID</j2ee:java-variable-name>
+      <j2ee:xml-element-name>customerID</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>FirstName</j2ee:java-variable-name>
+      <j2ee:xml-element-name>firstName</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>LastName</j2ee:java-variable-name>
+      <j2ee:xml-element-name>lastName</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>Date</j2ee:java-variable-name>
+      <j2ee:xml-element-name>date</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>Amount</j2ee:java-variable-name>
+      <j2ee:xml-element-name>amount</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.Order</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:alsb="http://www.alsb.com/">alsb:Order</j2ee:root-type-qname>
+    <j2ee:qname-scope>complexType</j2ee:qname-scope>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>CustomerID</j2ee:java-variable-name>
+      <j2ee:xml-element-name>customerID</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>Product</j2ee:java-variable-name>
+      <j2ee:xml-element-name>product</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:service-interface-mapping>
+    <j2ee:service-interface>javax.xml.rpc.Service</j2ee:service-interface>
+    <j2ee:wsdl-service-name xmlns:alsb="http://www.alsb.com/">alsb:SplitJoin_WS</j2ee:wsdl-service-name>
+    <j2ee:port-mapping>
+      <j2ee:port-name>SplitJoin_WSSOAP</j2ee:port-name>
+      <j2ee:java-port-name>getSplitJoin_WSSOAP</j2ee:java-port-name>
+    </j2ee:port-mapping>
+  </j2ee:service-interface-mapping>
+  <j2ee:service-endpoint-interface-mapping>
+    <j2ee:service-endpoint-interface>com.alsb.business.SplitJoin_WSImplPortType</j2ee:service-endpoint-interface>
+    <j2ee:wsdl-port-type xmlns:alsb="http://www.alsb.com/">alsb:SplitJoin_WS</j2ee:wsdl-port-type>
+    <j2ee:wsdl-binding xmlns:alsb="http://www.alsb.com/">alsb:SplitJoin_WSSOAP</j2ee:wsdl-binding>
+    <j2ee:service-endpoint-method-mapping>
+      <j2ee:java-method-name>getOrderInfo</j2ee:java-method-name>
+      <j2ee:wsdl-operation>getOrderInfo</j2ee:wsdl-operation>
+      <j2ee:method-param-parts-mapping>
+        <j2ee:param-position>0</j2ee:param-position>
+        <j2ee:param-type>com.alsb.GetOrderInfo</j2ee:param-type>
+        <j2ee:wsdl-message-mapping>
+          <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com/">alsb:getOrderInfo</j2ee:wsdl-message>
+          <j2ee:wsdl-message-part-name>getOrderInfo</j2ee:wsdl-message-part-name>
+          <j2ee:parameter-mode>IN</j2ee:parameter-mode>
+        </j2ee:wsdl-message-mapping>
+      </j2ee:method-param-parts-mapping>
+      <j2ee:wsdl-return-value-mapping>
+        <j2ee:method-return-value>com.alsb.GetOrderInfoResponse</j2ee:method-return-value>
+        <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com/">alsb:getOrderInfoResponse</j2ee:wsdl-message>
+        <j2ee:wsdl-message-part-name>getOrderInfoResponse</j2ee:wsdl-message-part-name>
+      </j2ee:wsdl-return-value-mapping>
+    </j2ee:service-endpoint-method-mapping>
+    <j2ee:service-endpoint-method-mapping>
+      <j2ee:java-method-name>getBillingInfo</j2ee:java-method-name>
+      <j2ee:wsdl-operation>getBillingInfo</j2ee:wsdl-operation>
+      <j2ee:method-param-parts-mapping>
+        <j2ee:param-position>0</j2ee:param-position>
+        <j2ee:param-type>com.alsb.GetBillingInfo</j2ee:param-type>
+        <j2ee:wsdl-message-mapping>
+          <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com/">alsb:getBillingInfo</j2ee:wsdl-message>
+          <j2ee:wsdl-message-part-name>getBillingInfo</j2ee:wsdl-message-part-name>
+          <j2ee:parameter-mode>IN</j2ee:parameter-mode>
+        </j2ee:wsdl-message-mapping>
+      </j2ee:method-param-parts-mapping>
+      <j2ee:wsdl-return-value-mapping>
+        <j2ee:method-return-value>com.alsb.GetBillingInfoResponse</j2ee:method-return-value>
+        <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com/">alsb:getBillingInfoResponse</j2ee:wsdl-message>
+        <j2ee:wsdl-message-part-name>getBillingInfoResponse</j2ee:wsdl-message-part-name>
+      </j2ee:wsdl-return-value-mapping>
+    </j2ee:service-endpoint-method-mapping>
+    <j2ee:service-endpoint-method-mapping>
+      <j2ee:java-method-name>getCustomerInfo</j2ee:java-method-name>
+      <j2ee:wsdl-operation>getCustomerInfo</j2ee:wsdl-operation>
+      <j2ee:method-param-parts-mapping>
+        <j2ee:param-position>0</j2ee:param-position>
+        <j2ee:param-type>com.alsb.GetCustomerInfo</j2ee:param-type>
+        <j2ee:wsdl-message-mapping>
+          <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com/">alsb:getCustomerInfo</j2ee:wsdl-message>
+          <j2ee:wsdl-message-part-name>getCustomerInfo</j2ee:wsdl-message-part-name>
+          <j2ee:parameter-mode>IN</j2ee:parameter-mode>
+        </j2ee:wsdl-message-mapping>
+      </j2ee:method-param-parts-mapping>
+      <j2ee:wsdl-return-value-mapping>
+        <j2ee:method-return-value>com.alsb.GetCustomerInfoResponse</j2ee:method-return-value>
+        <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com/">alsb:getCustomerInfoResponse</j2ee:wsdl-message>
+        <j2ee:wsdl-message-part-name>getCustomerInfoResponse</j2ee:wsdl-message-part-name>
+      </j2ee:wsdl-return-value-mapping>
+    </j2ee:service-endpoint-method-mapping>
+  </j2ee:service-endpoint-interface-mapping>
+</j2ee:java-wsdl-mapping>

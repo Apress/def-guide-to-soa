@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment>
+  <ser:coreEntry isProxy="true" isEnabled="true" isAutoPublish="false" xmlns:ser="http://www.bea.com/wli/sb/services">
+    <ser:description/>
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:wsdl ref="HelloWorld_SB/HelloWorldService"/>
+      <con:port>
+        <con:name>HelloWorldSoapPort</con:name>
+        <con:namespace>http://www.alsb.com/</con:namespace>
+      </con:port>
+      <con:selector type="SOAP body"/>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig xmlns:ser="http://www.bea.com/wli/sb/services">
+    <tran:provider-id xmlns:tran="http://www.bea.com/wli/sb/transports">http</tran:provider-id>
+    <tran:inbound xmlns:tran="http://www.bea.com/wli/sb/transports">true</tran:inbound>
+    <tran:URI xmlns:tran="http://www.bea.com/wli/sb/transports">
+      <env:value xmlns:env="http://www.bea.com/wli/config/env">/esb/GoodbyeWorld</env:value>
+    </tran:URI>
+    <tran:inbound-properties xmlns:tran="http://www.bea.com/wli/sb/transports"/>
+    <tran:all-headers xmlns:tran="http://www.bea.com/wli/sb/transports">false</tran:all-headers>
+    <tran:provider-specific xmlns:tran="http://www.bea.com/wli/sb/transports">
+      <http:inbound-properties xmlns:http="http://www.bea.com/wli/sb/transports/http"/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router xmlns:ser="http://www.bea.com/wli/sb/services">
+    <con:flow xmlns:con="http://www.bea.com/wli/sb/pipeline/config">
+      <con:route-node name="RouteTo_HelloWorldBiz">
+        <con:context>
+          <con1:varNsDecl namespace="http://www.alsb.com/" prefix="alsb" xmlns:con1="http://www.bea.com/wli/sb/stages/config"/>
+        </con:context>
+        <con:actions>
+          <con1:route xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config">
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-572741550211253847--7ad725a6.1187b00012e.-7ffc</con2:id>
+            <con1:service ref="HelloWorld_SB/HelloWorldBiz" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            <con1:operation passThrough="true"/>
+            <con1:outboundTransform/>
+            <con1:responseTransform>
+              <con2:assign varName="goodbyeGreeting" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+                <con3:id xmlns:con3="http://www.bea.com/wli/sb/stages/config">_ActionId-572741550211253847--7ad725a6.1187b00012e.-7ffb</con3:id>
+                <con2:expr>
+                  <con3:xqueryText xmlns:con3="http://www.bea.com/wli/sb/stages/config">replace($body/alsb:getGreetingResponse/alsb:return, 'Hello', 'Goodbye')</con3:xqueryText>
+                </con2:expr>
+              </con2:assign>
+              <con2:replace varName="body" contents-only="true" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+                <con3:id xmlns:con3="http://www.bea.com/wli/sb/stages/config">_ActionId-572741550211253847--7ad725a6.1187b00012e.-7ffa</con3:id>
+                <con2:location>
+                  <con3:xpathText xmlns:con3="http://www.bea.com/wli/sb/stages/config">./alsb:getGreetingResponse/alsb:return</con3:xpathText>
+                </con2:location>
+                <con2:expr>
+                  <con3:xqueryText xmlns:con3="http://www.bea.com/wli/sb/stages/config">$goodbyeGreeting</con3:xqueryText>
+                </con2:expr>
+              </con2:replace>
+              <con2:validate xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+                <con3:id xmlns:con3="http://www.bea.com/wli/sb/stages/config">_ActionId-572741550211253847--7ad725a6.1187b00012e.-7ff9</con3:id>
+                <con2:wsdl ref="HelloWorld_SB/HelloWorldService"/>
+                <con2:schemaElement xmlns:alsb="http://www.alsb.com/">alsb:getGreetingResponse</con2:schemaElement>
+                <con2:varName>body</con2:varName>
+                <con2:location>
+                  <con3:xpathText xmlns:con3="http://www.bea.com/wli/sb/stages/config">./*</con3:xpathText>
+                </con2:location>
+              </con2:validate>
+            </con1:responseTransform>
+          </con1:route>
+        </con:actions>
+      </con:route-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

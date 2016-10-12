@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment>
+  <ser:coreEntry isProxy="true" isEnabled="true" xmlns:ser="http://www.bea.com/wli/sb/services">
+    <ser:binding type="Mixed" xsi:type="con:MixedBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:request type="Text"/>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+  </ser:coreEntry>
+  <ser:endpointConfig xmlns:ser="http://www.bea.com/wli/sb/services">
+    <tran:provider-id xmlns:tran="http://www.bea.com/wli/sb/transports">ftp</tran:provider-id>
+    <tran:inbound xmlns:tran="http://www.bea.com/wli/sb/transports">true</tran:inbound>
+    <tran:URI xmlns:tran="http://www.bea.com/wli/sb/transports">
+      <env:value xmlns:env="http://www.bea.com/wli/config/env">ftp://localhost:21/ftp_in</env:value>
+    </tran:URI>
+    <tran:inbound-properties xmlns:tran="http://www.bea.com/wli/sb/transports"/>
+    <tran:all-headers xmlns:tran="http://www.bea.com/wli/sb/transports">false</tran:all-headers>
+    <tran:provider-specific xmlns:tran="http://www.bea.com/wli/sb/transports">
+      <ftp:inbound-properties xmlns:ftp="http://www.bea.com/wli/sb/transports/ftp">
+        <ftp:recursive-scan>false</ftp:recursive-scan>
+        <ftp:passByReference>false</ftp:passByReference>
+        <ftp:directStreaming>false</ftp:directStreaming>
+        <ftp:download-directory>
+          <env:value xmlns:env="http://www.bea.com/wli/config/env">c:\ftp</env:value>
+        </ftp:download-directory>
+        <ftp:timeout>60</ftp:timeout>
+        <ftp:auth-info>
+          <ftp:service-account ref="ServiceTypes_SB/FTP Account"/>
+        </ftp:auth-info>
+        <ftp:post-read-action>archive</ftp:post-read-action>
+        <ftp:archive-directory>
+          <env:value xmlns:env="http://www.bea.com/wli/config/env">c:\ftp_archive</env:value>
+        </ftp:archive-directory>
+        <ftp:error-directory>
+          <env:value xmlns:env="http://www.bea.com/wli/config/env">c:\ftp_error</env:value>
+        </ftp:error-directory>
+        <ftp:retry-count>3</ftp:retry-count>
+        <ftp:file-mask>*.*</ftp:file-mask>
+        <ftp:poll-info>
+          <ftp:interval-milliseconds>600000</ftp:interval-milliseconds>
+        </ftp:poll-info>
+        <ftp:read-limit>10</ftp:read-limit>
+        <ftp:sortByArrival>false</ftp:sortByArrival>
+        <ftp:transfer-mode>ascii</ftp:transfer-mode>
+      </ftp:inbound-properties>
+      <ftp:request-encoding xmlns:ftp="http://www.bea.com/wli/sb/transports/ftp">utf-8</ftp:request-encoding>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router xmlns:ser="http://www.bea.com/wli/sb/services">
+    <con:pipeline type="request" name="PipelinePairNode1_request" xmlns:con="http://www.bea.com/wli/sb/pipeline/config">
+      <con:stage name="show text info">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="textContents" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-8281060091765992916-9485b9.1191a650621.-7fff</con2:id>
+            <con1:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">$body/text()</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:log xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config">
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-8281060091765992916-9485b9.1191a650621.-7ffe</con2:id>
+            <con1:logLevel>error</con1:logLevel>
+            <con1:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">concat('Text contents are: ', $textContents)</con2:xqueryText>
+            </con1:expr>
+          </con1:log>
+          <con1:assign varName="fileName" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-8281060091765992916-9485b9.1191a650621.-7ffd</con2:id>
+            <con1:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">$inbound/ctx:transport/ctx:request/tp:headers/ftp:fileName</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:log xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config">
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-8281060091765992916-9485b9.1191a650621.-7ffc</con2:id>
+            <con1:logLevel>error</con1:logLevel>
+            <con1:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">concat('File name is: ', $fileName)</con2:xqueryText>
+            </con1:expr>
+          </con1:log>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode1_response" xmlns:con="http://www.bea.com/wli/sb/pipeline/config"/>
+    <con:flow xmlns:con="http://www.bea.com/wli/sb/pipeline/config">
+      <con:pipeline-node name="PipelinePairNode1">
+        <con:request>PipelinePairNode1_request</con:request>
+        <con:response>PipelinePairNode1_response</con:response>
+      </con:pipeline-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

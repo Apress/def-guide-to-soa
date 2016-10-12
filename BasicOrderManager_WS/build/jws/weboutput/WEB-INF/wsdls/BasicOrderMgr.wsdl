@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<s0:definitions name="BasicOrderMgrDefinitions" targetNamespace="http://www.alsb.com/" xmlns="" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://www.alsb.com/" xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/">
+  <s0:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.alsb.com/" xmlns:alsb="http://www.alsb.com/" xmlns:order="http://www.alsb.com/order/" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://www.alsb.com/" xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://www.alsb.com/order/" schemaLocation="order.xsd"/>
+      <!--  TIP: Start your element names off lower case. This will 
+			      more closely match the Java naming conventions when you 
+			      generate the code
+			-->
+      <xs:element name="getCreditRating">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="firstName" type="xs:string"/>
+            <xs:element name="lastName" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCreditRatingResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getProductCatalog">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="creditRating" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getProductCatalogResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="productList" type="order:ProductList"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="processOrder">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="order" type="order:Order"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="processPreferredOrder">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="order" type="order:Order"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </s0:types>
+  <s0:message name="getCreditRating">
+    <s0:part element="s1:getCreditRating" name="getCreditRating"/>
+  </s0:message>
+  <s0:message name="getCreditRatingResponse">
+    <s0:part element="s1:getCreditRatingResponse" name="getCreditRatingResponse"/>
+  </s0:message>
+  <s0:message name="getProductCatalog">
+    <s0:part element="s1:getProductCatalog" name="getProductCatalog"/>
+  </s0:message>
+  <s0:message name="getProductCatalogResponse">
+    <s0:part element="s1:getProductCatalogResponse" name="getProductCatalogResponse"/>
+  </s0:message>
+  <s0:message name="processOrder">
+    <s0:part element="s1:processOrder" name="processOrder"/>
+  </s0:message>
+  <s0:message name="processPreferredOrder">
+    <s0:part element="s1:processPreferredOrder" name="processPreferredOrder"/>
+  </s0:message>
+  <s0:portType name="BasicOrderMgrPort">
+    <s0:operation name="getCreditRating" parameterOrder="getCreditRating">
+      <s0:input message="s1:getCreditRating"/>
+      <s0:output message="s1:getCreditRatingResponse"/>
+    </s0:operation>
+    <s0:operation name="getProductCatalog" parameterOrder="getProductCatalog">
+      <s0:input message="s1:getProductCatalog"/>
+      <s0:output message="s1:getProductCatalogResponse"/>
+    </s0:operation>
+    <s0:operation name="processOrder" parameterOrder="processOrder">
+      <s0:input message="s1:processOrder"/>
+    </s0:operation>
+    <s0:operation name="processPreferredOrder" parameterOrder="processPreferredOrder">
+      <s0:input message="s1:processPreferredOrder"/>
+    </s0:operation>
+  </s0:portType>
+  <s0:binding name="BasicOrderMgrServiceSoapBinding" type="s1:BasicOrderMgrPort">
+    <s2:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <s0:operation name="processPreferredOrder">
+      <s2:operation style="document"/>
+      <s0:input>
+        <s2:body parts="processPreferredOrder" use="literal"/>
+      </s0:input>
+    </s0:operation>
+    <s0:operation name="getCreditRating">
+      <s2:operation style="document"/>
+      <s0:input>
+        <s2:body parts="getCreditRating" use="literal"/>
+      </s0:input>
+      <s0:output>
+        <s2:body parts="getCreditRatingResponse" use="literal"/>
+      </s0:output>
+    </s0:operation>
+    <s0:operation name="getProductCatalog">
+      <s2:operation style="document"/>
+      <s0:input>
+        <s2:body parts="getProductCatalog" use="literal"/>
+      </s0:input>
+      <s0:output>
+        <s2:body parts="getProductCatalogResponse" use="literal"/>
+      </s0:output>
+    </s0:operation>
+    <s0:operation name="processOrder">
+      <s2:operation style="document"/>
+      <s0:input>
+        <s2:body parts="processOrder" use="literal"/>
+      </s0:input>
+    </s0:operation>
+  </s0:binding>
+  <s0:service name="BasicOrderMgrService">
+    <s0:port binding="s1:BasicOrderMgrServiceSoapBinding" name="BasicOrderMgrSoapPort">
+      <s2:address location="http://localhost:7001/business/basicOrderMgr/BasicOrderMgrService"/>
+    </s0:port>
+  </s0:service>
+</s0:definitions>

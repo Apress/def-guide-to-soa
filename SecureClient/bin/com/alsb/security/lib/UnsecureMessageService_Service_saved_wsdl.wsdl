@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<s0:definitions name="UnsecureMessageService" targetNamespace="http://www.alsb.com/SecureMessageService/" xmlns="" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://www.alsb.com/SecureMessageService/" xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/">
+  <s0:types>
+    <xsd:schema targetNamespace="http://www.alsb.com/SecureMessageService/" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://www.alsb.com/SecureMessageService/" xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.alsb.com/SecureMessageService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:element name="getAccount">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="customerID" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getAccountResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="customerID" type="xsd:int"/>
+            <xsd:element name="customerName" type="xsd:string"/>
+            <xsd:element name="account" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </s0:types>
+  <s0:message name="getAccountRequest">
+    <s0:part element="s1:getAccount" name="parameters"/>
+  </s0:message>
+  <s0:message name="getAccountResponse">
+    <s0:part element="s1:getAccountResponse" name="parameters"/>
+  </s0:message>
+  <s0:portType name="UnsecureMessageService">
+    <s0:operation name="getAccount">
+      <s0:input message="s1:getAccountRequest"/>
+      <s0:output message="s1:getAccountResponse"/>
+    </s0:operation>
+  </s0:portType>
+  <s0:binding name="UnsecureMessageServiceSOAP" type="s1:UnsecureMessageService">
+    <s2:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <s0:operation name="getAccount">
+      <s2:operation soapAction="getAccount"/>
+      <s0:input>
+        <s2:body use="literal"/>
+      </s0:input>
+      <s0:output>
+        <s2:body use="literal"/>
+      </s0:output>
+    </s0:operation>
+  </s0:binding>
+  <s0:service name="UnsecureMessageService">
+    <s0:port binding="s1:UnsecureMessageServiceSOAP" name="UnsecureMessageServiceSOAP">
+      <s2:address location="http://JEDAVIES01.amer.bea.com:7001/Security_SB/UnsecureMessage"/>
+    </s0:port>
+  </s0:service>
+</s0:definitions>

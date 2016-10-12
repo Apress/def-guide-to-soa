@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment>
+  <aler:description xmlns:aler="http://www.bea.com/wli/monitoring/alert">Alerts for the console only</aler:description>
+  <aler:AlertToSNMP xmlns:aler="http://www.bea.com/wli/monitoring/alert">false</aler:AlertToSNMP>
+</xml-fragment>

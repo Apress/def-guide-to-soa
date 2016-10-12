@@ -1,0 +1,6 @@
+<factorypath>
+    <factorypathentry kind="PLUGIN" id="com.bea.workshop.webservices.core" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="PLUGIN" id="com.bea.workshop.controls.core" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="PLUGIN" id="com.bea.workshop.netui.core" enabled="false" runInBatchMode="false"/>
+    <factorypathentry kind="PLUGIN" id="com.bea.workshop.wls.ejb.core" enabled="false" runInBatchMode="false"/>
+</factorypath>

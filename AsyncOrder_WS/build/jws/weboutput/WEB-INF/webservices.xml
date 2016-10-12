@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<webservices xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <webservice-description>
+    <webservice-description-name>com.alsb.async.ws.AsyncBusinessImpl</webservice-description-name>
+    <wsdl-file>/wsdls/AsyncBusiness.wsdl</wsdl-file>
+    <jaxrpc-mapping-file>WEB-INF/AsyncBusiness.xml</jaxrpc-mapping-file>
+    <port-component>
+      <port-component-name>AsyncBusiness</port-component-name>
+      <wsdl-port xmlns:asy="http://www.alsb.com/AsyncBusiness/">asy:AsyncBusiness</wsdl-port>
+      <service-endpoint-interface>com.alsb.async.ws.AsyncBusinessImplPortType</service-endpoint-interface>
+      <service-impl-bean>
+        <servlet-link>AsyncBusinessServletjms</servlet-link>
+      </service-impl-bean>
+    </port-component>
+  </webservice-description>
+</webservices>

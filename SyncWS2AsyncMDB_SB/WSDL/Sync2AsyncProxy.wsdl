@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="SyncProxy"
+	targetNamespace="http://www.alsb.com/SyncProxy/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.alsb.com/SyncProxy/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<types>
+		<xsd:schema targetNamespace="http://www.alsb.com/SyncProxy/"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:order="http://www.alsb.com/order/">
+			<xs:import namespace="http://www.alsb.com/order/"
+				schemaLocation="order.xsd" />
+			<xsd:element name="submitOrder" type="order:Order" />
+		</xsd:schema>
+	</types>
+
+	<message name="submitOrder">
+		<part element="tns:submitOrder" name="submitOrder" />
+	</message>
+
+	<message name="submitOrderResponse">
+		<part element="tns:submitOrder" name="submitOrder" />
+	</message>
+
+	<portType name="SyncProxy">
+		<operation name="submitSyncOrder">
+			<input message="tns:submitOrder" />
+			<output message="tns:submitOrder" />
+		</operation>
+	</portType>
+
+	<binding name="SyncProxySOAP" type="tns:SyncProxy">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="submitSyncOrder">
+			<soap:operation
+				soapAction="http://www.alsb.com/SyncProxy/submitOrder" />
+			<input>
+				<soap:body parts="submitOrder" use="literal" />
+			</input>
+			<output>
+				<soap:body parts="submitOrder" use="literal" />
+			</output>
+		</operation>
+	</binding>
+	<service name="SyncProxy">
+		<port binding="tns:SyncProxySOAP" name="SyncProxySOAP">
+			<soap:address
+				location="http://localhost:7001/advmessage/SyncProxy" />
+		</port>
+	</service>
+</definitions>

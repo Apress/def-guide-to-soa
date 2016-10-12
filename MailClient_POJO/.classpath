@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/BEAHome/alsb30/jrockit_150_11/missioncontrol/plugins/com.jrockit.mc.console.ui.notification_1.0.0/lib/mail.jar"/>
+	<classpathentry kind="lib" path="C:/BEAHome/alsb30/jrockit_150_11/missioncontrol/plugins/com.jrockit.mc.rjmx_1.0.0/lib/activation.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

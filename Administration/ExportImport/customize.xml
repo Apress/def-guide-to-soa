@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cus:Customizations xmlns:cus="http://www.bea.com/wli/config/customizations" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xt="http://www.bea.com/wli/config/xmltypes">
+  <cus:customization xsi:type="cus:FindAndReplaceCustomizationType">
+    <cus:description>Set the right Work Manager</cus:description>
+    <cus:query>
+      <xt:envValueTypes>Work Manager</xt:envValueTypes>
+      <xt:refsToSearch xsi:type="xt:LocationRefType">
+        <xt:type>Project</xt:type>
+        <xt:path>HelloWorld_SB</xt:path>
+      </xt:refsToSearch>
+      <xt:includeOnlyModifiedResources>false</xt:includeOnlyModifiedResources>
+      <xt:searchString xsi:nil="true"/>
+      <xt:isCompleteMatch>false</xt:isCompleteMatch>
+    </cus:query>
+    <cus:replacement>Production System Work Manager</cus:replacement>
+  </cus:customization>
+  <cus:customization xsi:type="cus:FindAndReplaceCustomizationType">
+    <cus:description>Update to the correct server and port number</cus:description>
+    <cus:query>
+      <xt:envValueTypes>Service URI</xt:envValueTypes>
+      <xt:refsToSearch xsi:type="xt:LocationRefType">
+        <xt:type>Project</xt:type>
+        <xt:path>HelloWorld_SB</xt:path>
+      </xt:refsToSearch>
+      <xt:includeOnlyModifiedResources>false</xt:includeOnlyModifiedResources>
+      <xt:searchString>localhost:7001</xt:searchString>
+      <xt:isCompleteMatch>false</xt:isCompleteMatch>
+    </cus:query>
+    <cus:replacement>localhost:7101</cus:replacement>
+  </cus:customization>
+</cus:Customizations>

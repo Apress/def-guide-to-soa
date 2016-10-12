@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http">
+  <ser:coreEntry isProxy="true" isEnabled="true">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config">
+      <con:wsdl ref="Test/WSDL/HelloWorldService"/>
+      <con:port>
+        <con:name>HelloWorldSoapPort</con:name>
+        <con:namespace>http://www.alsb.com/</con:namespace>
+      </con:port>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>http</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>/Test/TestPipeline</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>false</tran:all-headers>
+    <tran:provider-specific>
+      <http:inbound-properties/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router errorHandler="_onErrorHandler-572741550211253847--7ad725a6.1187b00012e.-7ffe">
+    <con:pipeline type="request" name="PipelinePairNode1_request" errorHandler="_onErrorHandler-572741550211253847--7ad725a6.1187b00012e.-7fff" xmlns:con="http://www.bea.com/wli/sb/pipeline/config">
+      <con:stage name="verify contents">
+        <con:context/>
+      </con:stage>
+      <con:stage name="transform request format" errorHandler="_onErrorHandler-572741550211253847--7ad725a6.1187b00012e.-7ffd">
+        <con:context/>
+      </con:stage>
+      <con:stage name="get additional info">
+        <con:context/>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode1_response" xmlns:con="http://www.bea.com/wli/sb/pipeline/config">
+      <con:stage name="transform response format">
+        <con:context/>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="error" name="_onErrorHandler-572741550211253847--7ad725a6.1187b00012e.-7fff" xmlns:con="http://www.bea.com/wli/sb/pipeline/config"/>
+    <con:pipeline type="error" name="_onErrorHandler-572741550211253847--7ad725a6.1187b00012e.-7ffe" xmlns:con="http://www.bea.com/wli/sb/pipeline/config"/>
+    <con:pipeline type="error" name="_onErrorHandler-572741550211253847--7ad725a6.1187b00012e.-7ffd" xmlns:con="http://www.bea.com/wli/sb/pipeline/config"/>
+    <con:flow xmlns:con="http://www.bea.com/wli/sb/pipeline/config">
+      <con:pipeline-node name="PipelinePairNode1">
+        <con:request>PipelinePairNode1_request</con:request>
+        <con:response>PipelinePairNode1_response</con:response>
+      </con:pipeline-node>
+      <con:route-node name="route to business service">
+        <con:context/>
+      </con:route-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

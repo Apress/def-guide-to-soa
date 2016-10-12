@@ -1,0 +1,13 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<soapenv:Header/>
+	<soapenv:Body>
+		<m:submitAsyncOrder xmlns:m="http://example.org">
+			<m:Order>
+				<m:OrderDate>2006-04-26T13:07:41.171-07:00</m:OrderDate>
+				<m:OrderId>1</m:OrderId>
+				<m:FirstName xsi:nil="true"/>
+				<m:LastName xsi:nil="true"/>
+			</m:Order>
+		</m:submitAsyncOrder>
+	</soapenv:Body>
+</soapenv:Envelope>

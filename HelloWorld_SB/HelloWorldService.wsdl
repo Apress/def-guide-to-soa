@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<s0:definitions name="HelloWorldServiceDefinitions"
+	targetNamespace="http://www.alsb.com/" xmlns=""
+	xmlns:s0="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:s1="http://www.alsb.com/"
+	xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/">
+	<s0:types>
+		<xs:schema attributeFormDefault="unqualified"
+			elementFormDefault="qualified" targetNamespace="http://www.alsb.com/"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema">
+			<xs:element name="getGreeting">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="name" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getGreetingResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+	</s0:types>
+	<s0:message name="getGreeting">
+		<s0:part element="s1:getGreeting" name="parameters" />
+	</s0:message>
+	<s0:message name="getGreetingResponse">
+		<s0:part element="s1:getGreetingResponse" name="parameters" />
+	</s0:message>
+	<s0:portType name="HelloWorld">
+		<s0:operation name="getGreeting" parameterOrder="parameters">
+			<s0:input message="s1:getGreeting" />
+			<s0:output message="s1:getGreetingResponse" />
+		</s0:operation>
+	</s0:portType>
+	<s0:binding name="HelloWorldServiceSoapBinding"
+		type="s1:HelloWorld">
+		<s2:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<s0:operation name="getGreeting">
+			<s2:operation soapAction="" style="document" />
+			<s0:input>
+				<s2:body parts="parameters" use="literal" />
+			</s0:input>
+			<s0:output>
+				<s2:body parts="parameters" use="literal" />
+			</s0:output>
+		</s0:operation>
+	</s0:binding>
+	<s0:service name="HelloWorldService">
+		<s0:port binding="s1:HelloWorldServiceSoapBinding"
+			name="HelloWorldSoapPort">
+			<s2:address
+				location="http://localhost:7001/business/hello/HelloWorldService" />
+		</s0:port>
+	</s0:service>
+</s0:definitions>

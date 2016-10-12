@@ -1,0 +1,238 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<s0:definitions name="TemperamentalCustomerServiceDefinitions" targetNamespace="http://www.alsb.com" xmlns="" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://www.alsb.com" xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/">
+  <s0:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.alsb.com" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://www.alsb.com" xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="variableOpC">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="arg0" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+
+      </xs:element>
+      <xs:element name="variableOpCResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getRapidCustomer">
+
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="id" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getRapidCustomerResponse">
+        <xs:complexType>
+          <xs:sequence>
+
+            <xs:element name="return" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setDelay">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="delayInSeconds" type="xs:int"/>
+          </xs:sequence>
+
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setDelayResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+
+      <xs:element name="variableOpB">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="arg0" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="variableOpBResponse">
+        <xs:complexType>
+
+          <xs:sequence>
+            <xs:element name="return" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getVariableCustomer">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="id" type="xs:int"/>
+
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getVariableCustomerResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+
+      </xs:element>
+      <xs:element name="variableOpA">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="arg0" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="variableOpAResponse">
+
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </s0:types>
+  <s0:message name="variableOpC">
+
+    <s0:part element="s1:variableOpC" name="parameters"/>
+  </s0:message>
+  <s0:message name="variableOpCResponse">
+    <s0:part element="s1:variableOpCResponse" name="parameters"/>
+  </s0:message>
+  <s0:message name="getRapidCustomer">
+    <s0:part element="s1:getRapidCustomer" name="parameters"/>
+  </s0:message>
+  <s0:message name="getRapidCustomerResponse">
+
+    <s0:part element="s1:getRapidCustomerResponse" name="parameters"/>
+  </s0:message>
+  <s0:message name="setDelay">
+    <s0:part element="s1:setDelay" name="parameters"/>
+  </s0:message>
+  <s0:message name="setDelayResponse">
+    <s0:part element="s1:setDelayResponse" name="parameters"/>
+  </s0:message>
+  <s0:message name="variableOpB">
+
+    <s0:part element="s1:variableOpB" name="parameters"/>
+  </s0:message>
+  <s0:message name="variableOpBResponse">
+    <s0:part element="s1:variableOpBResponse" name="parameters"/>
+  </s0:message>
+  <s0:message name="getVariableCustomer">
+    <s0:part element="s1:getVariableCustomer" name="parameters"/>
+  </s0:message>
+  <s0:message name="getVariableCustomerResponse">
+
+    <s0:part element="s1:getVariableCustomerResponse" name="parameters"/>
+  </s0:message>
+  <s0:message name="variableOpA">
+    <s0:part element="s1:variableOpA" name="parameters"/>
+  </s0:message>
+  <s0:message name="variableOpAResponse">
+    <s0:part element="s1:variableOpAResponse" name="parameters"/>
+  </s0:message>
+  <s0:portType name="TemperamentalCustomerService">
+
+    <s0:operation name="variableOpC" parameterOrder="parameters">
+      <s0:input message="s1:variableOpC"/>
+      <s0:output message="s1:variableOpCResponse"/>
+    </s0:operation>
+    <s0:operation name="getRapidCustomer" parameterOrder="parameters">
+      <s0:input message="s1:getRapidCustomer"/>
+      <s0:output message="s1:getRapidCustomerResponse"/>
+    </s0:operation>
+    <s0:operation name="setDelay" parameterOrder="parameters">
+
+      <s0:input message="s1:setDelay"/>
+      <s0:output message="s1:setDelayResponse"/>
+    </s0:operation>
+    <s0:operation name="variableOpB" parameterOrder="parameters">
+      <s0:input message="s1:variableOpB"/>
+      <s0:output message="s1:variableOpBResponse"/>
+    </s0:operation>
+    <s0:operation name="getVariableCustomer" parameterOrder="parameters">
+      <s0:input message="s1:getVariableCustomer"/>
+
+      <s0:output message="s1:getVariableCustomerResponse"/>
+    </s0:operation>
+    <s0:operation name="variableOpA" parameterOrder="parameters">
+      <s0:input message="s1:variableOpA"/>
+      <s0:output message="s1:variableOpAResponse"/>
+    </s0:operation>
+  </s0:portType>
+  <s0:binding name="TemperamentalCustomerServiceSoapBinding" type="s1:TemperamentalCustomerService">
+    <s2:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+    <s0:operation name="variableOpC">
+      <s2:operation soapAction="" style="document"/>
+      <s0:input>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:input>
+      <s0:output>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:output>
+    </s0:operation>
+
+    <s0:operation name="getRapidCustomer">
+      <s2:operation soapAction="" style="document"/>
+      <s0:input>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:input>
+      <s0:output>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:output>
+    </s0:operation>
+
+    <s0:operation name="setDelay">
+      <s2:operation soapAction="" style="document"/>
+      <s0:input>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:input>
+      <s0:output>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:output>
+    </s0:operation>
+
+    <s0:operation name="variableOpB">
+      <s2:operation soapAction="" style="document"/>
+      <s0:input>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:input>
+      <s0:output>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:output>
+    </s0:operation>
+
+    <s0:operation name="getVariableCustomer">
+      <s2:operation soapAction="" style="document"/>
+      <s0:input>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:input>
+      <s0:output>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:output>
+    </s0:operation>
+
+    <s0:operation name="variableOpA">
+      <s2:operation soapAction="" style="document"/>
+      <s0:input>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:input>
+      <s0:output>
+        <s2:body parts="parameters" use="literal"/>
+      </s0:output>
+    </s0:operation>
+
+  </s0:binding>
+  <s0:service name="TemperamentalCustomerService">
+    <s0:port binding="s1:TemperamentalCustomerServiceSoapBinding" name="TemperamentalCustomerSoapPort">
+      <s2:address location="http://localhost:7001/TemperamentalService_WS/customer"/>
+    </s0:port>
+  </s0:service>
+</s0:definitions>

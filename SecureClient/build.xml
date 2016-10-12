@@ -1,0 +1,38 @@
+<project name="SecurityClient" default="all" basedir=".">
+
+	<!-- set global properties for this build -->
+	<!--  Modify these two properties too match your environment -->
+	<property name="alsb.home" value="g:/beaALSB30" />
+	
+	<!--  Do No Modify These Properties  -->
+	<property name="weblogic.home" value="${alsb.home}/wlserver_10.0" />
+	<property name="src.dir" value="src" />
+	<property name="classes.dir" value="./bin" />
+	<property name="gensrc.package.name" value="com.alsb.security.lib" />
+
+	<path id="client.class.path">
+		<pathelement path="${classes.dir}" />
+		<pathelement path="${java.class.path}" />
+		<fileset dir="${weblogic.home}/server/lib">
+	    	<include name="weblogic.jar"/>
+	        <include name="webserviceclient.jar"/>
+	    </fileset>
+	</path>
+
+	<taskdef name="clientgen"
+		classname="weblogic.wsee.tools.anttasks.ClientGenTask" />
+
+	<target name="all" depends="clientgen" />
+
+	<target name="clientgen">
+	   <clientgen
+			wsdl="http://localhost:7001/Security_SB/SecureMessage?WSDL"
+			destDir="${src.dir}" classpath="${java.class.path}"
+			packageName="${gensrc.package.name}" />
+			
+		<clientgen
+			wsdl="http://localhost:7001/Security_SB/UnsecureMessage?WSDL"
+			destDir="${src.dir}" classpath="${java.class.path}"
+			packageName="${gensrc.package.name}" />
+	</target>
+</project>

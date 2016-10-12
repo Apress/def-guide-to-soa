@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services">
+  <ser:description>The key provider to secure the proxy service.</ser:description>
+  <ser:type>proxy-service-provider</ser:type>
+  <ser:credentials>
+    <ser:key-pair purpose="Encryption">
+      <ser:alias>alsbserver</ser:alias>
+      <ser:password>keypassword</ser:password>
+    </ser:key-pair>
+    <ser:key-pair purpose="DigitalSignature">
+      <ser:alias>alsbserver</ser:alias>
+      <ser:password>keypassword</ser:password>
+    </ser:key-pair>
+    <ser:key-pair purpose="SSL">
+      <ser:alias>alsbserver</ser:alias>
+      <ser:password>keypassword</ser:password>
+    </ser:key-pair>
+  </ser:credentials>
+</xml-fragment>

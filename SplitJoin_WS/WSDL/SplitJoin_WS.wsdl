@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.alsb.com/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SplitJoin_WS"
+	targetNamespace="http://www.alsb.com/">
+	<wsdl:types>
+		<xsd:schema
+			targetNamespace="http://www.alsb.com/">
+			
+			<xsd:complexType name="Bill">
+				<xsd:sequence>
+					<xsd:element name="customerID" type="xsd:int"></xsd:element>
+					<xsd:element name="firstName" type="xsd:string"></xsd:element>
+					<xsd:element name="lastName" type="xsd:string"></xsd:element>
+					<xsd:element name="date" type="xsd:date"></xsd:element>
+					<xsd:element name="amount" type="xsd:double"></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="Order">
+				<xsd:sequence>
+					<xsd:element name="customerID" type="xsd:int"></xsd:element>
+					<xsd:element minOccurs="1" maxOccurs="unbounded"
+						name="product" type="xsd:string">
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:element name="getCustomerInfo">
+				<xsd:complexType>
+					<xsd:sequence>						<xsd:element name="customerID" type="xsd:int"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getCustomerInfoResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="customerID" type="xsd:int"></xsd:element>
+						<xsd:element name="firstName"
+							type="xsd:string">
+						</xsd:element>
+						<xsd:element name="lastName"
+							type="xsd:string">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="getBillingInfo">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="customerID" type="xsd:int"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+			<xsd:element name="getBillingInfoResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="customerID" type="xsd:int" />
+						<xsd:element minOccurs="1" maxOccurs="unbounded" name="bill" type="tns:Bill" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getOrderInfo">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="customerID" type="xsd:int"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getOrderInfoResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="customerID" type="xsd:int"></xsd:element>
+						<xsd:element minOccurs="1" maxOccurs="unbounded"
+							name="order" type="tns:Order">
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="getCustomerInfo">
+		<wsdl:part name="getCustomerInfo" element="tns:getCustomerInfo"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getCustomerInfoResponse">
+		<wsdl:part name="getCustomerInfoResponse"
+			element="tns:getCustomerInfoResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getBillingInfo">
+		<wsdl:part name="getBillingInfo" element="tns:getBillingInfo"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getBillingInfoResponse">
+		<wsdl:part name="getBillingInfoResponse"
+			element="tns:getBillingInfoResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getOrderInfo">
+		<wsdl:part name="getOrderInfo" element="tns:getOrderInfo"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getOrderInfoResponse">
+		<wsdl:part name="getOrderInfoResponse"
+			element="tns:getOrderInfoResponse">
+		</wsdl:part>
+	</wsdl:message>
+	
+	<wsdl:portType name="SplitJoin_WS">		<wsdl:operation name="getCustomerInfo" parameterOrder="getCustomerInfo">
+			<wsdl:input message="tns:getCustomerInfo"></wsdl:input>
+			<wsdl:output message="tns:getCustomerInfoResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getBillingInfo" parameterOrder="getBillingInfo">
+			<wsdl:input message="tns:getBillingInfo"></wsdl:input>
+			<wsdl:output message="tns:getBillingInfoResponse"></wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getOrderInfo" parameterOrder="getOrderInfo">
+			<wsdl:input message="tns:getOrderInfo"></wsdl:input>
+			<wsdl:output message="tns:getOrderInfoResponse"></wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	
+	<wsdl:binding name="SplitJoin_WSSOAP" type="tns:SplitJoin_WS">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="getCustomerInfo">
+			<soap:operation soapAction="getCustomerInfo" style="document" />
+			<wsdl:input>
+				<soap:body parts="getCustomerInfo" use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body parts="getCustomerInfoResponse" use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getBillingInfo">
+			<soap:operation soapAction="getBillingInfo" style="document" />
+			<wsdl:input>
+				<soap:body parts="getBillingInfo" use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body parts="getBillingInfoResponse" use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getOrderInfo">
+			<soap:operation soapAction="getOrderInfo" style="document" />
+			<wsdl:input>
+				<soap:body parts="getOrderInfo" use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body parts="getOrderInfoResponse" use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	
+	<wsdl:service name="SplitJoin_WS">
+		<wsdl:port binding="tns:SplitJoin_WSSOAP"
+			name="SplitJoin_WSSOAP">
+			<soap:address location="http://localhost:7001/SplitJoin_WS/business" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

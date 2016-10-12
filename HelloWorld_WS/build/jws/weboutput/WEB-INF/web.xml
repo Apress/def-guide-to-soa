@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" id="WebApp_ID">
+  <display-name>HelloWorld_WS</display-name>
+  <servlet>
+    <servlet-name>HelloWorldServiceServlethttp</servlet-name>
+    <servlet-class>com.alsb.hello.HelloWorld</servlet-class>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HelloWorldServiceServlethttp</servlet-name>
+    <url-pattern>/HelloWorldService</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>

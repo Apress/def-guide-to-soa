@@ -1,0 +1,15 @@
+<wsp:Policy wsu:Id="TestPolicy-example"
+	xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy"
+	xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+	xmlns:rm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy" 
+	xmlns:beapolicy="http://www.bea.com/wsrm/policy"
+	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+	<sp:Strict wsp:Optional="true"/>
+	<rm:RMAssertion>
+      <rm:InactivityTimeout Milliseconds="600000"/>
+      <rm:BaseRetransmissionInterval Milliseconds="3000"/>
+      <rm:ExponentialBackoff/>
+      <rm:AcknowledgementInterval Milliseconds="200"/>
+      <beapolicy:Expires Expires="P1D"/>
+    </rm:RMAssertion>
+</wsp:Policy>

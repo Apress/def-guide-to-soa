@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions name="SyncBusinessServiceDefinitions" 
+  targetNamespace="http://www.alsb.com/" 
+  xmlns="http://schemas.xmlsoap.org/wsdl/" 
+  xmlns:alsb="http://www.alsb.com/" 
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <types>
+    <xs:schema attributeFormDefault="unqualified" 
+      elementFormDefault="qualified" 
+      targetNamespace="http://www.alsb.com/" 
+      xmlns:alsb="http://www.alsb.com/" 
+      xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+      xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      
+        <xs:complexType name="Order">
+          <xs:sequence>
+            <xs:element name="orderID" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      
+      <xs:element name="submitOrder">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="order" type="alsb:Order"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="submitOrderResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="orderResultValue" type="alsb:Order"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </types>
+  
+  <message name="submitOrder">
+    <part element="alsb:submitOrder" name="parameters"/>
+  </message>
+  <message name="submitOrderResponse">
+    <part element="alsb:submitOrderResponse" name="parameters"/>
+  </message>
+  
+  <portType name="SyncBusinessPortType">
+    <operation name="submitOrder" parameterOrder="submitOrder">
+      <input message="alsb:submitOrder"/>
+      <output message="alsb:submitOrderResponse"/>
+    </operation>
+  </portType>
+  
+  <binding name="SyncBusinessServiceSoapBinding" type="alsb:SyncBusinessPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="submitOrder">
+      <soap:operation soapAction="" style="document"/>
+      <input>
+        <soap:body parts="submitOrder" use="literal"/>
+      </input>
+      <output>
+        <soap:body parts="parameters" use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  
+  <service name="SyncBusinessService">
+    <port binding="alsb:SyncBusinessServiceSoapBinding" name="SyncBusinessService">
+      <soap:address location="http://localhost:7001/business/SyncBusinessService"/>
+    </port>
+  </service>
+</definitions>

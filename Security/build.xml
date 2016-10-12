@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="Security" default="all" basedir=".">
+	<!-- NOTE: I have changed this from the format specified in the book.
+	     Simply modify the properties below to suit your specific 
+	     configuration, expecially the bea.hom and domain.home properties -->
+	
+    <!-- OPTIONAL: Modify these properties if you are using this 
+         script for your own projects -->
+	<property name="bea.home"						value="C:\BEAHome\OSB10gR3" />
+	<property name="domain.home"					value="C:\Domains\OSB103R3_book" />
+    <property name="server.trust.jks.filename"		value="alsb_trust.jks" />
+    <property name="server.identity.jks.filename"	value="alsb_identity.jks" />
+    <property name="server.cert.filename"			value="server.pem" />
+    <property name="server.cert.alias"				value="alsb" />
+    <property name="server.key.password"			value="keypassword" />
+    <property name="server.store.password"			value="storepassword" />
+	<property name="server.keyname"					value="alsbserver" />
+	<property name="server.host"					value="localhost" />
+	
+	<property name="client.trust.jks.filename"		value="client_trust.jks" />
+	<property name="client.identify.jks.filename"	value="client_identity.jks" />
+	<property name="clientcert.filename"			value="jeff.pem" />
+	<property name="client.cert.alias"	    		value="jeff" />
+	<property name="client.key.password"			value="keypassword" />
+	<property name="client.store.password"			value="storepassword" />
+	<property name="client.keyname"					value="alsbserverkey" />
+	<property name="client.host"					value="localhost" />
+	
+    <!--  Utility Properties. Do No Modify These Properties  -->
+	<property name="weblogic.home"			value="${bea.home}/wlserver_10.3" />
+	<property name="jdk.home"				value="${bea.home}/jdk160_05" />
+	<property name="src.dir" 				value="src"/>
+	<property name="gensrc.dir" 			value="gensrc"/>
+	<property name="classes.dir" 			value="./bin" />
+	<property name="package.name" 			value="com.alsb.security" />
+	<!-- Create a PATH-like version of the package name -->
+	<property name="package.path" 			value="com/alsb/security" />
+	
+
+	    
+	<!--
+	========================================
+	              Path Section
+	========================================
+	-->
+	<path id="wlst.class.path">
+	    <fileset dir="${weblogic.home}/server/lib">
+	    	<include name="weblogic.jar"/>
+	        <include name="webserviceclient.jar"/>
+	    </fileset>
+	</path>
+	
+	<!--
+		========================================
+		              Primary Targets
+		========================================
+	-->
+	<target name="all" depends="clean,createServerTrustKeystore,createClientTrustKeystore,copyToAdminServer" description="Create the web service client libraries for the HelloWorldClient."/>
+	
+	<!-- View all of the certificates in the keystore -->
+	<target name="viewServerKeystore">
+		<exec executable="${jdk.home}/bin/keytool.exe">
+			<arg line="-list -v -keystore ${server.trust.jks.filename} -storepass ${server.store.password}"/>
+		</exec>
+	</target>
+	
+	<target name="viewCertifiates">
+		<exec executable="${jdk.home}/bin/keytool.exe">
+			<arg line="-printcert -v -file jeffTempCert.pem"/>
+		</exec>
+		<exec executable="${jdk.home}/bin/keytool.exe">
+			<arg line="-list -v -file jeffTempKey.pem"/>
+		</exec>
+	</target>
+	
+	<target name="viewClientKeystore">
+		<exec executable="${jdk.home}/bin/keytool.exe">
+			<arg line="-list -keystore ${client.trust.jks.filename} -storepass ${server.store.password} -rfc"/>
+		</exec>
+	</target>
+	
+	<target name="copyToAdminServer" description="Copy the keystore to the root directory of the admin server">
+		<echo>Copying the necessary files into the domain's home directory at ${domain.home}</echo>
+		<copy file="${server.trust.jks.filename}" todir="${domain.home}" />
+	</target>
+	
+	<target name="clean">
+		<delete>
+			<fileset dir=".">
+				<include name="*.jks"/>
+		    	<include name="*.pem"/>
+		    </fileset>
+		</delete>
+		<delete file="${clientcert.filename}" failonerror="false"/>
+	</target>
+
+	<target name="configureWebLogic">
+		<echo>Configuring WebLogic admin server with generated security</echo>
+		<java classname="weblogic.WLST" fork="yes" classpathref="wlst.class.path">
+			<arg line="configureServerSecurity.py" />
+		</java>
+	</target>
+	
+	<target name="createServerTrustKeystore" description="Create the files need on the ALSB server">
+		<!-- Creates the keystore (database) and creates a certificate named 
+		     "alsbserverkey" in the new  keystore 
+		-->
+		<echo>Generating the server keystore and certificate</echo>
+		<exec executable="${jdk.home}/bin/keytool.exe">
+			<arg line='-genkey -validity 3650 -alias ${server.keyname} -keyalg RSA -keysize 1024 -dname "CN=server, OU=IT, O=BEA, L=San Jose ST=California, C=US" -keypass ${server.key.password} -keystore ${server.trust.jks.filename} -storepass ${server.store.password}'/>
+		</exec>
+		
+		<!-- This exports the self-signed certificate to a base 64 encoded 
+		     file called "server.pem"
+		-->
+		<echo>Exporting the server certificate</echo>
+		<exec executable="${jdk.home}/bin/keytool.exe">
+			<arg line="-export -alias ${server.keyname} -file ${server.cert.filename} -keystore ${server.trust.jks.filename} -storepass ${server.store.password} -rfc"/>
+		</exec>
+		
+		<!-- Import the self-signed cert into the keystore we created, as a 
+		     trust cert entity under a new alias in the keystore
+		 -->
+		<echo>Importing the certificate into the keystore</echo>
+		<exec executable="${jdk.home}/bin/keytool.exe">
+			<arg line="-import -trustcacerts -alias alsbServerTrust -file ${server.cert.filename} -keystore ${server.trust.jks.filename} -keypass ${server.key.password} -storepass ${server.store.password} -noprompt"/>
+		</exec>
+	</target>
+	
+	<target name="createClientTrustKeystore" description="Generate the files needed on the client side to authenticate properly">
+		<!-- Create the public/private keypair for a sample user names "jeff" in a new identify keystore -->
+		<echo>Generating the client keystore and certificate</echo>
+		<exec executable="${jdk.home}/bin/keytool.exe">
+			<arg line='-genkey -validity 3650 -alias ${client.cert.alias} -keyalg RSA -keysize 1024 -dname "CN=jeff, OU=IT, O=BEA, L=San Jose ST=California, C=US" -keypass ${server.key.password} -keystore ${client.trust.jks.filename} -storepass ${client.store.password}'/>
+		</exec>
+		
+		<!-- This exports the self-signed certificate to a base 64 encoded file called "jeff.pem" -->
+		<echo>Exporting the client certificate</echo>
+		<exec executable="${jdk.home}/bin/keytool.exe">
+			<arg line="-export -alias ${client.cert.alias} -file ${clientcert.filename} -keystore ${client.trust.jks.filename} -storepass ${client.store.password} -rfc"/>
+		</exec>
+		
+		<!-- Import the self-signed client cert for the user into the server trust keystore -->
+		<echo>Import the client certificate into the server's keystore</echo>
+		<exec executable="${jdk.home}/bin/keytool.exe">
+			<arg line="-import -trustcacerts -alias ${client.cert.alias} -file ${clientcert.filename} -keystore ${server.trust.jks.filename} -storepass ${server.store.password} -noprompt"/>
+		</exec>
+		
+		<!-- Import the server certificate iinto the client keystore -->
+		<echo>Import the client certificate into the server's keystore</echo>
+		<exec executable="${jdk.home}/bin/keytool.exe">
+			<arg line="-import -trustcacerts -alias ${server.keyname} -file ${server.cert.filename} -keystore ${client.trust.jks.filename} -storepass ${client.store.password} -noprompt"/>
+		</exec>
+	</target>
+</project>

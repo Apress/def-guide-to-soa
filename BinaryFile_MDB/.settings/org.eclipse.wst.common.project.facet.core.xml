@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faceted-project>
+  <runtime name="Oracle WebLogic Server v10.3"/>
+  <fixed facet="jst.ejb"/>
+  <fixed facet="jst.java"/>
+  <fixed facet="java.apt"/>
+  <fixed facet="wlw.ejb"/>
+  <installed facet="java.apt" version="5.0"/>
+  <installed facet="jst.ejb" version="2.1"/>
+  <installed facet="jst.java" version="6.0"/>
+  <installed facet="wlw.ejb" version="10.3"/>
+  <installed facet="workshop.xmlbeans" version="2.3"/>
+</faceted-project>

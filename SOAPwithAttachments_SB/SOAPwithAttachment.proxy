@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment>
+  <ser:coreEntry isProxy="true" isEnabled="true" isAutoPublish="false" xmlns:ser="http://www.bea.com/wli/sb/services">
+    <ser:description/>
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:wsdl ref="SOAPwithAttachments_SB/WSDL/SOAPwithAttachment"/>
+      <con:port>
+        <con:name>SOAPwithAttachmentSOAP</con:name>
+        <con:namespace>http://www.alsb.com/SOAPwithAttachment/</con:namespace>
+      </con:port>
+      <con:selector type="SOAP body"/>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig xmlns:ser="http://www.bea.com/wli/sb/services">
+    <tran:provider-id xmlns:tran="http://www.bea.com/wli/sb/transports">http</tran:provider-id>
+    <tran:inbound xmlns:tran="http://www.bea.com/wli/sb/transports">true</tran:inbound>
+    <tran:URI xmlns:tran="http://www.bea.com/wli/sb/transports">
+      <env:value xmlns:env="http://www.bea.com/wli/config/env">/SOAPwithAttachments_SB/SOAPwithAttachment</env:value>
+    </tran:URI>
+    <tran:inbound-properties xmlns:tran="http://www.bea.com/wli/sb/transports"/>
+    <tran:all-headers xmlns:tran="http://www.bea.com/wli/sb/transports">false</tran:all-headers>
+    <tran:provider-specific xmlns:tran="http://www.bea.com/wli/sb/transports">
+      <http:inbound-properties xmlns:http="http://www.bea.com/wli/sb/transports/http"/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router xmlns:ser="http://www.bea.com/wli/sb/services">
+    <con:pipeline type="request" name="PipelinePairNode1_request" xmlns:con="http://www.bea.com/wli/sb/pipeline/config">
+      <con:stage name="examine attachment">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="numAttachments" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-7589700858866210582--c882958.119c42fe27f.-7fff</con2:id>
+            <con1:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">fn:count($attachments/ctx:attachment)</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:log xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config">
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-7589700858866210582--c882958.119c42fe27f.-7ffe</con2:id>
+            <con1:logLevel>error</con1:logLevel>
+            <con1:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">fn:concat("There are ", $numAttachments, " attachments with the message")</con2:xqueryText>
+            </con1:expr>
+            <con1:message>!!!!!!!!!!!!!!!!!!!!!</con1:message>
+          </con1:log>
+          <con1:foreach xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-7589700858866210582--c882958.119c42fe27f.-7ffd</con2:id>
+            <con1:variable>attachments</con1:variable>
+            <con1:expression>
+              <con2:xpathText xmlns:con2="http://www.bea.com/wli/sb/stages/config">./ctx:attachment</con2:xpathText>
+            </con1:expression>
+            <con1:value-variable>attach</con1:value-variable>
+            <con1:index-variable>index</con1:index-variable>
+            <con1:total-variable>totalAttachments</con1:total-variable>
+            <con1:actions>
+              <con2:log xmlns:con2="http://www.bea.com/wli/sb/stages/logging/config">
+                <con3:id xmlns:con3="http://www.bea.com/wli/sb/stages/config">_ActionId-7589700858866210582--c882958.119c42fe27f.-7ffc</con3:id>
+                <con2:logLevel>error</con2:logLevel>
+                <con2:expr>
+                  <con3:xqueryText xmlns:con3="http://www.bea.com/wli/sb/stages/config">concat('Attachment ', string($index), ' of ', string($totalAttachments),
+ fn:codepoints-to-string(10),
+'Content-ID: ', $attach/ctx:Content-ID, fn:codepoints-to-string(10),
+'Content-Type: ', $attach/ctx:Content-Type, fn:codepoints-to-string(10),
+'Content-Transfer-Encoding: ', $attach/ctx:Content-Transfer-Encoding, 
+fn:codepoints-to-string(10),
+'Content-Description: ', $attach/ctx:Content-Description, 
+fn:codepoints-to-string(10),
+'Content-Location: ', $attach/ctx:Content-Location, fn:codepoints-to-string(10),
+'Content-Disposition: ', $attach/ctx:Content-Disposition, 
+fn:codepoints-to-string(10),
+'body: ', $attach/ctx:body, fn:codepoints-to-string(10))</con3:xqueryText>
+                </con2:expr>
+                <con2:message>@@@@@@@@@@@</con2:message>
+              </con2:log>
+            </con1:actions>
+          </con1:foreach>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode1_response" xmlns:con="http://www.bea.com/wli/sb/pipeline/config"/>
+    <con:flow xmlns:con="http://www.bea.com/wli/sb/pipeline/config">
+      <con:pipeline-node name="PipelinePairNode1">
+        <con:request>PipelinePairNode1_request</con:request>
+        <con:response>PipelinePairNode1_response</con:response>
+      </con:pipeline-node>
+      <con:route-node name="RouteTo_SOAPwithAttachment">
+        <con:context/>
+        <con:actions>
+          <con1:route xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config">
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-7589700858866210582--c882958.119c42fe27f.-8000</con2:id>
+            <con1:service ref="SOAPwithAttachments_SB/SOAPwithAttachment" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            <con1:operation passThrough="true"/>
+            <con1:outboundTransform/>
+            <con1:responseTransform/>
+          </con1:route>
+        </con:actions>
+      </con:route-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

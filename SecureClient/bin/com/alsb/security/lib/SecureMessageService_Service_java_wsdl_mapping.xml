@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<j2ee:java-wsdl-mapping xmlns:j2ee="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <j2ee:package-mapping>
+    <j2ee:package-type>com.alsb.security.lib</j2ee:package-type>
+    <j2ee:namespaceURI>http://www.alsb.com/SecureMessageService/</j2ee:namespaceURI>
+  </j2ee:package-mapping>
+  <j2ee:package-mapping>
+    <j2ee:package-type>com.alsb.securemessageservice</j2ee:package-type>
+    <j2ee:namespaceURI>http://www.alsb.com/SecureMessageService/</j2ee:namespaceURI>
+  </j2ee:package-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.securemessageservice.GetAccountResponse</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:sec="http://www.alsb.com/SecureMessageService/">sec:getAccountResponse</j2ee:root-type-qname>
+    <j2ee:qname-scope>element</j2ee:qname-scope>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.securemessageservice.GetAccount</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:sec="http://www.alsb.com/SecureMessageService/">sec:getAccount</j2ee:root-type-qname>
+    <j2ee:qname-scope>element</j2ee:qname-scope>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.securemessageservice.GetAccountResponse</j2ee:java-type>
+    <j2ee:anonymous-type-qname>http://www.alsb.com/SecureMessageService/:&gt;getAccountResponse</j2ee:anonymous-type-qname>
+    <j2ee:qname-scope>complexType</j2ee:qname-scope>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>CustomerID</j2ee:java-variable-name>
+      <j2ee:xml-element-name>customerID</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>CustomerName</j2ee:java-variable-name>
+      <j2ee:xml-element-name>customerName</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>Account</j2ee:java-variable-name>
+      <j2ee:xml-element-name>account</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.securemessageservice.GetAccount</j2ee:java-type>
+    <j2ee:anonymous-type-qname>http://www.alsb.com/SecureMessageService/:&gt;getAccount</j2ee:anonymous-type-qname>
+    <j2ee:qname-scope>complexType</j2ee:qname-scope>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>CustomerID</j2ee:java-variable-name>
+      <j2ee:xml-element-name>customerID</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:service-interface-mapping>
+    <j2ee:service-interface>com.alsb.security.lib.SecureMessageService_Service</j2ee:service-interface>
+    <j2ee:wsdl-service-name xmlns:sec="http://www.alsb.com/SecureMessageService/">sec:SecureMessageService</j2ee:wsdl-service-name>
+    <j2ee:port-mapping>
+      <j2ee:port-name>SecureMessageServiceSOAP</j2ee:port-name>
+      <j2ee:java-port-name>SecureMessageServiceSOAP</j2ee:java-port-name>
+    </j2ee:port-mapping>
+  </j2ee:service-interface-mapping>
+  <j2ee:service-endpoint-interface-mapping>
+    <j2ee:service-endpoint-interface>com.alsb.security.lib.SecureMessageService_PortType</j2ee:service-endpoint-interface>
+    <j2ee:wsdl-port-type xmlns:sec="http://www.alsb.com/SecureMessageService/">sec:SecureMessageService</j2ee:wsdl-port-type>
+    <j2ee:wsdl-binding xmlns:sec="http://www.alsb.com/SecureMessageService/">sec:SecureMessageServiceSOAP</j2ee:wsdl-binding>
+    <j2ee:service-endpoint-method-mapping>
+      <j2ee:java-method-name>getAccount</j2ee:java-method-name>
+      <j2ee:wsdl-operation>getAccount</j2ee:wsdl-operation>
+      <j2ee:method-param-parts-mapping>
+        <j2ee:param-position>0</j2ee:param-position>
+        <j2ee:param-type>com.alsb.securemessageservice.GetAccount</j2ee:param-type>
+        <j2ee:wsdl-message-mapping>
+          <j2ee:wsdl-message xmlns:sec="http://www.alsb.com/SecureMessageService/">sec:getAccountRequest</j2ee:wsdl-message>
+          <j2ee:wsdl-message-part-name>parameters</j2ee:wsdl-message-part-name>
+          <j2ee:parameter-mode>IN</j2ee:parameter-mode>
+        </j2ee:wsdl-message-mapping>
+      </j2ee:method-param-parts-mapping>
+      <j2ee:wsdl-return-value-mapping>
+        <j2ee:method-return-value>com.alsb.securemessageservice.GetAccountResponse</j2ee:method-return-value>
+        <j2ee:wsdl-message xmlns:sec="http://www.alsb.com/SecureMessageService/">sec:getAccountResponse</j2ee:wsdl-message>
+        <j2ee:wsdl-message-part-name>parameters</j2ee:wsdl-message-part-name>
+      </j2ee:wsdl-return-value-mapping>
+    </j2ee:service-endpoint-method-mapping>
+  </j2ee:service-endpoint-interface-mapping>
+</j2ee:java-wsdl-mapping>

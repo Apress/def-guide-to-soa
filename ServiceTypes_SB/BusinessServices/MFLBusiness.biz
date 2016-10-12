@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment>
+  <ser:coreEntry isProxy="false" isEnabled="true" xmlns:ser="http://www.bea.com/wli/sb/services">
+    <ser:binding type="Mixed" xsi:type="con:MixedBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:request type="MFL">
+        <con1:mfl ref="ServiceTypes_SB/CustomerFTPFormat" xmlns:con1="http://www.bea.com/wli/sb/typesystem/config"/>
+      </con:request>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+    </ser:monitoring>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+  </ser:coreEntry>
+  <ser:endpointConfig xmlns:ser="http://www.bea.com/wli/sb/services">
+    <tran:provider-id xmlns:tran="http://www.bea.com/wli/sb/transports">ftp</tran:provider-id>
+    <tran:inbound xmlns:tran="http://www.bea.com/wli/sb/transports">false</tran:inbound>
+    <tran:URI xmlns:tran="http://www.bea.com/wli/sb/transports">
+      <env:value xmlns:env="http://www.bea.com/wli/config/env">ftp://localhost:21</env:value>
+    </tran:URI>
+    <tran:outbound-properties xmlns:tran="http://www.bea.com/wli/sb/transports">
+      <tran:load-balancing-algorithm>round-robin</tran:load-balancing-algorithm>
+      <tran:retry-count>0</tran:retry-count>
+      <tran:retry-interval>30</tran:retry-interval>
+    </tran:outbound-properties>
+    <tran:provider-specific xmlns:tran="http://www.bea.com/wli/sb/transports"><ftp:outbound-properties xmlns:ftp="http://www.bea.com/wli/sb/transports/ftp"><ftp:timeout>60</ftp:timeout><ftp:auth-info><ftp:service-account ref="ServiceTypes_SB/CustomerFTPAccount"/></ftp:auth-info><ftp:destination-file-name><ftp:prefix-suffix><ftp:prefix>customer</ftp:prefix><ftp:suffix>.text</ftp:suffix></ftp:prefix-suffix></ftp:destination-file-name><ftp:transfer-mode>binary</ftp:transfer-mode></ftp:outbound-properties><ftp:request-encoding xmlns:ftp="http://www.bea.com/wli/sb/transports/ftp">utf-8</ftp:request-encoding></tran:provider-specific>
+  </ser:endpointConfig>
+</xml-fragment>

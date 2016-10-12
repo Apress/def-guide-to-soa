@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<weblogic-web-app xmlns="http://www.bea.com/ns/weblogic/weblogic-web-app" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.bea.com/ns/weblogic/weblogic-web-app http://www.bea.com/ns/weblogic/weblogic-web-app/1.0/weblogic-web-app.xsd">
+  <weblogic-version>10.3</weblogic-version>
+  <context-root>SOAPwithAttachment_WS</context-root>
+  <library-ref>
+    <library-name>beehive-controls-1.0.1-10.0-war</library-name>
+    <specification-version>1.0</specification-version>
+    <exact-match>true</exact-match>
+  </library-ref>
+  <library-ref>
+    <library-name>weblogic-controls-10.0-war</library-name>
+    <specification-version>10.0</specification-version>
+    <exact-match>true</exact-match>
+  </library-ref>
+  <library-ref>
+    <library-name>wls-commonslogging-bridge-war</library-name>
+    <specification-version>1.0</specification-version>
+    <exact-match>true</exact-match>
+  </library-ref>
+</weblogic-web-app>

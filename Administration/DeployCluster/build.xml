@@ -1,0 +1,54 @@
+<project default="export">
+	<!-- ALSB domain creation project -->
+	<property environment="env" />
+	<property name="domain.export.script" value="export.py" />
+	<property name="domain.import.script" value="import.py" />
+	<property name="export.config.file" value="export.properties" />
+	<property name="import.config.file" value="import.properties" />
+	<property name="build" value="build" />
+	<property name="dist" value="dist" />
+	<!-- The bea.home property hold that name of the directory where you installed ALSB 3.0.
+			 you need to change this value so that it matches your installation directory.
+	-->
+	<property name="bea.home" value="C:/BEAHome/alsb30" />
+
+	<property name="weblogic.home" value="${bea.home}/wlserver_10.0" />
+
+	<path id="wlst.class.path">
+		<fileset dir="${bea.home}/alsb_3.0/lib">
+			<include name="sb-kernel-api.jar" />
+		</fileset>
+		<fileset dir="${bea.home}/modules">
+			<include name="com.bea.common.configfwk_1.1.0.0.jar" />
+		</fileset>
+		<fileset dir="${weblogic.home}/server/lib">
+			<include name="weblogic.jar" />
+			<include name="webserviceclient.jar" />
+		</fileset>
+	</path>
+
+	<taskdef name="wlst" classname="weblogic.ant.taskdefs.management.WLSTTask" classpathref="wlst.class.path" />
+
+	<target name="export">
+		<echo message="exportscript: ${domain.export.script}" />
+		<java classname="weblogic.WLST" fork="true">
+			<classpath refid="wlst.class.path" />
+			<arg line="${domain.export.script} ${export.config.file}" />
+		</java>
+	</target>
+
+	<target name="import">
+		<echo message="Running the ImportProject.java file" />
+		<java classname="com.alsb.admin.ImportPproject" fork="true">
+			<classpath refid="wlst.class.path" />
+		</java>
+	</target>
+
+	<target name="clean">
+		<delete dir="${dist}" />
+		<delete dir="${build}" />
+		<mkdir dir="${dist}" />
+		<mkdir dir="${build}" />
+	</target>
+
+</project>

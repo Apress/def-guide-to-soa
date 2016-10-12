@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment>
+  <ser:coreEntry isProxy="false" isEnabled="true" xmlns:ser="http://www.bea.com/wli/sb/services">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:wsdl ref="Temperamental_SB/credit"/><con:port><con:name>TemperamentalCreditSoapPort</con:name><con:namespace>http://www.alsb.com</con:namespace></con:port></ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+    </ser:monitoring>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig xmlns:ser="http://www.bea.com/wli/sb/services">
+    <tran:provider-id xmlns:tran="http://www.bea.com/wli/sb/transports">http</tran:provider-id>
+    <tran:inbound xmlns:tran="http://www.bea.com/wli/sb/transports">false</tran:inbound>
+    <tran:URI xmlns:tran="http://www.bea.com/wli/sb/transports">
+      <env:value xmlns:env="http://www.bea.com/wli/config/env">http://localhost:7001/TemperamentalService_WS/credit</env:value>
+    </tran:URI>
+    <tran:outbound-properties xmlns:tran="http://www.bea.com/wli/sb/transports">
+      <tran:load-balancing-algorithm>round-robin</tran:load-balancing-algorithm>
+      <tran:retry-count>0</tran:retry-count>
+      <tran:retry-interval>30</tran:retry-interval>
+      <tran:retry-application-errors>true</tran:retry-application-errors>
+    </tran:outbound-properties>
+    <tran:provider-specific xmlns:tran="http://www.bea.com/wli/sb/transports"><http:outbound-properties xmlns:http="http://www.bea.com/wli/sb/transports/http"><http:request-method>POST</http:request-method><http:timeout>0</http:timeout><http:follow-redirects>true</http:follow-redirects></http:outbound-properties></tran:provider-specific>
+  </ser:endpointConfig>
+</xml-fragment>

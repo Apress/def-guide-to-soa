@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<s1:definitions name="SecureMessageService" targetNamespace="http://www.alsb.com/SecureMessageService/" xmlns="" xmlns:s0="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:s1="http://schemas.xmlsoap.org/wsdl/" xmlns:s2="http://www.alsb.com/SecureMessageService/" xmlns:s3="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+  <wsp:UsingPolicy s1:Required="true"/>
+  <wsp:Policy s0:Id="CustomEncryptPolicy.xml">
+    <sp:Strict xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy"/>
+    <wssp:Confidentiality xmlns:s0="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:s1="http://schemas.xmlsoap.org/wsdl/" xmlns:s2="http://www.alsb.com/SecureMessageService/" xmlns:s3="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:sec="http://www.alsb.com/SecureMessageService/" xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy" xmlns:wssp="http://www.bea.com/wls90/security/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <wssp:KeyWrappingAlgorithm URI="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/>
+      <!--  Require the greeting that we return to be encrypted -->
+      <wssp:Target>
+        <wssp:EncryptionAlgorithm URI="http://www.w3.org/2001/04/xmlenc#tripledes-cbc"/>
+        <wssp:MessageParts>
+				wsp:GetBody(./sec:getAccountResponse/account)
+			</wssp:MessageParts>
+      </wssp:Target>
+      <wssp:KeyInfo>
+        <wssp:SecurityToken TokenType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3"/>
+        <wssp:SecurityTokenReference>
+          <wssp:Embedded>
+            <wsse:BinarySecurityToken EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary" ValueType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">MIICJjCCAY8CBEdqsWcwDQYJKoZIhvcNAQEEBQAwWjELMAkGA1UEBhMCVVMxHzAdBgNVBAcTFlNhbiBKb3NlIFNUPUNhbGlmb3JuaWExDDAKBgNVBAoTA0JFQTELMAkGA1UECxMCSVQxDzANBgNVBAMTBnNlcnZlcjAeFw0wNzEyMjAxODE2MDdaFw0xNzEyMTcxODE2MDdaMFoxCzAJBgNVBAYTAlVTMR8wHQYDVQQHExZTYW4gSm9zZSBTVD1DYWxpZm9ybmlhMQwwCgYDVQQKEwNCRUExCzAJBgNVBAsTAklUMQ8wDQYDVQQDEwZzZXJ2ZXIwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAKPsS+WfEH1oYDV3xd+1ywXQVjrSiO0Qi68Pta0n7+BVvug99tAoCPdNxPdUdrJvNoHs9zlpCc5KzvOrK+RIYLpzaoJYS/8t7kyk4f1xWV4ORbBd2abECI4HsvU0TygPF8Bfdd8NdyEXbhJzzreZoC9maaXOQQ7OOu7sbbqtRDplAgMBAAEwDQYJKoZIhvcNAQEEBQADgYEAS4yjExT0uFLHIgA0YOPyNfe9lYpiSDLOJSvDLgVVrPc87mW1MIg+3UpVkRrngqfUIUtuXfxO+jPsbXkEIw+b4MzZMFn78l13rV/aBCkGG6GyyJFscq6dwDcjk0DE0AdKJv5bxhKf82pEnUYWv3e8iw2yFKLbgwepHiweDQV+Ksk=</wsse:BinarySecurityToken>
+          </wssp:Embedded>
+        </wssp:SecurityTokenReference>
+      </wssp:KeyInfo>
+    </wssp:Confidentiality>
+  </wsp:Policy>
+  <wsp:Policy s0:Id="Encrypt.xml">
+    <wssp:Confidentiality xmlns:s0="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:s1="http://schemas.xmlsoap.org/wsdl/" xmlns:s2="http://www.alsb.com/SecureMessageService/" xmlns:s3="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wssp="http://www.bea.com/wls90/security/policy">
+      <wssp:KeyWrappingAlgorithm URI="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/>
+      <wssp:Target>
+        <wssp:EncryptionAlgorithm URI="http://www.w3.org/2001/04/xmlenc#tripledes-cbc"/>
+        <wssp:MessageParts Dialect="http://schemas.xmlsoap.org/2002/12/wsse#part">wsp:Body()</wssp:MessageParts>
+      </wssp:Target>
+      <wssp:KeyInfo>
+        <wssp:SecurityToken TokenType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3"/>
+        <wssp:SecurityTokenReference>
+          <wssp:Embedded>
+            <wsse:BinarySecurityToken EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary" ValueType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">MIICJjCCAY8CBEdqsWcwDQYJKoZIhvcNAQEEBQAwWjELMAkGA1UEBhMCVVMxHzAdBgNVBAcTFlNhbiBKb3NlIFNUPUNhbGlmb3JuaWExDDAKBgNVBAoTA0JFQTELMAkGA1UECxMCSVQxDzANBgNVBAMTBnNlcnZlcjAeFw0wNzEyMjAxODE2MDdaFw0xNzEyMTcxODE2MDdaMFoxCzAJBgNVBAYTAlVTMR8wHQYDVQQHExZTYW4gSm9zZSBTVD1DYWxpZm9ybmlhMQwwCgYDVQQKEwNCRUExCzAJBgNVBAsTAklUMQ8wDQYDVQQDEwZzZXJ2ZXIwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAKPsS+WfEH1oYDV3xd+1ywXQVjrSiO0Qi68Pta0n7+BVvug99tAoCPdNxPdUdrJvNoHs9zlpCc5KzvOrK+RIYLpzaoJYS/8t7kyk4f1xWV4ORbBd2abECI4HsvU0TygPF8Bfdd8NdyEXbhJzzreZoC9maaXOQQ7OOu7sbbqtRDplAgMBAAEwDQYJKoZIhvcNAQEEBQADgYEAS4yjExT0uFLHIgA0YOPyNfe9lYpiSDLOJSvDLgVVrPc87mW1MIg+3UpVkRrngqfUIUtuXfxO+jPsbXkEIw+b4MzZMFn78l13rV/aBCkGG6GyyJFscq6dwDcjk0DE0AdKJv5bxhKf82pEnUYWv3e8iw2yFKLbgwepHiweDQV+Ksk=</wsse:BinarySecurityToken>
+          </wssp:Embedded>
+        </wssp:SecurityTokenReference>
+      </wssp:KeyInfo>
+    </wssp:Confidentiality>
+  </wsp:Policy>
+  <wsp:Policy s0:Id="Sign.xml">
+    <wssp:Integrity xmlns:s0="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:s1="http://schemas.xmlsoap.org/wsdl/" xmlns:s2="http://www.alsb.com/SecureMessageService/" xmlns:s3="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wls="http://www.bea.com/wls90/security/policy/wsee#part" xmlns:wssp="http://www.bea.com/wls90/security/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+      <wssp:SignatureAlgorithm URI="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+      <wssp:CanonicalizationAlgorithm URI="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+      <wssp:Target>
+        <wssp:DigestAlgorithm URI="http://www.w3.org/2000/09/xmldsig#sha1"/>
+        <wssp:MessageParts Dialect="http://www.bea.com/wls90/security/policy/wsee#part"> 
+        wls:SystemHeaders()
+      </wssp:MessageParts>
+      </wssp:Target>
+      <wssp:Target>
+        <wssp:DigestAlgorithm URI="http://www.w3.org/2000/09/xmldsig#sha1"/>
+        <wssp:MessageParts Dialect="http://www.bea.com/wls90/security/policy/wsee#part"> 
+        wls:SecurityHeader(wsu:Timestamp)
+      </wssp:MessageParts>
+      </wssp:Target>
+      <wssp:Target>
+        <wssp:DigestAlgorithm URI="http://www.w3.org/2000/09/xmldsig#sha1"/>
+        <wssp:MessageParts Dialect="http://schemas.xmlsoap.org/2002/12/wsse#part">
+      wsp:Body()
+      </wssp:MessageParts>
+      </wssp:Target>
+      <wssp:SupportedTokens>
+        <wssp:SecurityToken IncludeInMessage="true" TokenType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3">
+          <wssp:TokenIssuer>CN=server,OU=IT,O=BEA,L=San Jose ST\=California,C=US,CN=jeff,OU=IT,O=BEA,L=San Jose ST\=California,C=US,</wssp:TokenIssuer>
+        </wssp:SecurityToken>
+      </wssp:SupportedTokens>
+    </wssp:Integrity>
+    <wssp:MessageAge Age="60" xmlns:wssp="http://www.bea.com/wls90/security/policy"/>
+  </wsp:Policy>
+  <s1:types>
+    <xsd:schema targetNamespace="http://www.alsb.com/SecureMessageService/" xmlns:s0="http://schemas.xmlsoap.org/wsdl/" xmlns:s1="http://www.alsb.com/SecureMessageService/" xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s3="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.alsb.com/SecureMessageService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:element name="getAccount">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="customerID" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getAccountResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="customerID" type="xsd:int"/>
+            <xsd:element name="customerName" type="xsd:string"/>
+            <xsd:element name="account" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </s1:types>
+  <s1:message name="getAccountRequest">
+    <s1:part element="s2:getAccount" name="parameters"/>
+  </s1:message>
+  <s1:message name="getAccountResponse">
+    <s1:part element="s2:getAccountResponse" name="parameters"/>
+  </s1:message>
+  <s1:portType name="SecureMessageService">
+    <s1:operation name="getAccount">
+      <s1:input message="s2:getAccountRequest"/>
+      <s1:output message="s2:getAccountResponse"/>
+    </s1:operation>
+  </s1:portType>
+  <s1:binding name="SecureMessageServiceSOAP" type="s2:SecureMessageService">
+    <s3:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <s1:operation name="getAccount">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#Sign.xml"/>
+      </wsp:Policy>
+      <s3:operation soapAction="getAccount"/>
+      <s1:input>
+        <wsp:Policy>
+          <wsp:PolicyReference URI="#Encrypt.xml"/>
+        </wsp:Policy>
+        <s3:body use="literal"/>
+      </s1:input>
+      <s1:output>
+        <wsp:Policy>
+          <wsp:PolicyReference URI="#CustomEncryptPolicy.xml"/>
+        </wsp:Policy>
+        <s3:body use="literal"/>
+      </s1:output>
+    </s1:operation>
+  </s1:binding>
+  <s1:service name="SecureMessageService">
+    <s1:port binding="s2:SecureMessageServiceSOAP" name="SecureMessageServiceSOAP">
+      <s3:address location="http://JEDAVIES01.amer.bea.com:7001/Security_SB/SecureMessage"/>
+    </s1:port>
+  </s1:service>
+</s1:definitions>

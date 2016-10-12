@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.alsb.com/SOAPwithAttachment/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+	name="SOAPwithAttachment"
+	targetNamespace="http://www.alsb.com/SOAPwithAttachment/">
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.alsb.com/SOAPwithAttachment/">
+			<xsd:element name="submitAttachmentResponse" type="xsd:string" />
+			<xsd:complexType name="SubmitAttachmentRequestType">
+				<xsd:sequence>
+					<xsd:element name="fileName" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="submitAttachmentRequest" type="tns:SubmitAttachmentRequestType" />
+			<xsd:element name="zipFile" type="xsd:base64Binary" />
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="submitAttachmentRequest">
+		<wsdl:part name="submitAttachment" type="tns:SubmitAttachmentRequestType"  />
+		<wsdl:part name="zipFile" type="xsd:base64Binary" />
+	</wsdl:message>
+	
+	<wsdl:message name="submitAttachmentResponse">
+		<wsdl:part element="tns:submitAttachmentResponse"
+			name="submitAttachmentResponse" />
+	</wsdl:message>
+	
+	<wsdl:portType name="SOAPwithAttachmentPort">
+		<wsdl:operation name="submitAttachment">
+			<wsdl:input message="tns:submitAttachmentRequest" />
+			<wsdl:output message="tns:submitAttachmentResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	
+	<wsdl:binding name="SOAPwithAttachmentSOAP"
+		type="tns:SOAPwithAttachmentPort">
+		<soap:binding style="rpc"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="submitAttachment">
+			<soap:operation
+				soapAction="http://www.alsb.com/SOAPwithAttachment/submitAttachment" />
+			<wsdl:input>
+				<mime:multipartRelated>
+					<mime:part>
+						<soap:body parts="submitAttachment" use="literal" />
+					</mime:part>
+					<mime:part>
+						<mime:content part="zipFile" type="application/zip" />
+					</mime:part>
+				</mime:multipartRelated>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body parts="submitAttachmentResponse" use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	
+	<wsdl:service name="SOAPwithAttachment">
+		<wsdl:port binding="tns:SOAPwithAttachmentSOAP"
+			name="SOAPwithAttachmentSOAP">
+			<soap:address location="http://localhost:7001/SOAPwithAttachment_WS/SOAPwithAttachment" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

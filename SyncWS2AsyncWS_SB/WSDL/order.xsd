@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.alsb.com/order/"
+	xmlns:order="http://www.alsb.com/order/"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:complexType name="Product">
+		<xs:sequence>
+			<xs:element minOccurs="1" name="CreditNeeded"
+				nillable="true" type="xs:int" />
+			<xs:element minOccurs="1" name="Name" nillable="true"
+				type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="LineItem">
+		<xs:sequence>
+			<xs:element minOccurs="1" name="Product"
+				type="order:Product" />
+			<xs:element minOccurs="1" name="Quantity" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="orderStatus">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Submitted"/>
+			<xs:enumeration value="Completed"/>
+			<xs:enumeration value="Error"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:complexType name="Order">
+		<xs:sequence>
+			<xs:element name="orderStatus" type="order:orderStatus" minOccurs="1" maxOccurs="1" />
+			<xs:element minOccurs="1" name="id" type="xs:int" />
+			<xs:element minOccurs="1" name="FirstName" nillable="true"
+				type="xs:string" />
+			<xs:element minOccurs="1" name="LastName" nillable="true"
+				type="xs:string" />
+			<xs:element maxOccurs="unbounded" minOccurs="0"
+				name="LineItem" type="order:LineItem" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ProductList">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0"
+				name="Product" type="order:Product" />
+		</xs:sequence>
+	</xs:complexType>
+</schema>

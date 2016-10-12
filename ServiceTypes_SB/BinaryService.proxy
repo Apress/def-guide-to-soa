@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment>
+  <ser:coreEntry isProxy="true" isEnabled="true" xmlns:ser="http://www.bea.com/wli/sb/services">
+    <ser:binding type="Mixed" xsi:type="con:MixedBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:request type="Binary"/>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+  </ser:coreEntry>
+  <ser:endpointConfig xmlns:ser="http://www.bea.com/wli/sb/services">
+    <tran:provider-id xmlns:tran="http://www.bea.com/wli/sb/transports">file</tran:provider-id>
+    <tran:inbound xmlns:tran="http://www.bea.com/wli/sb/transports">true</tran:inbound>
+    <tran:URI xmlns:tran="http://www.bea.com/wli/sb/transports">
+      <env:value xmlns:env="http://www.bea.com/wli/config/env">file:///c:/filedir</env:value>
+    </tran:URI>
+    <tran:inbound-properties xmlns:tran="http://www.bea.com/wli/sb/transports"/>
+    <tran:all-headers xmlns:tran="http://www.bea.com/wli/sb/transports">false</tran:all-headers>
+    <tran:provider-specific xmlns:tran="http://www.bea.com/wli/sb/transports">
+      <file:inbound-properties xmlns:file="http://www.bea.com/wli/sb/transports/file">
+        <file:fileMask>*.*</file:fileMask>
+        <file:pollingInterval>600</file:pollingInterval>
+        <file:sortByArrival>false</file:sortByArrival>
+        <file:postAction>Delete</file:postAction>
+        <file:readLimit>10</file:readLimit>
+        <file:passByReference>false</file:passByReference>
+        <file:scanSubDirectories>false</file:scanSubDirectories>
+        <file:stageDir>
+          <env:value xmlns:env="http://www.bea.com/wli/config/env">c:\stage</env:value>
+        </file:stageDir>
+        <file:errorDir>
+          <env:value xmlns:env="http://www.bea.com/wli/config/env">c:\error</env:value>
+        </file:errorDir>
+      </file:inbound-properties>
+      <file:request-encoding xmlns:file="http://www.bea.com/wli/sb/transports/file">utf-8</file:request-encoding>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router xmlns:ser="http://www.bea.com/wli/sb/services">
+    <con:flow xmlns:con="http://www.bea.com/wli/sb/pipeline/config">
+      <con:route-node name="RouteNode1">
+        <con:context/>
+        <con:actions>
+          <con1:route xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config">
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-8281060091765992916-9485b9.1191a650621.-8000</con2:id>
+            <con1:service ref="ServiceTypes_SB/BusinessServices/BinaryBusinessService" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            <con1:outboundTransform/>
+            <con1:responseTransform/>
+          </con1:route>
+        </con:actions>
+      </con:route-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<webservices xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <webservice-description>
+    <webservice-description-name>com.alsb.business.SplitJoin_WSImpl</webservice-description-name>
+    <wsdl-file>/wsdls/SplitJoin_WS.wsdl</wsdl-file>
+    <jaxrpc-mapping-file>WEB-INF/SplitJoin_WS.xml</jaxrpc-mapping-file>
+    <port-component>
+      <port-component-name>SplitJoin_WSSOAP</port-component-name>
+      <wsdl-port xmlns:alsb="http://www.alsb.com/">alsb:SplitJoin_WSSOAP</wsdl-port>
+      <service-endpoint-interface>com.alsb.business.SplitJoin_WSImplPortType</service-endpoint-interface>
+      <service-impl-bean>
+        <servlet-link>SplitJoin_WSServlethttp</servlet-link>
+      </service-impl-bean>
+    </port-component>
+  </webservice-description>
+</webservices>

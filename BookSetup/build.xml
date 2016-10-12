@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="Book Source Code Builder" default="all" basedir=".">
+    <!-- set global properties for this build -->
+	<!-- The bea.home property hold that name of the directory where you installed ALSB 3.0.
+	     you need to change this value so that it matches your installation directory.
+	-->
+	<property name="bea.home" value="C:/BEAHome/OSB10gR3" />
+
+	<!-- The workspace.dir is the directory of the workspace that you created to contain the sample
+	     projects from this book. By default, the namespace is "alsb30_book"
+	-->
+	<property name="workspace.dir" value="c:/_workspaces/OSB10gR3_book" />
+
+	<property name="weblogic.home"	value="${bea.home}/wlserver_10.3" />
+    
+<path id="wlst.class.path">
+		    <fileset dir="${weblogic.home}/server/lib">
+		    	<include name="weblogic.jar"/>
+		        <include name="webserviceclient.jar"/>
+		    </fileset>
+</path>
+	
+	<target name="all" depends="build,add_sbconfig" description="Create the ZIP file for the book's source code."/>
+	
+	
+	<target name="build" description="==> Create the ZIP file for the book's source code.">
+		<zip destfile="alsb_book.zip">
+			<fileset dir="./">
+				<exclude name="**/*.zip" />
+				<exclude name="**/*.class" />
+				<exclude name="**/*.log" />
+				<exclude name="**/*.lock" />
+				<exclude name=".metadata/" />
+				<exclude name="build.xml" />
+			</fileset>
+		</zip>
+	</target>
+	<target name="add_sbconfig" description="==> Create the ZIP file for the book's source code.">
+		<zip destfile="alsb_book.zip" update="true">
+			<fileset dir="./">
+				<include name="installALSBasService.zip" />
+				<exclude name=".metadata/" />
+				<exclude name="build.xml" />
+			</fileset>
+		</zip>
+	</target>
+
+	<target name="configureServerResources">
+		<java classname="weblogic.WLST" fork="yes" classpathref="wlst.class.path">
+		 <arg line="configureServerResources.py" />
+		</java>
+	 </target>  
+	  
+	<target name="deleteServerResources">
+		<java classname="weblogic.WLST" fork="yes" classpathref="wlst.class.path">
+		 <arg line="deleteServerResources.py" />
+		</java>
+	</target>  
+
+	<target name="test">
+		<java classname="weblogic.WLST" fork="yes" classpathref="wlst.class.path">
+		 <arg line="test.py" />
+		</java>
+	</target>  
+
+	<!-- Change the value in the <replaceToken> tag to the directory where you installed 
+	     ALSB. Then just run this target to update the projects source code to
+	     use the correct installation location of ALSB
+`	-->
+	<target name="updateLibrary" description="Updates the library references of the Workshop projects">
+		<replace dir="${workspace.dir}" value="G:/beaALSB30">
+			<include name="**/*.classpath" />
+			<!-- This is the token we are searching for and will replace -->
+			<replacetoken>F:/beaALSB30</replacetoken>
+		</replace>
+	</target>
+</project>

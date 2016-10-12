@@ -1,0 +1,8 @@
+#Mon May 19 20:26:26 PDT 2008
+eclipse.preferences.version=1
+informants/com.bea.workshop.controls.core.ControlExtension=com.bea.workshop.controls.core.informants.ControlExtensionInformant,com.bea.workshop.controls.core.informants.ControlExtensionValueAddInformant,
+informants/com.bea.workshop.controls.core.ControlImplementation=com.bea.workshop.controls.core.informants.ControlImplementationInformant,com.bea.workshop.controls.core.informants.ControlImplementationValueAddInformant,
+informants/com.bea.workshop.controls.core.ControlInterface=com.bea.workshop.controls.core.informants.ControlInterfaceInformant,com.bea.workshop.controls.core.informants.ControlInterfaceValueAddInformant,
+informants/com.bea.workshop.netui.core.jsfBackingBean=com.bea.workshop.netui.core.informants.JSFBackingInformant,
+informants/com.bea.workshop.netui.core.netuiFormBean=com.bea.workshop.netui.core.informants.NetUIFormBeanInformant,
+informants/com.bea.workshop.netui.core.pageFlowController=com.bea.workshop.netui.core.informants.NetUIControllerInformant,

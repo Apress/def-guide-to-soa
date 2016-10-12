@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpel:process name="SplitJoin"
+     targetNamespace="http://www.example.com/flow/SplitJoin_SB/SplitJoin"
+     xmlns:tns="http://www.example.com/flow/SplitJoin_SB/SplitJoin"
+		xmlns:bind="http://www.alsb.com/flow/"
+     xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+		xmlns:rescon="http://www.bea.com/alsb/flow/resources/config"
+		xmlns:bea="http://www.bea.com/bpel/ui/extensions"
+		xmlns:ext="http://www.bea.com/bpel/extensions"
+		xmlns:expr="http://www.bea.com/wli/sb/stages/config"
+		xmlns:trf="http://www.bea.com/wli/sb/stages/transform/config"
+		bea:name="SplitJoin"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://www.alsb.com/">
+     <bpel:partnerLinks>
+			<bpel:partnerLink name="SplitJoin" partnerLinkType="tns:SplitJoin"
+				myRole="SplitJoin">
+			</bpel:partnerLink>
+		<bpel:partnerLink name="SplitJoin_WS"
+		partnerLinkType="tns:SplitJoin_WS_plnkType"
+		partnerRole="SplitJoin_WS_PartnerRole">
+		</bpel:partnerLink></bpel:partnerLinks>
+
+		<bpel:variables>
+  		<bpel:variable name="request"
+			 		  messageType="bind:getAllCustomerInfo">
+			</bpel:variable>
+			<bpel:variable name="response"
+			 		  messageType="bind:getAllCustomerInfoResponse">
+			</bpel:variable>
+		<bpel:variable name="customerID" type="xsd:int"></bpel:variable>
+		<bpel:variable name="billingInfo" element="bind:BillingInfo"></bpel:variable>
+		<bpel:variable name="orderInfo" element="bind:OrderInfo"></bpel:variable>
+		<bpel:variable name="firstName" type="xsd:string"></bpel:variable>
+		<bpel:variable name="lastName" type="xsd:string"></bpel:variable></bpel:variables>
+
+     <bpel:sequence>
+     <bpel:receive partnerLink="SplitJoin" operation="getAllCustomerInfo" variable="request" createInstance="yes">
+			<rescon:receiveInfo>
+        		<rescon:wsdl ref="SplitJoin_SB/WSDL/SplitJoinFlow" binding="bind:SplitJoin_WSSOAP"/>
+    		</rescon:receiveInfo>
+     </bpel:receive>
+     <bpel:assign>
+     	<bpel:extensionAssignOperation>
+     		<trf:assign varName="customerID">
+     			<trf:expr>
+     				<expr:xqueryText>data($request.getAllCustomerInfo/customerID)</expr:xqueryText>
+     			</trf:expr>
+     		</trf:assign>
+     	</bpel:extensionAssignOperation>
+     	</bpel:assign>
+     <bpel:flow>
+     	<bpel:scope bea:name="get customer info">
+     		<bpel:variables>
+     			
+     			<bpel:variable name="getCustomerInfoResponse"
+     				messageType="ns1:getCustomerInfoResponse">
+     			</bpel:variable>
+     			<bpel:variable name="getCustomerInfoRequest"
+     				messageType="ns1:getCustomerInfo">
+     			</bpel:variable></bpel:variables>
+     		<bpel:sequence>
+     			<bpel:assign>
+     				<bpel:extensionAssignOperation>
+     					<trf:assign
+     						varName="getCustomerInfoRequest.getCustomerInfo">
+     						<trf:expr>
+     							<expr:xqueryText>&lt;ns1:getCustomerInfo&gt;
+   &lt;customerID&gt;{$customerID}&lt;/customerID&gt;
+&lt;/ns1:getCustomerInfo&gt;</expr:xqueryText>
+     						</trf:expr>
+     					</trf:assign>
+     				</bpel:extensionAssignOperation></bpel:assign>
+     			<bpel:invoke operation="getCustomerInfo" partnerLink="SplitJoin_WS" bea:name="get customer info" inputVariable="getCustomerInfoRequest" outputVariable="getCustomerInfoResponse">
+     				<rescon:invokeInfo>
+     					<rescon:service isProxy="false" ref="SplitJoin_SB/SplitJoin_WS"></rescon:service>
+     				</rescon:invokeInfo></bpel:invoke>
+     			<bpel:assign>
+     				
+     				<bpel:extensionAssignOperation>
+     					<trf:assign varName="firstName">
+     						<trf:expr>
+     							<expr:xqueryText>data($getCustomerInfoResponse.getCustomerInfoResponse/firstName)</expr:xqueryText>
+     						</trf:expr>
+     					</trf:assign>
+     				</bpel:extensionAssignOperation>
+     				<bpel:extensionAssignOperation>
+     					<trf:assign varName="lastName">
+     						<trf:expr>
+     							<expr:xqueryText>data($getCustomerInfoResponse.getCustomerInfoResponse/lastName)</expr:xqueryText>
+     						</trf:expr>
+     					</trf:assign>
+     				</bpel:extensionAssignOperation></bpel:assign></bpel:sequence>
+     	</bpel:scope>
+     	<bpel:scope bea:name="get billing info">
+     		<bpel:variables>
+     			<bpel:variable name="getBillingInfoRequest"
+     				messageType="ns1:getBillingInfo">
+     			</bpel:variable>
+     			<bpel:variable name="getBillingInfoResponse"
+     				messageType="ns1:getBillingInfoResponse">
+     			</bpel:variable></bpel:variables>
+     		<bpel:sequence>
+     			<bpel:assign>
+     				<bpel:extensionAssignOperation>
+     					<trf:assign
+     						varName="getBillingInfoRequest.getBillingInfo">
+     						<trf:expr>
+     							<expr:xqueryText>&lt;ns1:getBillingInfo&gt;
+   &lt;customerID&gt;{$customerID}&lt;/customerID&gt;
+&lt;/ns1:getBillingInfo&gt;</expr:xqueryText>
+     						</trf:expr>
+     					</trf:assign>
+     				</bpel:extensionAssignOperation></bpel:assign>
+     			<bpel:invoke operation="getBillingInfo" partnerLink="SplitJoin_WS" inputVariable="getBillingInfoRequest" outputVariable="getBillingInfoResponse" bea:name="getBillingInfo">
+     				<rescon:invokeInfo>
+     					<rescon:service isProxy="false" ref="SplitJoin_SB/SplitJoin_WS"></rescon:service>
+     				</rescon:invokeInfo></bpel:invoke>
+     			<bpel:assign>
+     				<bpel:extensionAssignOperation>
+     					<trf:assign varName="billingInfo">
+     						<trf:expr>
+     							
+     						<expr:xqueryTransform>
+     							<expr:resource ref="SplitJoin_SB/billingXLA"></expr:resource>
+     							<expr:param name="getBillingInfoResponse1">
+     								<expr:path>$getBillingInfoResponse.getBillingInfoResponse</expr:path></expr:param></expr:xqueryTransform></trf:expr>
+     					</trf:assign>
+     				</bpel:extensionAssignOperation>
+     				
+     				
+     				</bpel:assign></bpel:sequence>
+     	</bpel:scope>
+     <bpel:scope bea:name="get order info">
+		<bpel:variables>
+			<bpel:variable name="getOrderInfoRequest"
+				messageType="ns1:getOrderInfo">
+			</bpel:variable>
+			<bpel:variable name="getOrderIInfoResponse"
+				messageType="ns1:getOrderInfoResponse">
+			</bpel:variable></bpel:variables>
+	<bpel:sequence>
+			<bpel:assign>
+				<bpel:extensionAssignOperation>
+					<trf:assign
+						varName="getOrderInfoRequest.getOrderInfo">
+						<trf:expr>
+							<expr:xqueryText>&lt;ns1:getOrderInfo&gt;
+   &lt;customerID&gt;{$customerID}&lt;/customerID&gt;
+&lt;/ns1:getOrderInfo&gt;</expr:xqueryText>
+						</trf:expr>
+					</trf:assign>
+				</bpel:extensionAssignOperation></bpel:assign>
+			<bpel:invoke operation="getOrderInfo" partnerLink="SplitJoin_WS" inputVariable="getOrderInfoRequest" outputVariable="getOrderIInfoResponse" bea:name="getOrderIinfo">
+				<rescon:invokeInfo>
+					<rescon:service isProxy="false" ref="SplitJoin_SB/SplitJoin_WS"></rescon:service>
+				</rescon:invokeInfo></bpel:invoke>
+			<bpel:assign>
+				<bpel:extensionAssignOperation>
+					<trf:assign varName="orderInfo">
+						<trf:expr>
+							<expr:xqueryTransform>
+								<expr:resource
+									ref="SplitJoin_SB/orderXLA">
+								</expr:resource>
+								<expr:param
+									name="getOrderInfoResponse1">
+									<expr:path>$getOrderIInfoResponse.getOrderInfoResponse</expr:path>
+								</expr:param>
+							</expr:xqueryTransform>
+						</trf:expr>
+					</trf:assign>
+				</bpel:extensionAssignOperation></bpel:assign></bpel:sequence>
+     </bpel:scope>
+     </bpel:flow>
+     <bpel:assign>
+     	<bpel:extensionAssignOperation>
+     		<trf:assign
+     			varName="response.getAllCustomerInfoResponse">
+     		<trf:expr>
+     			<expr:xqueryText>&lt;bind:getAllCustomerInfoResponse&gt;
+   &lt;customerID&gt;{$customerID}&lt;/customerID&gt;
+   &lt;firstName&gt;{$firstName}&lt;/firstName&gt;
+   &lt;lastName&gt;{$lastName}&lt;/lastName&gt;
+   {$billingInfo}
+   {$orderInfo}
+&lt;/bind:getAllCustomerInfoResponse&gt;</expr:xqueryText></trf:expr></trf:assign>
+     	</bpel:extensionAssignOperation></bpel:assign>
+     <bpel:reply partnerLink="SplitJoin" operation="getAllCustomerInfo" variable="response"></bpel:reply>
+     </bpel:sequence>
+</bpel:process>

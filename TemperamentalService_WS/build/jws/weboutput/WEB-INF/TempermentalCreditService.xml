@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<j2ee:java-wsdl-mapping xmlns:j2ee="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <j2ee:package-mapping>
+    <j2ee:package-type>com.alsb.temperamental</j2ee:package-type>
+    <j2ee:namespaceURI>http://www.alsb.com</j2ee:namespaceURI>
+  </j2ee:package-mapping>
+  <j2ee:service-interface-mapping>
+    <j2ee:service-interface>javax.xml.rpc.Service</j2ee:service-interface>
+    <j2ee:wsdl-service-name xmlns:alsb="http://www.alsb.com">alsb:TempermentalCreditService</j2ee:wsdl-service-name>
+    <j2ee:port-mapping>
+      <j2ee:port-name>TempermentalCreditSoapPort</j2ee:port-name>
+      <j2ee:java-port-name>getTempermentalCreditSoapPort</j2ee:java-port-name>
+    </j2ee:port-mapping>
+  </j2ee:service-interface-mapping>
+  <j2ee:service-endpoint-interface-mapping>
+    <j2ee:service-endpoint-interface>com.alsb.temperamental.TemperamentalCreditServicePortType</j2ee:service-endpoint-interface>
+    <j2ee:wsdl-port-type xmlns:alsb="http://www.alsb.com">alsb:TempermentalCreditService</j2ee:wsdl-port-type>
+    <j2ee:wsdl-binding xmlns:alsb="http://www.alsb.com">alsb:TempermentalCreditServiceSoapBinding</j2ee:wsdl-binding>
+    <j2ee:service-endpoint-method-mapping>
+      <j2ee:java-method-name>variableCreditCheck</j2ee:java-method-name>
+      <j2ee:wsdl-operation>variableCreditCheck</j2ee:wsdl-operation>
+      <j2ee:wrapped-element></j2ee:wrapped-element>
+      <j2ee:method-param-parts-mapping>
+        <j2ee:param-position>0</j2ee:param-position>
+        <j2ee:param-type>java.lang.String</j2ee:param-type>
+        <j2ee:wsdl-message-mapping>
+          <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com">alsb:variableCreditCheck</j2ee:wsdl-message>
+          <j2ee:wsdl-message-part-name>arg0</j2ee:wsdl-message-part-name>
+          <j2ee:parameter-mode>IN</j2ee:parameter-mode>
+        </j2ee:wsdl-message-mapping>
+      </j2ee:method-param-parts-mapping>
+      <j2ee:wsdl-return-value-mapping>
+        <j2ee:method-return-value>java.lang.String</j2ee:method-return-value>
+        <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com">alsb:variableCreditCheckResponse</j2ee:wsdl-message>
+        <j2ee:wsdl-message-part-name>return</j2ee:wsdl-message-part-name>
+      </j2ee:wsdl-return-value-mapping>
+    </j2ee:service-endpoint-method-mapping>
+    <j2ee:service-endpoint-method-mapping>
+      <j2ee:java-method-name>setDelay</j2ee:java-method-name>
+      <j2ee:wsdl-operation>setDelay</j2ee:wsdl-operation>
+      <j2ee:wrapped-element></j2ee:wrapped-element>
+      <j2ee:method-param-parts-mapping>
+        <j2ee:param-position>0</j2ee:param-position>
+        <j2ee:param-type>int</j2ee:param-type>
+        <j2ee:wsdl-message-mapping>
+          <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com">alsb:setDelay</j2ee:wsdl-message>
+          <j2ee:wsdl-message-part-name>delayInSeconds</j2ee:wsdl-message-part-name>
+          <j2ee:parameter-mode>IN</j2ee:parameter-mode>
+        </j2ee:wsdl-message-mapping>
+      </j2ee:method-param-parts-mapping>
+      <j2ee:wsdl-return-value-mapping>
+        <j2ee:method-return-value>int</j2ee:method-return-value>
+        <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com">alsb:setDelayResponse</j2ee:wsdl-message>
+        <j2ee:wsdl-message-part-name>return</j2ee:wsdl-message-part-name>
+      </j2ee:wsdl-return-value-mapping>
+    </j2ee:service-endpoint-method-mapping>
+    <j2ee:service-endpoint-method-mapping>
+      <j2ee:java-method-name>variableOpB</j2ee:java-method-name>
+      <j2ee:wsdl-operation>variableOpB</j2ee:wsdl-operation>
+      <j2ee:wrapped-element></j2ee:wrapped-element>
+      <j2ee:method-param-parts-mapping>
+        <j2ee:param-position>0</j2ee:param-position>
+        <j2ee:param-type>java.lang.String</j2ee:param-type>
+        <j2ee:wsdl-message-mapping>
+          <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com">alsb:variableOpB</j2ee:wsdl-message>
+          <j2ee:wsdl-message-part-name>arg0</j2ee:wsdl-message-part-name>
+          <j2ee:parameter-mode>IN</j2ee:parameter-mode>
+        </j2ee:wsdl-message-mapping>
+      </j2ee:method-param-parts-mapping>
+      <j2ee:wsdl-return-value-mapping>
+        <j2ee:method-return-value>java.lang.String</j2ee:method-return-value>
+        <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com">alsb:variableOpBResponse</j2ee:wsdl-message>
+        <j2ee:wsdl-message-part-name>return</j2ee:wsdl-message-part-name>
+      </j2ee:wsdl-return-value-mapping>
+    </j2ee:service-endpoint-method-mapping>
+    <j2ee:service-endpoint-method-mapping>
+      <j2ee:java-method-name>variableOpA</j2ee:java-method-name>
+      <j2ee:wsdl-operation>variableOpA</j2ee:wsdl-operation>
+      <j2ee:wrapped-element></j2ee:wrapped-element>
+      <j2ee:method-param-parts-mapping>
+        <j2ee:param-position>0</j2ee:param-position>
+        <j2ee:param-type>java.lang.String</j2ee:param-type>
+        <j2ee:wsdl-message-mapping>
+          <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com">alsb:variableOpA</j2ee:wsdl-message>
+          <j2ee:wsdl-message-part-name>arg0</j2ee:wsdl-message-part-name>
+          <j2ee:parameter-mode>IN</j2ee:parameter-mode>
+        </j2ee:wsdl-message-mapping>
+      </j2ee:method-param-parts-mapping>
+      <j2ee:wsdl-return-value-mapping>
+        <j2ee:method-return-value>java.lang.String</j2ee:method-return-value>
+        <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com">alsb:variableOpAResponse</j2ee:wsdl-message>
+        <j2ee:wsdl-message-part-name>return</j2ee:wsdl-message-part-name>
+      </j2ee:wsdl-return-value-mapping>
+    </j2ee:service-endpoint-method-mapping>
+    <j2ee:service-endpoint-method-mapping>
+      <j2ee:java-method-name>variableOpC</j2ee:java-method-name>
+      <j2ee:wsdl-operation>variableOpC</j2ee:wsdl-operation>
+      <j2ee:wrapped-element></j2ee:wrapped-element>
+      <j2ee:method-param-parts-mapping>
+        <j2ee:param-position>0</j2ee:param-position>
+        <j2ee:param-type>java.lang.String</j2ee:param-type>
+        <j2ee:wsdl-message-mapping>
+          <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com">alsb:variableOpC</j2ee:wsdl-message>
+          <j2ee:wsdl-message-part-name>arg0</j2ee:wsdl-message-part-name>
+          <j2ee:parameter-mode>IN</j2ee:parameter-mode>
+        </j2ee:wsdl-message-mapping>
+      </j2ee:method-param-parts-mapping>
+      <j2ee:wsdl-return-value-mapping>
+        <j2ee:method-return-value>java.lang.String</j2ee:method-return-value>
+        <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com">alsb:variableOpCResponse</j2ee:wsdl-message>
+        <j2ee:wsdl-message-part-name>return</j2ee:wsdl-message-part-name>
+      </j2ee:wsdl-return-value-mapping>
+    </j2ee:service-endpoint-method-mapping>
+    <j2ee:service-endpoint-method-mapping>
+      <j2ee:java-method-name>rapidCreditCheck</j2ee:java-method-name>
+      <j2ee:wsdl-operation>rapidCreditCheck</j2ee:wsdl-operation>
+      <j2ee:wrapped-element></j2ee:wrapped-element>
+      <j2ee:method-param-parts-mapping>
+        <j2ee:param-position>0</j2ee:param-position>
+        <j2ee:param-type>java.lang.String</j2ee:param-type>
+        <j2ee:wsdl-message-mapping>
+          <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com">alsb:rapidCreditCheck</j2ee:wsdl-message>
+          <j2ee:wsdl-message-part-name>arg0</j2ee:wsdl-message-part-name>
+          <j2ee:parameter-mode>IN</j2ee:parameter-mode>
+        </j2ee:wsdl-message-mapping>
+      </j2ee:method-param-parts-mapping>
+      <j2ee:wsdl-return-value-mapping>
+        <j2ee:method-return-value>java.lang.String</j2ee:method-return-value>
+        <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com">alsb:rapidCreditCheckResponse</j2ee:wsdl-message>
+        <j2ee:wsdl-message-part-name>return</j2ee:wsdl-message-part-name>
+      </j2ee:wsdl-return-value-mapping>
+    </j2ee:service-endpoint-method-mapping>
+  </j2ee:service-endpoint-interface-mapping>
+</j2ee:java-wsdl-mapping>

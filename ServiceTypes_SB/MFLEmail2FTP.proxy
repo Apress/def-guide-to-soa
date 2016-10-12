@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment>
+  <ser:coreEntry isProxy="true" isEnabled="true" xmlns:ser="http://www.bea.com/wli/sb/services">
+    <ser:binding type="Mixed" xsi:type="con:MixedBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <con:request type="MFL">
+        <con1:mfl ref="ServiceTypes_SB/CustomerEmailFormat" xmlns:con1="http://www.bea.com/wli/sb/typesystem/config"/>
+      </con:request>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+  </ser:coreEntry>
+  <ser:endpointConfig xmlns:ser="http://www.bea.com/wli/sb/services">
+    <tran:provider-id xmlns:tran="http://www.bea.com/wli/sb/transports">email</tran:provider-id>
+    <tran:inbound xmlns:tran="http://www.bea.com/wli/sb/transports">true</tran:inbound>
+    <tran:URI xmlns:tran="http://www.bea.com/wli/sb/transports">
+      <env:value xmlns:env="http://www.bea.com/wli/config/env">mailfrom:localhost:110</env:value>
+    </tran:URI>
+    <tran:inbound-properties xmlns:tran="http://www.bea.com/wli/sb/transports"/>
+    <tran:all-headers xmlns:tran="http://www.bea.com/wli/sb/transports">false</tran:all-headers>
+    <tran:provider-specific xmlns:tran="http://www.bea.com/wli/sb/transports">
+      <ema:inbound-properties xmlns:ema="http://www.bea.com/wli/sb/transports/email">
+        <ema:protocol>pop3</ema:protocol>
+        <ema:attachment-action>ignore</ema:attachment-action>
+        <ema:polling-interval>600</ema:polling-interval>
+        <ema:read-limit>10</ema:read-limit>
+        <ema:post-read>delete</ema:post-read>
+        <ema:passByReference>false</ema:passByReference>
+        <ema:passAttachmentsByReference>false</ema:passAttachmentsByReference>
+        <ema:download-directory>
+          <env:value xmlns:env="http://www.bea.com/wli/config/env">c:\emaildownload</env:value>
+        </ema:download-directory>
+        <ema:error-directory>
+          <env:value xmlns:env="http://www.bea.com/wli/config/env">c:\emailerror</env:value>
+        </ema:error-directory>
+        <ema:service-account ref="ServiceTypes_SB/ProxyEmailAccount"/>
+      </ema:inbound-properties>
+      <ema:request-encoding xmlns:ema="http://www.bea.com/wli/sb/transports/email">iso-8859-1</ema:request-encoding>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router xmlns:ser="http://www.bea.com/wli/sb/services">
+    <con:pipeline type="request" name="PipelinePairNode1_request" xmlns:con="http://www.bea.com/wli/sb/pipeline/config">
+      <con:stage name="get email info">
+        <con:context/>
+        <con:actions>
+          <con1:assign varName="firstName" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-849409272778971692--646eb486.1192b2205fa.-8000</con2:id>
+            <con1:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">$body/CustomerEmailFormat/firstName</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="lastName" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-849409272778971692--646eb486.1192b2205fa.-7fff</con2:id>
+            <con1:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">$body/CustomerEmailFormat/lastName</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="customerID" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-849409272778971692--646eb486.1192b2205fa.-7ffe</con2:id>
+            <con1:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">$body/CustomerEmailFormat/CustomerID</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="from" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-849409272778971692--646eb486.1192b2205fa.-7ffd</con2:id>
+            <con1:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">$inbound/ctx:transport/ctx:request/tp:headers/email:From</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:assign varName="date" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-849409272778971692--646eb486.1192b2205fa.-7ffc</con2:id>
+            <con1:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">$inbound/ctx:transport/ctx:request/tp:headers/email:Date</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:log xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config">
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-5374129396400588194-54b84a30.1192b8fade1.-8000</con2:id>
+            <con1:logLevel>error</con1:logLevel>
+            <con1:expr>
+              <con2:xqueryText xmlns:con2="http://www.bea.com/wli/sb/stages/config">concat('First Name: ', $firstName, ', Last Name: ', $lastName,
+', Customer ID: ', $customerID, ', From: ', $from, ', Date: ', $date)</con2:xqueryText>
+            </con1:expr>
+            <con1:message>************************
+************************
+************************</con1:message>
+          </con1:log>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode1_response" xmlns:con="http://www.bea.com/wli/sb/pipeline/config"/>
+    <con:flow xmlns:con="http://www.bea.com/wli/sb/pipeline/config">
+      <con:pipeline-node name="PipelinePairNode1">
+        <con:request>PipelinePairNode1_request</con:request>
+        <con:response>PipelinePairNode1_response</con:response>
+      </con:pipeline-node>
+      <con:route-node name="RouteNode1">
+        <con:context/>
+        <con:actions>
+          <con1:route xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config">
+            <con2:id xmlns:con2="http://www.bea.com/wli/sb/stages/config">_ActionId-849409272778971692--646eb486.1192b2205fa.-7ffb</con2:id>
+            <con1:service ref="ServiceTypes_SB/BusinessServices/MFLBusiness" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            <con1:outboundTransform>
+              <con2:replace varName="body" contents-only="true" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+                <con3:id xmlns:con3="http://www.bea.com/wli/sb/stages/config">_ActionId-849409272778971692--646eb486.1192b2205fa.-7ffa</con3:id>
+                <con2:location>
+                  <con3:xpathText xmlns:con3="http://www.bea.com/wli/sb/stages/config">.</con3:xpathText>
+                </con2:location>
+                <con2:expr>
+                  <con3:xqueryTransform xmlns:con3="http://www.bea.com/wli/sb/stages/config">
+                    <con3:resource ref="ServiceTypes_SB/CustomerMFLTransform"/>
+                    <con3:param name="customerEmailFormat">
+                      <con3:path>$body/CustomerEmailFormat</con3:path>
+                    </con3:param>
+                  </con3:xqueryTransform>
+                </con2:expr>
+              </con2:replace>
+            </con1:outboundTransform>
+            <con1:responseTransform/>
+          </con1:route>
+        </con:actions>
+      </con:route-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

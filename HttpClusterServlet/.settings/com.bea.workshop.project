@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-project guid="HttpClusterServlet_11a045d0e6b_d2701d9732f5ff34" version="5">
+	<web-app guid="HttpClusterServlet_11a045d0e7a_f4b8df6795d54613">
+		<web-app-type>com.m7.webapp.java</web-app-type>
+		<folder-mapping project-name="HttpClusterServlet" project-uri="WebContent" web-app-uri="/"/>
+	</web-app>
+	<properties>
+		<property name="validation.compile" value="true"/>
+		<property name="validation.missingFile" value="true"/>
+		<property name="validation.unresolvedVar" value="false"/>
+		<property name="validation" value="true"/>
+		<property name="taglib.downloadRemote" value="true"/>
+		<property name="validation.resources" value="true"/>
+		<property name="validation.unresolvedType" value="true"/>
+		<property name="validation.compile.jspQuotation" value="false"/>
+	</properties>
+</web-project>

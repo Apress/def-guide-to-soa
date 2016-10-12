@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faceted-project>
+  <runtime name="Oracle WebLogic Server v10.3"/>
+  <fixed facet="workshop.webservices"/>
+  <fixed facet="wls.web"/>
+  <fixed facet="jst.web"/>
+  <fixed facet="jst.java"/>
+  <installed facet="jst.web" version="2.4"/>
+  <installed facet="wls.controls" version="10.0"/>
+  <installed facet="java.apt" version="5.0"/>
+  <installed facet="wls.webservices" version="10.0"/>
+  <installed facet="wls.logging" version="1.0"/>
+  <installed facet="workshop.webservices" version="1.0"/>
+  <installed facet="workshop.beehive.controls" version="1.0.1"/>
+  <installed facet="jst.java" version="6.0"/>
+  <installed facet="wls.web" version="10.3"/>
+  <installed facet="workshop.xmlbeans" version="2.3"/>
+</faceted-project>

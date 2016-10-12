@@ -1,0 +1,1 @@
+call d:\domains\alsb30_book\bin\setDomainEnv.cmd

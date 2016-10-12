@@ -1,0 +1,5 @@
+#Fri Apr 04 09:37:38 PDT 2008
+eclipse.preferences.version=1
+informants/com.bea.workshop.wls.ejb.core.entity=com.bea.workshop.wls.ejb.core.informants.EJBEntityInformant,
+informants/com.bea.workshop.wls.ejb.core.message=com.bea.workshop.wls.ejb.core.informants.EJBMessageInformant,
+informants/com.bea.workshop.wls.ejb.core.session=com.bea.workshop.wls.ejb.core.informants.EJBSessionInformant,

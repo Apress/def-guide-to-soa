@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions name="AdvancedMessageFlowServiceDefinitions" 
+   targetNamespace="http://www.alsb.com" 
+   xmlns="http://schemas.xmlsoap.org/wsdl/" 
+   xmlns:alsb="http://www.alsb.com" 
+   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <types>
+    <xs:schema attributeFormDefault="unqualified" 
+       elementFormDefault="qualified" 
+       targetNamespace="http://www.alsb.com" 
+       xmlns:alsb="http://www.alsb.com"
+       xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+       xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+   <!--  TIP: Start your element names off lower case. This will more closely match the
+   Java naming conventions when you generate the code -->
+       <xs:element name="calculateTaxRequest">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="taxableAmount" type="xs:double" />
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="calculateTaxResponse">
+      <xs:complexType>
+         <xs:sequence>
+            <xs:element name="result" type="xs:double" />
+         </xs:sequence>
+      </xs:complexType>
+   </xs:element>
+   </xs:schema>
+  </types>
+  
+  <message name="calculateTaxRequest">
+    <part element="alsb:calculateTaxRequest" name="parameters"/>
+  </message>
+  <message name="calculateTaxResponse">
+    <part element="alsb:calculateTaxResponse" name="parameters"/>
+  </message>
+  
+  <portType name="EJBTaxProxy">
+    <operation name="calculateTax" parameterOrder="parameters">
+      <input message="alsb:calculateTaxRequest"/>
+      <output message="alsb:calculateTaxResponse"/>
+    </operation>
+  </portType>
+  
+  <binding name="EJBTaxProxySoapBinding" type="alsb:EJBTaxProxy">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="calculateTax">
+      <soap:operation soapAction="" style="document"/>
+      <input>
+        <soap:body parts="parameters" use="literal"/>
+      </input>
+      <output>
+        <soap:body parts="parameters" use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  
+  <service name="CalculateTaxService">
+    <port binding="alsb:EJBTaxProxySoapBinding" name="EJBTaxSoapPort">
+      <soap:address location="http://localhost:7001/taxproxy/EJBTaxProxyService"/>
+    </port>
+  </service>
+</definitions>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<netui-config xmlns="http://beehive.apache.org/netui/2004/server/config">
+
+    <expression-languages>
+        <default-language>netuiel</default-language>
+        <expression-language>
+            <name>netuiel</name>
+            <factory-class>org.apache.beehive.netui.script.el.ExpressionEvaluatorImpl$NetUIELEngineFactory</factory-class>
+        </expression-language>
+    </expression-languages>
+
+    <request-interceptors>
+        <global>
+            <request-interceptor>
+                <interceptor-class>org.apache.beehive.netui.tags.tree.TreeCRI</interceptor-class>
+            </request-interceptor>
+            <request-interceptor>
+                <interceptor-class>org.apache.beehive.netui.tags.divpanel.DivPanelCRI</interceptor-class>
+            </request-interceptor>
+        </global>
+    </request-interceptors>
+
+    <prefix-handlers>
+        <prefix-handler>
+            <name>checkbox_key</name>
+            <handler-class>org.apache.beehive.netui.tags.html.CheckBox$CheckBoxPrefixHandler</handler-class>
+        </prefix-handler>
+        <prefix-handler>
+            <name>checkbox_group_key</name>
+            <handler-class>org.apache.beehive.netui.tags.html.CheckBoxGroup$CheckboxGroupPrefixHandler</handler-class>
+        </prefix-handler>
+        <prefix-handler>
+            <name>radio_button_group_key</name>
+            <handler-class>org.apache.beehive.netui.tags.html.RadioButtonGroup$RadioButtonGroupPrefixHandler</handler-class>
+        </prefix-handler>
+        <prefix-handler>
+            <name>select_key</name>
+            <handler-class>org.apache.beehive.netui.tags.html.Select$SelectPrefixHandler</handler-class>
+        </prefix-handler>
+    </prefix-handlers>
+
+    <catalog>
+        <chain name="xhr-commands">
+            <command>
+                <command-class>org.apache.beehive.netui.tags.tree.TreeCRI</command-class>
+            </command>
+            <command>
+                <command-class>org.apache.beehive.netui.tags.divpanel.DivPanelCRI</command-class>
+            </command>
+            <command>
+                <command-class>org.apache.beehive.netui.tags.internal.ViewRendererCRI</command-class>
+            </command>
+        </chain>
+    </catalog>
+
+</netui-config>

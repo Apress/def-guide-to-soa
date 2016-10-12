@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions name="BasicOrderMgrDefinitions"
+	targetNamespace="http://www.alsb.com/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:alsb="http://www.alsb.com/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+	<types>
+		<xs:schema attributeFormDefault="unqualified"
+			elementFormDefault="qualified" targetNamespace="http://www.alsb.com/"
+			xmlns:order="http://www.alsb.com/order/" 
+			xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+			<xs:import namespace="http://www.alsb.com/order/" schemaLocation="./order.xsd" />
+
+			<!--  TIP: Start your element names off lower case. This will 
+			      more closely match the Java naming conventions when you 
+			      generate the code
+			-->
+			<xs:element name="getCreditRating">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="firstName" type="xs:string" />
+						<xs:element name="lastName" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+
+			<xs:element name="getCreditRatingResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="xs:int" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+
+			<xs:element name="getProductCatalog">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="creditRating" type="xs:int" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+
+			<xs:element name="getProductCatalogResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="productList"
+							type="order:ProductList" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+
+			<xs:element name="processOrder">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="order" type="order:Order" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			
+			<xs:element name="processPreferredOrder">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="order" type="order:Order" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+	</types>
+	
+	<message name="getCreditRating">
+		<part element="alsb:getCreditRating" name="getCreditRating" />
+	</message>
+	
+	<message name="getCreditRatingResponse">
+		<part element="alsb:getCreditRatingResponse"
+			name="getCreditRatingResponse" />
+	</message>
+	
+	<message name="getProductCatalog">
+		<part element="alsb:getProductCatalog" name="getProductCatalog" />
+	</message>
+	
+	<message name="getProductCatalogResponse">
+		<part element="alsb:getProductCatalogResponse" name="getProductCatalogResponse" />
+	</message>
+	
+	<message name="processOrder">
+		<part element="alsb:processOrder" name="processOrder" />
+	</message>
+	
+	<message name="processPreferredOrder">
+		<part element="alsb:processPreferredOrder"
+			name="processPreferredOrder" />
+	</message>
+	
+	<portType name="BasicOrderMgrPort">
+		<operation name="getCreditRating"
+			parameterOrder="getCreditRating">
+			<input message="alsb:getCreditRating" />
+			<output message="alsb:getCreditRatingResponse" />
+		</operation>
+		<operation name="getProductCatalog"
+			parameterOrder="getProductCatalog">
+			<input message="alsb:getProductCatalog" />
+			<output message="alsb:getProductCatalogResponse" />
+		</operation>
+		<operation name="processOrder" parameterOrder="processOrder">
+			<input message="alsb:processOrder" />
+		</operation>
+		<operation name="processPreferredOrder"
+			parameterOrder="processPreferredOrder">
+			<input message="alsb:processPreferredOrder" />
+		</operation>
+	</portType>
+	<binding name="BasicOrderMgrServiceSoapBinding"
+		type="alsb:BasicOrderMgrPort">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="processPreferredOrder">
+			<soap:operation soapAction="" style="document" />
+			<input>
+				<soap:body parts="processPreferredOrder" use="literal" />
+			</input>
+		</operation>
+		<operation name="getCreditRating">
+			<soap:operation soapAction="" style="document" />
+			<input>
+				<soap:body parts="getCreditRating" use="literal" />
+			</input>
+			<output>
+				<soap:body parts="getCreditRatingResponse" use="literal" />
+			</output>
+		</operation>
+		<operation name="getProductCatalog">
+			<soap:operation soapAction="" style="document" />
+			<input>
+				<soap:body parts="getProductCatalog" use="literal" />
+			</input>
+			<output>
+				<soap:body parts="getProductCatalogResponse" use="literal" />
+			</output>
+		</operation>
+		<operation name="processOrder">
+			<soap:operation soapAction="" style="document" />
+			<input>
+				<soap:body parts="processOrder" use="literal" />
+			</input>
+		</operation>
+	</binding>
+	<service name="BasicOrderMgrService">
+		<port binding="alsb:BasicOrderMgrServiceSoapBinding"
+			name="BasicOrderMgrSoapPort">
+			<soap:address
+				location="http://localhost:7001/business/basicOrderMgr/BasicOrderMgrService" />
+		</port>
+	</service>
+</definitions>

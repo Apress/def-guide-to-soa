@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment>
+  <ser:coreEntry isProxy="false" isEnabled="true" xmlns:ser="http://www.bea.com/wli/sb/services">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType" transport-typed="true" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:binding><con:name>JwsServiceSoapBinding</con:name><con:namespace>http://www.openuri.org/</con:namespace></con:binding></ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+    </ser:monitoring>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+  </ser:coreEntry>
+  <ser:endpointConfig xmlns:ser="http://www.bea.com/wli/sb/services">
+    <tran:provider-id xmlns:tran="http://www.bea.com/wli/sb/transports">ejb</tran:provider-id>
+    <tran:inbound xmlns:tran="http://www.bea.com/wli/sb/transports">false</tran:inbound>
+    
+    <tran:URI xmlns:tran="http://www.bea.com/wli/sb/transports"><env:value xmlns:env="http://www.bea.com/wli/config/env">ejb:localProvider:ejb.TaxCalculatorRemoteHome</env:value></tran:URI><tran:outbound-properties xmlns:tran="http://www.bea.com/wli/sb/transports">
+      <tran:load-balancing-algorithm>round-robin</tran:load-balancing-algorithm>
+      <tran:retry-count>0</tran:retry-count>
+      <tran:retry-interval>30</tran:retry-interval>
+      <tran:retry-application-errors>true</tran:retry-application-errors>
+    </tran:outbound-properties>
+    <tran:provider-specific xmlns:tran="http://www.bea.com/wli/sb/transports"><ejb:service xmlns:ejb="http://www.bea.com/wli/sb/transports/ejb"><ejb:clientJar ref="ServiceTypes_SB/Tax_EJB"/><ejb:ejbHome classname="com.alsb.ejb.TaxCalculatorRemoteHome"/><ejb:ejbObject classname="com.alsb.ejb.TaxCalculatorRemote"><ejb:method name="calculateTax" signature="double calculateTax(double)" exclude="false"><ejb:operation>calculateTax</ejb:operation><ejb:param name="taxableAmount" type="double"/><ejb:return name="return" type="double"/></ejb:method></ejb:ejbObject><ejb:targetNamespace>http://www.openuri.org/</ejb:targetNamespace><ejb:style>Document Wrapped</ejb:style><ejb:encoding>Literal</ejb:encoding></ejb:service></tran:provider-specific>
+  </ser:endpointConfig>
+</xml-fragment>

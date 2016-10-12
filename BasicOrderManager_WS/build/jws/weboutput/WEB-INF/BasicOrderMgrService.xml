@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<j2ee:java-wsdl-mapping xmlns:j2ee="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <j2ee:package-mapping>
+    <j2ee:package-type>com.alsb.order</j2ee:package-type>
+    <j2ee:namespaceURI>http://www.alsb.com/order/</j2ee:namespaceURI>
+  </j2ee:package-mapping>
+  <j2ee:package-mapping>
+    <j2ee:package-type>com.alsb.www</j2ee:package-type>
+    <j2ee:namespaceURI>http://www.alsb.com/</j2ee:namespaceURI>
+  </j2ee:package-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.order.ProductList</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:ord="http://www.alsb.com/order/">ord:ProductList</j2ee:root-type-qname>
+    <j2ee:qname-scope>complexType</j2ee:qname-scope>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>Product</j2ee:java-variable-name>
+      <j2ee:xml-element-name>Product</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.order.Order</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:ord="http://www.alsb.com/order/">ord:Order</j2ee:root-type-qname>
+    <j2ee:qname-scope>complexType</j2ee:qname-scope>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>FirstName</j2ee:java-variable-name>
+      <j2ee:xml-element-name>FirstName</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>LastName</j2ee:java-variable-name>
+      <j2ee:xml-element-name>LastName</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>LineItem</j2ee:java-variable-name>
+      <j2ee:xml-element-name>LineItem</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.order.Product</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:ord="http://www.alsb.com/order/">ord:Product</j2ee:root-type-qname>
+    <j2ee:qname-scope>complexType</j2ee:qname-scope>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>CreditNeeded</j2ee:java-variable-name>
+      <j2ee:xml-element-name>CreditNeeded</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>Name</j2ee:java-variable-name>
+      <j2ee:xml-element-name>Name</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.order.LineItem</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:ord="http://www.alsb.com/order/">ord:LineItem</j2ee:root-type-qname>
+    <j2ee:qname-scope>complexType</j2ee:qname-scope>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>Product</j2ee:java-variable-name>
+      <j2ee:xml-element-name>Product</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>Quantity</j2ee:java-variable-name>
+      <j2ee:xml-element-name>Quantity</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:service-interface-mapping>
+    <j2ee:service-interface>javax.xml.rpc.Service</j2ee:service-interface>
+    <j2ee:wsdl-service-name xmlns:alsb="http://www.alsb.com/">alsb:BasicOrderMgrService</j2ee:wsdl-service-name>
+    <j2ee:port-mapping>
+      <j2ee:port-name>BasicOrderMgrSoapPort</j2ee:port-name>
+      <j2ee:java-port-name>getBasicOrderMgrSoapPort</j2ee:java-port-name>
+    </j2ee:port-mapping>
+  </j2ee:service-interface-mapping>
+  <j2ee:service-endpoint-interface-mapping>
+    <j2ee:service-endpoint-interface>com.alsb.www.BasicOrderMgrPortImplPortType</j2ee:service-endpoint-interface>
+    <j2ee:wsdl-port-type xmlns:alsb="http://www.alsb.com/">alsb:BasicOrderMgrPort</j2ee:wsdl-port-type>
+    <j2ee:wsdl-binding xmlns:alsb="http://www.alsb.com/">alsb:BasicOrderMgrServiceSoapBinding</j2ee:wsdl-binding>
+    <j2ee:service-endpoint-method-mapping>
+      <j2ee:java-method-name>processPreferredOrder</j2ee:java-method-name>
+      <j2ee:wsdl-operation>processPreferredOrder</j2ee:wsdl-operation>
+      <j2ee:wrapped-element></j2ee:wrapped-element>
+      <j2ee:method-param-parts-mapping>
+        <j2ee:param-position>0</j2ee:param-position>
+        <j2ee:param-type>com.alsb.order.Order</j2ee:param-type>
+        <j2ee:wsdl-message-mapping>
+          <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com/">alsb:processPreferredOrder</j2ee:wsdl-message>
+          <j2ee:wsdl-message-part-name>order</j2ee:wsdl-message-part-name>
+          <j2ee:parameter-mode>IN</j2ee:parameter-mode>
+        </j2ee:wsdl-message-mapping>
+      </j2ee:method-param-parts-mapping>
+    </j2ee:service-endpoint-method-mapping>
+    <j2ee:service-endpoint-method-mapping>
+      <j2ee:java-method-name>getProductCatalog</j2ee:java-method-name>
+      <j2ee:wsdl-operation>getProductCatalog</j2ee:wsdl-operation>
+      <j2ee:wrapped-element></j2ee:wrapped-element>
+      <j2ee:method-param-parts-mapping>
+        <j2ee:param-position>0</j2ee:param-position>
+        <j2ee:param-type>int</j2ee:param-type>
+        <j2ee:wsdl-message-mapping>
+          <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com/">alsb:getProductCatalog</j2ee:wsdl-message>
+          <j2ee:wsdl-message-part-name>creditRating</j2ee:wsdl-message-part-name>
+          <j2ee:parameter-mode>IN</j2ee:parameter-mode>
+        </j2ee:wsdl-message-mapping>
+      </j2ee:method-param-parts-mapping>
+      <j2ee:wsdl-return-value-mapping>
+        <j2ee:method-return-value>com.alsb.order.ProductList</j2ee:method-return-value>
+        <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com/">alsb:getProductCatalogResponse</j2ee:wsdl-message>
+        <j2ee:wsdl-message-part-name>productList</j2ee:wsdl-message-part-name>
+      </j2ee:wsdl-return-value-mapping>
+    </j2ee:service-endpoint-method-mapping>
+    <j2ee:service-endpoint-method-mapping>
+      <j2ee:java-method-name>processOrder</j2ee:java-method-name>
+      <j2ee:wsdl-operation>processOrder</j2ee:wsdl-operation>
+      <j2ee:wrapped-element></j2ee:wrapped-element>
+      <j2ee:method-param-parts-mapping>
+        <j2ee:param-position>0</j2ee:param-position>
+        <j2ee:param-type>com.alsb.order.Order</j2ee:param-type>
+        <j2ee:wsdl-message-mapping>
+          <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com/">alsb:processOrder</j2ee:wsdl-message>
+          <j2ee:wsdl-message-part-name>order</j2ee:wsdl-message-part-name>
+          <j2ee:parameter-mode>IN</j2ee:parameter-mode>
+        </j2ee:wsdl-message-mapping>
+      </j2ee:method-param-parts-mapping>
+    </j2ee:service-endpoint-method-mapping>
+    <j2ee:service-endpoint-method-mapping>
+      <j2ee:java-method-name>getCreditRating</j2ee:java-method-name>
+      <j2ee:wsdl-operation>getCreditRating</j2ee:wsdl-operation>
+      <j2ee:wrapped-element></j2ee:wrapped-element>
+      <j2ee:method-param-parts-mapping>
+        <j2ee:param-position>0</j2ee:param-position>
+        <j2ee:param-type>java.lang.String</j2ee:param-type>
+        <j2ee:wsdl-message-mapping>
+          <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com/">alsb:getCreditRating</j2ee:wsdl-message>
+          <j2ee:wsdl-message-part-name>firstName</j2ee:wsdl-message-part-name>
+          <j2ee:parameter-mode>IN</j2ee:parameter-mode>
+        </j2ee:wsdl-message-mapping>
+      </j2ee:method-param-parts-mapping>
+      <j2ee:method-param-parts-mapping>
+        <j2ee:param-position>1</j2ee:param-position>
+        <j2ee:param-type>java.lang.String</j2ee:param-type>
+        <j2ee:wsdl-message-mapping>
+          <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com/">alsb:getCreditRating</j2ee:wsdl-message>
+          <j2ee:wsdl-message-part-name>lastName</j2ee:wsdl-message-part-name>
+          <j2ee:parameter-mode>IN</j2ee:parameter-mode>
+        </j2ee:wsdl-message-mapping>
+      </j2ee:method-param-parts-mapping>
+      <j2ee:wsdl-return-value-mapping>
+        <j2ee:method-return-value>int</j2ee:method-return-value>
+        <j2ee:wsdl-message xmlns:alsb="http://www.alsb.com/">alsb:getCreditRatingResponse</j2ee:wsdl-message>
+        <j2ee:wsdl-message-part-name>return</j2ee:wsdl-message-part-name>
+      </j2ee:wsdl-return-value-mapping>
+    </j2ee:service-endpoint-method-mapping>
+  </j2ee:service-endpoint-interface-mapping>
+</j2ee:java-wsdl-mapping>

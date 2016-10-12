@@ -1,0 +1,60 @@
+<project default="export">
+	<!-- ALSB domain creation project -->
+	<property environment="env" />
+
+	<!-- set global properties for this build -->
+	<!-- The bea.home property hold that name of the directory where you installed ALSB 3.0.
+		 you need to change this value so that it matches your installation directory.
+	-->
+	<property name="bea.home" value="C:/BEAHome/alsb30" />
+
+	<!-- The workspace.dir is the directory of the workspace that you created to contain the sample
+		 projects from this book. By default, the namespace is "alsb30_book"
+	-->
+	<property name="workspace.dir" value="c:/_workspaces/alsb30_book" />
+
+	<property name="weblogic.home" value="${bea.home}/wlserver_10.0" />
+	<property name="domain.export.script" value="export.py" />
+	<property name="domain.import.script" value="import.py" />
+	<property name="export.config.file" value="export.properties" />
+	<property name="import.config.file" value="import.properties" />
+	<property name="build" value="build" />
+	<property name="dist" value="dist" />
+
+	<path id="wlst.class.path">
+		<fileset dir="${bea.home}/alsb_3.0/lib">
+			<include name="sb-kernel-api.jar" />
+		</fileset>
+		<fileset dir="${bea.home}/modules">
+			<include name="com.bea.common.configfwk_1.1.0.0.jar" />
+		</fileset>
+		<fileset dir="${weblogic.home}/server/lib">
+			<include name="weblogic.jar" />
+			<include name="webserviceclient.jar" />
+		</fileset>
+	</path>
+
+	<taskdef name="wlst" classname="weblogic.ant.taskdefs.management.WLSTTask" classpathref="wlst.class.path" />
+
+	<target name="export">
+		<echo message="exportscript: ${domain.export.script}" />
+		<java classname="weblogic.WLST" fork="true" classpathref="wlst.class.path">
+			<arg line="${domain.export.script} ${export.config.file}" />
+		</java>
+	</target>
+
+	<target name="import">
+		<echo message="importscript: ${domain.import.script}" />
+		<java classname="weblogic.WLST" fork="true" classpathref="wlst.class.path">
+			<arg line="${domain.import.script} ${import.config.file}" />
+		</java>
+	</target>
+
+	<target name="clean">
+		<delete dir="${dist}" />
+		<delete dir="${build}" />
+		<mkdir dir="${dist}" />
+		<mkdir dir="${build}" />
+	</target>
+
+</project>

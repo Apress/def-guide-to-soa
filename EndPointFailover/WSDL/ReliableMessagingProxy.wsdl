@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions name="ReliableMessagingProxyDefinitions"
+	targetNamespace="http://www.alsb.com/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:alsb="http://www.alsb.com/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+	<types>
+		<xs:schema attributeFormDefault="unqualified"
+			elementFormDefault="qualified" targetNamespace="http://www.alsb.com/"
+			xmlns:order="http://www.alsb.com/order/">
+
+			<!-- This is a utility element, so we can safely define it completely in this WSDL -->
+			<xs:element name="CustomerName">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="firstName" type="xs:string" />
+						<xs:element name="lastName" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			
+			<xs:element name="customerID" type="xs:int" />
+		</xs:schema>
+	</types>
+	
+	<message name="getCustomerRequest">
+		<part name="customerID" element="alsb:customerID" />
+	</message>
+	
+	<message name="getCustomerResponse">
+		<part name="customerName" element="alsb:CustomerName" />
+	</message>
+	
+	<portType name="ReliableMessagingProxyPort">
+		<operation name="getCustomer" parameterOrder="customerID">
+			<input message="alsb:getCustomerRequest" />
+			<output message="alsb:getCustomerResponse" />
+		</operation>
+	</portType>
+	
+	<binding name="ReliableMessagingSOAPBinding"
+		type="alsb:ReliableMessagingProxyPort">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="getCustomer">
+			<soap:operation soapAction="getCustomer" style="document" />
+			<input>
+				<soap:body parts="customerID" use="literal" />
+			</input>
+			<output>
+				<soap:body parts="customerName" use="literal" />
+			</output>
+		</operation>
+	</binding>
+	
+	<service name="ReliableMessagingProxyService">
+		<port binding="alsb:ReliableMessagingSOAPBinding"
+			name="ReliableOrderMgrProxySoapPort">
+			<soap:address
+				location="http://localhost:7001/esb/ReliableOrderMgrService" />
+		</port>
+	</service>
+</definitions>

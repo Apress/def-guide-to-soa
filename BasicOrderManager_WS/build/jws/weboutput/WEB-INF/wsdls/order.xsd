@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.alsb.com/order/"
+    xmlns="http://www.w3.org/2001/XMLSchema"
+    xmlns:order="http://www.alsb.com/order/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:complexType name="Product">
+        <xs:annotation>
+            <xs:documentation>     This is our definition of a Product
+                for our company.    </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element minOccurs="1" name="CreditNeeded"
+                nillable="true" type="xs:int"/>
+            <xs:element minOccurs="1" name="Name" nillable="true" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="LineItem">
+        <xs:annotation>
+            <xs:documentation>     This is a line item that applies to
+                an order    </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element minOccurs="1" name="Product" type="order:Product"/>
+            <xs:element minOccurs="1" name="Quantity" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Order">
+        <xs:annotation>
+            <xs:documentation>     This is our definition of an Order
+                for our company.    </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element minOccurs="1" name="FirstName" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="1" name="LastName" nillable="true" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0"
+                name="LineItem" type="order:LineItem"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ProductList">
+        <xs:annotation>
+            <xs:documentation>     This is a list of product types.    </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0"
+                name="Product" type="order:Product"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

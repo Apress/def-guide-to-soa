@@ -1,0 +1,5 @@
+<upgrade-log>
+  <entry time="2008-10-15 01:55:28 UTC">
+    <upgrade-participant pluginId="com.bea.alsb.core" pluginVersion="1.0.100" class="com.bea.alsb.core.internal.projects.upgrade.ALSBUpgradeParticipant"/>
+  </entry>
+</upgrade-log>

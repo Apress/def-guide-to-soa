@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<webservices xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <webservice-description>
+    <webservice-description-name>com.alsb.serial.SerialPortTypeImpl</webservice-description-name>
+    <wsdl-file>/wsdls/SerialService.wsdl</wsdl-file>
+    <jaxrpc-mapping-file>WEB-INF/SerialService.xml</jaxrpc-mapping-file>
+    <port-component>
+      <port-component-name>SerialService</port-component-name>
+      <wsdl-port xmlns:alsb="http://www.alsb.com/">alsb:SerialService</wsdl-port>
+      <service-endpoint-interface>com.alsb.serial.SerialPortTypeImplPortType</service-endpoint-interface>
+      <service-impl-bean>
+        <servlet-link>SerialServiceServlethttp</servlet-link>
+      </service-impl-bean>
+    </port-component>
+  </webservice-description>
+</webservices>

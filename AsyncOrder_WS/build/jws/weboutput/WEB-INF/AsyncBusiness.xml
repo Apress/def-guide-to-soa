@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<j2ee:java-wsdl-mapping xmlns:j2ee="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <j2ee:package-mapping>
+    <j2ee:package-type>com.alsb.order</j2ee:package-type>
+    <j2ee:namespaceURI>http://www.alsb.com/order/</j2ee:namespaceURI>
+  </j2ee:package-mapping>
+  <j2ee:package-mapping>
+    <j2ee:package-type>com.alsb.async.ws</j2ee:package-type>
+    <j2ee:namespaceURI>http://www.alsb.com/AsyncBusiness/</j2ee:namespaceURI>
+  </j2ee:package-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.order.Order</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:asy="http://www.alsb.com/AsyncBusiness/">asy:submitOrder</j2ee:root-type-qname>
+    <j2ee:qname-scope>element</j2ee:qname-scope>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.order.Order</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:ord="http://www.alsb.com/order/">ord:Order</j2ee:root-type-qname>
+    <j2ee:qname-scope>complexType</j2ee:qname-scope>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>OrderStatus</j2ee:java-variable-name>
+      <j2ee:xml-element-name>orderStatus</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>Id</j2ee:java-variable-name>
+      <j2ee:xml-element-name>id</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>FirstName</j2ee:java-variable-name>
+      <j2ee:xml-element-name>FirstName</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>LastName</j2ee:java-variable-name>
+      <j2ee:xml-element-name>LastName</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>LineItem</j2ee:java-variable-name>
+      <j2ee:xml-element-name>LineItem</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.order.OrderStatus</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:ord="http://www.alsb.com/order/">ord:orderStatus</j2ee:root-type-qname>
+    <j2ee:qname-scope>simpleType</j2ee:qname-scope>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.order.LineItem</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:ord="http://www.alsb.com/order/">ord:LineItem</j2ee:root-type-qname>
+    <j2ee:qname-scope>complexType</j2ee:qname-scope>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>Product</j2ee:java-variable-name>
+      <j2ee:xml-element-name>Product</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>Quantity</j2ee:java-variable-name>
+      <j2ee:xml-element-name>Quantity</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:java-xml-type-mapping>
+    <j2ee:java-type>com.alsb.order.Product</j2ee:java-type>
+    <j2ee:root-type-qname xmlns:ord="http://www.alsb.com/order/">ord:Product</j2ee:root-type-qname>
+    <j2ee:qname-scope>complexType</j2ee:qname-scope>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>CreditNeeded</j2ee:java-variable-name>
+      <j2ee:xml-element-name>CreditNeeded</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+    <j2ee:variable-mapping>
+      <j2ee:java-variable-name>Name</j2ee:java-variable-name>
+      <j2ee:xml-element-name>Name</j2ee:xml-element-name>
+    </j2ee:variable-mapping>
+  </j2ee:java-xml-type-mapping>
+  <j2ee:service-interface-mapping>
+    <j2ee:service-interface>javax.xml.rpc.Service</j2ee:service-interface>
+    <j2ee:wsdl-service-name xmlns:asy="http://www.alsb.com/AsyncBusiness/">asy:AsyncBusiness</j2ee:wsdl-service-name>
+    <j2ee:port-mapping>
+      <j2ee:port-name>AsyncBusiness</j2ee:port-name>
+      <j2ee:java-port-name>getAsyncBusiness</j2ee:java-port-name>
+    </j2ee:port-mapping>
+  </j2ee:service-interface-mapping>
+  <j2ee:service-endpoint-interface-mapping>
+    <j2ee:service-endpoint-interface>com.alsb.async.ws.AsyncBusinessImplPortType</j2ee:service-endpoint-interface>
+    <j2ee:wsdl-port-type xmlns:asy="http://www.alsb.com/AsyncBusiness/">asy:AsyncBusiness</j2ee:wsdl-port-type>
+    <j2ee:wsdl-binding xmlns:asy="http://www.alsb.com/AsyncBusiness/">asy:AsyncBusinessSOAP</j2ee:wsdl-binding>
+    <j2ee:service-endpoint-method-mapping>
+      <j2ee:java-method-name>submitAsyncOrder</j2ee:java-method-name>
+      <j2ee:wsdl-operation>submitAsyncOrder</j2ee:wsdl-operation>
+      <j2ee:method-param-parts-mapping>
+        <j2ee:param-position>0</j2ee:param-position>
+        <j2ee:param-type>com.alsb.order.Order</j2ee:param-type>
+        <j2ee:wsdl-message-mapping>
+          <j2ee:wsdl-message xmlns:asy="http://www.alsb.com/AsyncBusiness/">asy:submitOrder</j2ee:wsdl-message>
+          <j2ee:wsdl-message-part-name>submitOrder</j2ee:wsdl-message-part-name>
+          <j2ee:parameter-mode>IN</j2ee:parameter-mode>
+        </j2ee:wsdl-message-mapping>
+      </j2ee:method-param-parts-mapping>
+    </j2ee:service-endpoint-method-mapping>
+  </j2ee:service-endpoint-interface-mapping>
+</j2ee:java-wsdl-mapping>

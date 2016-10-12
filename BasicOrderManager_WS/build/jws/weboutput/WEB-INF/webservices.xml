@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<webservices xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <webservice-description>
+    <webservice-description-name>com.alsb.www.BasicOrderMgrPortImpl</webservice-description-name>
+    <wsdl-file>/wsdls/BasicOrderMgr.wsdl</wsdl-file>
+    <jaxrpc-mapping-file>WEB-INF/BasicOrderMgrService.xml</jaxrpc-mapping-file>
+    <port-component>
+      <port-component-name>BasicOrderMgrSoapPort</port-component-name>
+      <wsdl-port xmlns:alsb="http://www.alsb.com/">alsb:BasicOrderMgrSoapPort</wsdl-port>
+      <service-endpoint-interface>com.alsb.www.BasicOrderMgrPortImplPortType</service-endpoint-interface>
+      <service-impl-bean>
+        <servlet-link>BasicOrderMgrServiceServlethttp</servlet-link>
+      </service-impl-bean>
+    </port-component>
+  </webservice-description>
+</webservices>

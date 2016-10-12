@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.alsb.com/SecureMessageService/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	name="UnsecureMessageService"
+	targetNamespace="http://www.alsb.com/SecureMessageService/">
+	<wsdl:types>
+		<xsd:schema
+			targetNamespace="http://www.alsb.com/SecureMessageService/">
+			<xsd:element name="getAccount">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="customerID" type="xsd:int" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getAccountResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="customerID" type="xsd:int" />
+						<xsd:element name="customerName" type="xsd:string" />
+						<xsd:element name="account" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+	
+	<wsdl:message name="getAccountRequest">
+		<wsdl:part element="tns:getAccount" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="getAccountResponse">
+		<wsdl:part element="tns:getAccountResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:portType name="UnsecureMessageService">
+		<wsdl:operation name="getAccount">
+			<wsdl:input message="tns:getAccountRequest" />
+			<wsdl:output message="tns:getAccountResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="UnsecureMessageServiceSOAP"
+		type="tns:UnsecureMessageService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="getAccount">
+			<soap:operation
+				soapAction="getAccount" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="UnsecureMessageService">
+		<wsdl:port binding="tns:UnsecureMessageServiceSOAP"
+			name="UnsecureMessageServiceSOAP">
+			<soap:address location="http://localhost:7001/security/UnsecureMessage" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
